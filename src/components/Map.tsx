@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, Circle, CircleMarker, useMap, useMapEvents } from 'react-leaflet'
+import { useEffect, useRef, useState } from 'react'
+import { MapContainer, TileLayer, Marker, Popup, Circle, CircleMarker, ZoomControl, useMap, useMapEvents } from 'react-leaflet'
 import { createCustomIcon, HOTEL_COORDS, calculateDistance, formatDistance } from '../lib/leaflet'
 import { Location } from '../hooks/useLocations'
 import 'leaflet/dist/leaflet.css'
@@ -14,6 +14,7 @@ interface MapProps {
   onMapClick?: (e: any) => void
   editMode?: boolean
   onDeleteLocation?: (id: number) => void
+  hotelFlyTrigger?: number
 }
 
 function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
@@ -23,6 +24,18 @@ function MapController({ center, zoom }: { center: [number, number]; zoom: numbe
     map.setView(center, zoom)
   }, [center, zoom, map])
 
+  return null
+}
+
+function HotelFlyController({ trigger }: { trigger: number }) {
+  const map = useMap()
+  const prevTrigger = useRef(trigger)
+  useEffect(() => {
+    if (trigger !== prevTrigger.current) {
+      prevTrigger.current = trigger
+      map.flyTo(HOTEL_COORDS, 16)
+    }
+  }, [trigger, map])
   return null
 }
 
@@ -155,7 +168,7 @@ function UserLocationMarker({ isTracking }: { isTracking: boolean }) {
   )
 }
 
-export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode }: MapProps) {
+export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0 }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
 
   return (
@@ -172,6 +185,8 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
       />
 
       <MapController center={HOTEL_COORDS} zoom={15} />
+      <HotelFlyController trigger={hotelFlyTrigger} />
+      <ZoomControl position="bottomright" />
 
       {showUserLocation && <UserLocationMarker isTracking={!!isTracking} />}
 

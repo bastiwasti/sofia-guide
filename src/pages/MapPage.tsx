@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Layers, Edit, MapPin, Navigation } from 'lucide-react'
+import { Layers, Edit, MapPin, Navigation, Building2 } from 'lucide-react'
 import { useLocations } from '../hooks/useLocations'
 import { useCategories } from '../hooks/useCategories'
 import MapComponent from '../components/Map'
@@ -19,6 +19,7 @@ export default function MapPage() {
   const [showLocationForm, setShowLocationForm] = useState(false)
   const [showCategoryForm, setShowCategoryForm] = useState(false)
   const [newLocationCoords, setNewLocationCoords] = useState<{ lat: number; lng: number } | undefined>()
+  const [hotelFlyTrigger, setHotelFlyTrigger] = useState(0)
 
   const filteredLocations = useMemo(() => {
     if (selectedCategories.length === 0) return locations
@@ -142,6 +143,14 @@ export default function MapPage() {
         </div>
         <div className="header-actions">
           <button
+            className="toggle-button"
+            onClick={() => setHotelFlyTrigger(t => t + 1)}
+            aria-label="Zum Hotel"
+          >
+            <Building2 size={20} />
+            <span>Hotel</span>
+          </button>
+          <button
             className={`toggle-button ${showDistanceRings ? 'active' : ''}`}
             onClick={() => setShowDistanceRings(!showDistanceRings)}
             aria-label="Entfernungsringe umschalten"
@@ -164,7 +173,7 @@ export default function MapPage() {
             aria-label="Edit-Modus umschalten"
           >
             <Edit size={20} />
-            <span>{editMode ? 'Bearbeiten' : 'Neu'}</span>
+            <span>Neu</span>
           </button>
         </div>
       </div>
@@ -191,6 +200,7 @@ export default function MapPage() {
           showDistanceRings={showDistanceRings}
           showUserLocation={gpsMode !== 'off'}
           isTracking={gpsMode === 'tracking'}
+          hotelFlyTrigger={hotelFlyTrigger}
           onMapClick={handleMapClick}
           editMode={editMode}
           onDeleteLocation={handleDeleteLocation}
@@ -340,6 +350,9 @@ export default function MapPage() {
         .map-container {
           flex: 1;
           position: relative;
+        }
+        .map-container .leaflet-bottom {
+          bottom: 70px;
         }
       `}</style>
     </div>
