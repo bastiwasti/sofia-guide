@@ -2,7 +2,10 @@ import express from 'express'
 import { getLocations, getLocationById, createLocation, deleteLocation } from './routes/locations'
 import { getCategories, createCategory } from './routes/categories'
 import { getNotes, createNote, deleteNote } from './routes/notes'
-import { join } from 'path'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const app = express()
 const PORT = process.env.PORT || 3002
