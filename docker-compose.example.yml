@@ -1,0 +1,25 @@
+# Dieses File gehört auf den Docker-Host nach /opt/apps/sofia-guide/docker-compose.yml
+# NICHT ins Repo committen (enthält keine Secrets, aber ist host-spezifisch)
+
+services:
+  sofia-guide:
+    image: ghcr.io/bastiwasti/sofia-guide:latest
+    container_name: sofia-guide
+    restart: unless-stopped
+    volumes:
+      - sofia-guide-data:/app/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sofia-guide.rule=Host(`sofia.eventig.app`)"
+      - "traefik.http.routers.sofia-guide.entrypoints=websecure"
+      - "traefik.http.routers.sofia-guide.tls=true"
+      - "traefik.http.routers.sofia-guide.tls.certresolver=cloudflare"
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true
+
+volumes:
+  sofia-guide-data:
