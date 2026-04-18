@@ -115,7 +115,7 @@ export default function CategoryForm({ onSave, onCancel }: CategoryFormProps) {
           position: fixed;
           inset: 0;
           background: rgba(0, 0, 0, 0.5);
-          z-index: 3000;
+          z-index: 4000;
           display: flex;
           align-items: center;
           justify-content: center;

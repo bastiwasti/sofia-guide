@@ -66,11 +66,6 @@ export default function LocationForm({ initialCoords, onSave, onCancel }: Locati
                 autoFocus
               />
             </div>
-
-            <div className="form-group">
-              <label>Kategorie</label>
-              <div className="category-badge">Neu</div>
-            </div>
           </div>
 
           <div className="form-actions">
@@ -89,7 +84,7 @@ export default function LocationForm({ initialCoords, onSave, onCancel }: Locati
           position: fixed;
           inset: 0;
           background: rgba(0, 0, 0, 0.5);
-          z-index: 3000;
+          z-index: 4000;
           display: flex;
           align-items: flex-end;
           animation: fadeIn 0.2s ease;
@@ -171,16 +166,6 @@ export default function LocationForm({ initialCoords, onSave, onCancel }: Locati
           font-weight: 600;
           color: var(--color-gray-dark);
           margin-bottom: 6px;
-        }
-
-        .category-badge {
-          display: inline-block;
-          background: #6B7280;
-          color: white;
-          padding: 6px 12px;
-          border-radius: var(--border-radius-sm);
-          font-size: 14px;
-          font-weight: 500;
         }
 
         .form-actions {

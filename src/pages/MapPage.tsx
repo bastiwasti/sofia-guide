@@ -147,7 +147,7 @@ export default function MapPage() {
             onClick={() => setHotelFlyTrigger(t => t + 1)}
             aria-label="Zum Hotel"
           >
-            <Building2 size={20} />
+            <Building2 size={16} />
             <span>Hotel</span>
           </button>
           <button
@@ -155,7 +155,7 @@ export default function MapPage() {
             onClick={() => setShowDistanceRings(!showDistanceRings)}
             aria-label="Entfernungsringe umschalten"
           >
-            <Layers size={20} />
+            <Layers size={16} />
             <span>Ringe</span>
           </button>
           <button
@@ -164,7 +164,7 @@ export default function MapPage() {
             aria-label="GPS umschalten"
             title={gpsMode === 'off' ? 'GPS aktivieren' : gpsMode === 'static' ? 'Live-Tracking starten' : 'Live-Tracking stoppen'}
           >
-            {gpsMode === 'tracking' ? <Navigation size={20} className="animate-spin" /> : <MapPin size={20} />}
+            {gpsMode === 'tracking' ? <Navigation size={16} className="animate-spin" /> : <MapPin size={16} />}
             <span>{gpsMode === 'off' ? 'GPS' : gpsMode === 'static' ? 'Follow' : 'Off'}</span>
           </button>
           <button
@@ -172,7 +172,7 @@ export default function MapPage() {
             onClick={() => setEditMode(!editMode)}
             aria-label="Edit-Modus umschalten"
           >
-            <Edit size={20} />
+            <Edit size={16} />
             <span>Neu</span>
           </button>
         </div>
@@ -260,12 +260,12 @@ export default function MapPage() {
         .toggle-button {
           display: flex;
           align-items: center;
-          gap: 6px;
-          padding: 8px 12px;
+          gap: 4px;
+          padding: 6px 8px;
           background: var(--color-gray-light);
           border: none;
           border-radius: var(--border-radius-sm);
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 600;
           color: var(--color-gray-dark);
           transition: all 0.2s ease;
@@ -282,18 +282,18 @@ export default function MapPage() {
 
         .header-actions {
           display: flex;
-          gap: 8px;
+          gap: 6px;
         }
 
         .edit-button {
           display: flex;
           align-items: center;
-          gap: 6px;
-          padding: 8px 12px;
+          gap: 4px;
+          padding: 6px 8px;
           background: var(--color-gray-light);
           border: none;
           border-radius: var(--border-radius-sm);
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 600;
           color: var(--color-gray-dark);
           transition: all 0.2s ease;
@@ -353,6 +353,24 @@ export default function MapPage() {
         }
         .map-container .leaflet-bottom {
           bottom: 70px;
+        }
+
+        @media (max-width: 390px) {
+          .toggle-button,
+          .edit-button {
+            padding: 5px 6px;
+            font-size: 10px;
+            gap: 3px;
+          }
+
+          .header-actions {
+            gap: 4px;
+          }
+
+          .toggle-button span,
+          .edit-button span {
+            display: none;
+          }
         }
       `}</style>
     </div>

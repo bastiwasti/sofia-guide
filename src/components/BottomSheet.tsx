@@ -69,7 +69,7 @@ export default function BottomSheet({ location, onClose, onDelete }: BottomSheet
           position: fixed;
           inset: 0;
           background: rgba(0, 0, 0, 0.5);
-          z-index: 2000;
+          z-index: 4000;
           display: flex;
           align-items: flex-end;
           animation: fadeIn 0.2s ease;
