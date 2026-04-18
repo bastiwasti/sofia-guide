@@ -5,27 +5,40 @@ import { X, Volume2, Play, Pause } from 'lucide-react'
 export default function SurvivalPage() {
   const [selectedLetter, setSelectedLetter] = useState<{ cyrillic: string; latin?: string; pronunciation: string; example: string } | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [playingText, setPlayingText] = useState<string | null>(null)
 
-  const speakExample = (text: string) => {
+  const speakText = (text: string) => {
     if (!window.speechSynthesis) {
       alert('Dein Browser unterstützt keine Sprachausgabe.')
       return
     }
 
-    if (isPlaying) {
+    if (isPlaying && playingText === text) {
       window.speechSynthesis.cancel()
       setIsPlaying(false)
+      setPlayingText(null)
       return
     }
+
+    window.speechSynthesis.cancel()
 
     const utterance = new SpeechSynthesisUtterance(text)
     utterance.lang = 'bg-BG'
     utterance.rate = 0.8
     utterance.pitch = 1
 
-    utterance.onstart = () => setIsPlaying(true)
-    utterance.onend = () => setIsPlaying(false)
-    utterance.onerror = () => setIsPlaying(false)
+    utterance.onstart = () => {
+      setIsPlaying(true)
+      setPlayingText(text)
+    }
+    utterance.onend = () => {
+      setIsPlaying(false)
+      setPlayingText(null)
+    }
+    utterance.onerror = () => {
+      setIsPlaying(false)
+      setPlayingText(null)
+    }
 
     window.speechSynthesis.speak(utterance)
   }
@@ -70,12 +83,20 @@ export default function SurvivalPage() {
               <span>Bulgarisch</span>
               <span>Aussprache</span>
               <span>Deutsch</span>
+              <span></span>
             </div>
             {survivalContent.phrases.map((phrase, index) => (
               <div key={index} className="table-row">
                 <span className="bulgarian">{phrase.bulgarian}</span>
                 <span className="phonetic">{phrase.phonetic}</span>
                 <span className="german">{phrase.german}</span>
+                <button
+                  className="phrase-audio-button"
+                  onClick={() => speakText(phrase.bulgarian)}
+                  aria-label={`${phrase.bulgarian} anhören`}
+                >
+                  {isPlaying && playingText === phrase.bulgarian ? <Pause size={14} /> : <Play size={14} />}
+                </button>
               </div>
             ))}
           </div>
@@ -180,10 +201,10 @@ export default function SurvivalPage() {
                     <h3>Beispiel</h3>
                     <button
                       className="play-button"
-                      onClick={() => speakExample(extractBulgarianWord(selectedLetter.example))}
+                      onClick={() => speakText(extractBulgarianWord(selectedLetter.example))}
                       aria-label="Beispiel anhören"
                     >
-                      {isPlaying ? <Pause size={16} /> : <Play size={16} />}
+                      {isPlaying && playingText === extractBulgarianWord(selectedLetter.example) ? <Pause size={16} /> : <Play size={16} />}
                     </button>
                   </div>
                   <p className="example-text">{selectedLetter.example}</p>
@@ -314,7 +335,7 @@ export default function SurvivalPage() {
 
         .table-header {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-columns: 1.2fr 1fr 1fr 40px;
           gap: var(--spacing-sm);
           padding: var(--spacing-sm) var(--spacing-md);
           background: var(--color-gray-light);
@@ -325,11 +346,12 @@ export default function SurvivalPage() {
 
         .table-row {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-columns: 1.2fr 1fr 1fr 40px;
           gap: var(--spacing-sm);
           padding: var(--spacing-sm) var(--spacing-md);
           border-bottom: 1px solid var(--color-gray-light);
           font-size: 13px;
+          align-items: center;
         }
 
         .table-row:last-child {
@@ -681,6 +703,35 @@ export default function SurvivalPage() {
           font-style: italic;
           color: var(--color-text);
           margin: 0;
+        }
+
+        .phrase-audio-button {
+          background: var(--color-craft);
+          color: white;
+          border: none;
+          padding: 6px 8px;
+          border-radius: var(--border-radius-sm);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+          width: 32px;
+          height: 32px;
+        }
+
+        .phrase-audio-button:hover {
+          background: #145090;
+          transform: scale(1.05);
+        }
+
+        .phrase-audio-button:active {
+          transform: scale(0.95);
+        }
+
+        .phrase-audio-button:disabled {
+          background: var(--color-gray-medium);
+          cursor: not-allowed;
         }
       `}</style>
     </div>

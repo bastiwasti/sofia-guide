@@ -1,6 +1,47 @@
+import { useState } from 'react'
 import { sofiaContent } from '../data/sofiaContent'
+import { Play, Pause } from 'lucide-react'
 
 export default function SofiaPage() {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [playingText, setPlayingText] = useState<string | null>(null)
+
+  const speakText = (text: string) => {
+    if (!window.speechSynthesis) {
+      alert('Dein Browser unterstützt keine Sprachausgabe.')
+      return
+    }
+
+    if (isPlaying && playingText === text) {
+      window.speechSynthesis.cancel()
+      setIsPlaying(false)
+      setPlayingText(null)
+      return
+    }
+
+    window.speechSynthesis.cancel()
+
+    const utterance = new SpeechSynthesisUtterance(text)
+    utterance.lang = 'bg-BG'
+    utterance.rate = 0.8
+    utterance.pitch = 1
+
+    utterance.onstart = () => {
+      setIsPlaying(true)
+      setPlayingText(text)
+    }
+    utterance.onend = () => {
+      setIsPlaying(false)
+      setPlayingText(null)
+    }
+    utterance.onerror = () => {
+      setIsPlaying(false)
+      setPlayingText(null)
+    }
+
+    window.speechSynthesis.speak(utterance)
+  }
+
   return (
     <div className="sofia-page">
       <div className="hero-section">
@@ -38,7 +79,16 @@ export default function SofiaPage() {
           <div className="ordering-guide">
             {sofiaContent.orderingGuide.tips.map((tip, index) => (
               <div key={index} className="ordering-card">
-                <div className="situation">{tip.situation}</div>
+                <div className="ordering-card-header">
+                  <div className="situation">{tip.situation}</div>
+                  <button
+                    className="audio-button"
+                    onClick={() => speakText(tip.phonetic)}
+                    aria-label={`${tip.phonetic} anhören`}
+                  >
+                    {isPlaying && playingText === tip.phonetic ? <Pause size={14} /> : <Play size={14} />}
+                  </button>
+                </div>
                 <p className="instruction">{tip.instruction}</p>
                 <p className="phonetic">"{tip.phonetic}"</p>
               </div>
@@ -170,13 +220,50 @@ export default function SofiaPage() {
           border-left: 4px solid var(--color-sights);
         }
 
+        .ordering-card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: var(--spacing-sm);
+          margin-bottom: var(--spacing-xs);
+        }
+
         .ordering-card .situation {
           font-size: 12px;
           font-weight: 600;
           text-transform: uppercase;
           color: var(--color-gray-medium);
-          margin-bottom: var(--spacing-xs);
           letter-spacing: 0.5px;
+        }
+
+        .audio-button {
+          background: var(--color-sights);
+          color: white;
+          border: none;
+          padding: 6px 8px;
+          border-radius: var(--border-radius-sm);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s ease;
+          width: 32px;
+          height: 32px;
+          flex-shrink: 0;
+        }
+
+        .audio-button:hover {
+          background: #a01245;
+          transform: scale(1.05);
+        }
+
+        .audio-button:active {
+          transform: scale(0.95);
+        }
+
+        .audio-button:disabled {
+          background: var(--color-gray-medium);
+          cursor: not-allowed;
         }
 
         .ordering-card .instruction {
