@@ -30,7 +30,19 @@ CREATE TABLE IF NOT EXISTS notes (
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- User sessions table
+CREATE TABLE IF NOT EXISTS user_sessions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  session_id TEXT NOT NULL UNIQUE,
+  emoji TEXT NOT NULL UNIQUE,
+  recovery_code TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  last_seen DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_locations_category_id ON locations(category_id);
 CREATE INDEX IF NOT EXISTS idx_locations_coords ON locations(lat, lng);
 CREATE INDEX IF NOT EXISTS idx_notes_created_at ON notes(created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_user_sessions_session_id ON user_sessions(session_id);
+CREATE INDEX IF NOT EXISTS idx_user_sessions_emoji ON user_sessions(emoji);

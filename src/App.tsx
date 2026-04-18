@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import TabNavigation from './components/TabNavigation'
+import UserAvatar from './components/UserAvatar'
 import MapPage from './pages/MapPage'
 import HotelPage from './pages/HotelPage'
 import SurvivalPage from './pages/SurvivalPage'
@@ -34,6 +35,7 @@ function App() {
         {renderPage()}
       </main>
       <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      <UserAvatar />
     </div>
   )
 }
