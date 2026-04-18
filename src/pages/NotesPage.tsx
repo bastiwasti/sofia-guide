@@ -7,7 +7,6 @@ export default function NotesPage() {
   const { notes, loading, createNote, deleteNote } = useNotes(true, 30000)
   const [showForm, setShowForm] = useState(false)
   const [content, setContent] = useState('')
-  const [authorName, setAuthorName] = useState('')
   const [userSession, setUserSession] = useState<UserSession | null>(null)
 
   useEffect(() => {
@@ -23,16 +22,14 @@ export default function NotesPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!content.trim()) return
+    if (!content.trim() || !userSession?.session_id) return
 
     try {
       await createNote({
         content: content.trim(),
-        author_name: authorName.trim() || undefined,
-        author_emoji: userSession?.emoji || undefined
+        session_id: userSession.session_id
       })
       setContent('')
-      setAuthorName('')
       setShowForm(false)
     } catch (error) {
       console.error('Failed to create note:', error)
@@ -40,15 +37,16 @@ export default function NotesPage() {
   }
 
   async function handleDelete(id: number) {
-    const password = prompt("Passwort zum Löschen eingeben (Bastis Geburtstag):")
-    if (password !== '24031986') {
-      alert('Falsches Passwort!')
+    if (!userSession?.session_id) {
+      alert('Du bist nicht eingeloggt!')
       return
     }
+
     try {
-      await deleteNote(id)
+      await deleteNote(id, userSession.session_id)
     } catch (error) {
       console.error('Failed to delete note:', error)
+      alert('Löschen fehlgeschlagen')
     }
   }
 
@@ -123,7 +121,16 @@ export default function NotesPage() {
         </button>
       </div>
 
-      {showForm && (
+      {showForm && !userSession?.session_id && (
+        <div className="note-form">
+          <p className="login-hint">Bitte logge dich ein, um Notizen zu erstellen.</p>
+          <button className="submit-button" onClick={() => setShowForm(false)}>
+            Schließen
+          </button>
+        </div>
+      )}
+
+      {showForm && userSession?.session_id && (
         <form className="note-form" onSubmit={handleSubmit}>
           <textarea
             placeholder="Was möchtest du teilen?"
@@ -132,22 +139,7 @@ export default function NotesPage() {
             rows={3}
             maxLength={500}
           />
-          
-          <div className="form-row">
-            <input
-              type="text"
-              placeholder="Name"
-              value={authorName}
-              onChange={(e) => setAuthorName(e.target.value)}
-              maxLength={30}
-              className="name-input"
-            />
-            
-            <div className="emoji-display">
-              {userSession?.emoji || <span className="no-emoji">👤</span>}
-            </div>
-          </div>
-          
+
           <div className="form-actions">
             <button type="button" className="cancel-button" onClick={() => setShowForm(false)}>
               Abbrechen
@@ -166,24 +158,29 @@ export default function NotesPage() {
             <p>Noch keine Notizen</p>
             <p className="hint">Sei der Erste und teile etwas!</p>
           </div>
-        ) : (
+         ) : (
           notes.map(note => (
             <div key={note.id} className="note-card">
               <div className="note-header">
                 <div className="author-info">
-                  {note.author_emoji && <span className="emoji">{note.author_emoji}</span>}
-                  {note.author_name && <span className="name">{note.author_name}</span>}
+                  {(note.author_emoji || note.backup_emoji) && (
+                    <span className={`emoji ${note.is_active_user === 0 ? 'deprecated' : ''}`}>
+                      {note.author_emoji || note.backup_emoji}
+                    </span>
+                  )}
                 </div>
                 <span className="timestamp">{formatDate(note.created_at)}</span>
               </div>
               <p className="note-content">{note.content}</p>
-              <button
-                className="delete-button"
-                onClick={() => handleDelete(note.id)}
-                aria-label="Löschen"
-              >
-                <Trash2 size={16} />
-              </button>
+              {note.session_id === userSession?.session_id && (
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(note.id)}
+                  aria-label="Löschen"
+                >
+                  <Trash2 size={16} />
+                </button>
+              )}
             </div>
           ))
         )}
@@ -239,6 +236,13 @@ export default function NotesPage() {
           box-shadow: var(--shadow-sm);
         }
 
+        .login-hint {
+          text-align: center;
+          color: var(--color-gray-medium);
+          font-size: 14px;
+          margin: 0;
+        }
+
         .note-form textarea {
           width: 100%;
           border: 1px solid var(--color-gray-light);
@@ -253,36 +257,6 @@ export default function NotesPage() {
         .note-form textarea:focus {
           outline: 2px solid var(--color-craft);
           border-color: transparent;
-        }
-
-        .form-row {
-          display: flex;
-          gap: var(--spacing-sm);
-          margin-bottom: var(--spacing-md);
-        }
-
-        .form-row input {
-          flex: 1;
-        }
-
-        .name-input {
-          min-width: 120px;
-          height: 40px;
-        }
-
-        .emoji-display {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          font-size: 24px;
-          background: var(--color-gray-light);
-          border-radius: 8px;
-        }
-
-        .emoji-display .no-emoji {
-          opacity: 0.5;
         }
 
         .form-actions {
@@ -362,9 +336,9 @@ export default function NotesPage() {
           font-size: 18px;
         }
 
-        .author-info .name {
-          font-weight: 600;
-          font-size: 14px;
+        .author-info .emoji.deprecated {
+          text-decoration: line-through;
+          opacity: 0.6;
         }
 
         .timestamp {

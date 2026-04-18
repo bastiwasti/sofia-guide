@@ -54,8 +54,9 @@ export const api = {
       method: 'PUT',
       body: JSON.stringify(data)
     }),
-  delete: <T>(endpoint: string) => 
+  delete: <T>(endpoint: string, data?: unknown) =>
     apiRequest<T>(endpoint, {
-      method: 'DELETE'
+      method: 'DELETE',
+      body: data ? JSON.stringify(data) : undefined
     })
 }

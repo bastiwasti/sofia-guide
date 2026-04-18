@@ -4,8 +4,10 @@ import { api } from '../lib/api'
 export interface Note {
   id: number
   content: string
-  author_name: string | null
+  session_id: string | null
+  backup_emoji: string | null
   author_emoji: string | null
+  is_active_user: number
   created_at: string
 }
 
@@ -16,7 +18,7 @@ export function useNotes(autoRefresh = false, refreshInterval = 30000) {
 
   useEffect(() => {
     fetchNotes()
-    
+
     if (autoRefresh) {
       const interval = setInterval(fetchNotes, refreshInterval)
       return () => clearInterval(interval)
@@ -36,7 +38,7 @@ export function useNotes(autoRefresh = false, refreshInterval = 30000) {
     }
   }
 
-  async function createNote(note: { content: string; author_name?: string; author_emoji?: string }) {
+  async function createNote(note: { content: string; session_id: string }) {
     try {
       const newNote = await api.post<Note>('/notes', note)
       setNotes(prev => [newNote, ...prev])
@@ -46,9 +48,9 @@ export function useNotes(autoRefresh = false, refreshInterval = 30000) {
     }
   }
 
-  async function deleteNote(id: number) {
+  async function deleteNote(id: number, session_id: string) {
     try {
-      await api.delete(`/notes/${id}`)
+      await api.delete(`/notes/${id}`, { session_id })
       setNotes(prev => prev.filter(n => n.id !== id))
     } catch (err) {
       throw err

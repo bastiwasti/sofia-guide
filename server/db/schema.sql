@@ -25,9 +25,10 @@ CREATE TABLE IF NOT EXISTS locations (
 CREATE TABLE IF NOT EXISTS notes (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   content TEXT NOT NULL,
-  author_name TEXT,
-  author_emoji TEXT,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  session_id TEXT,
+  backup_emoji TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (session_id) REFERENCES user_sessions(session_id)
 );
 
 -- User sessions table
