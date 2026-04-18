@@ -55,7 +55,7 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
               onClick={() => onTabChange(tab.id as Tab)}
               aria-label={tab.label}
             >
-              <Icon size={24} strokeWidth={activeTab === tab.id ? 2.5 : 2} />
+              <Icon size={22} strokeWidth={activeTab === tab.id ? 2.5 : 2} />
               <span className="tab-label">{tab.label}</span>
             </button>
           )
@@ -70,7 +70,6 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
           aria-label={session ? `Profil: ${session.emoji}` : 'Profil wählen'}
         >
           <span className="profile-emoji">{session?.emoji || '👤'}</span>
-          <span className="tab-label">Profil</span>
         </button>
       </div>
 
@@ -116,13 +115,15 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
           display: flex;
           flex-direction: column;
           align-items: center;
+          justify-content: center;
           gap: 2px;
           background: transparent;
           color: var(--color-gray-medium);
-          padding: var(--spacing-xs) var(--spacing-sm);
+          padding: 0 var(--spacing-sm);
           border-radius: var(--border-radius-sm);
           transition: all 0.2s ease;
           flex-shrink: 0;
+          height: 100%;
         }
 
         .tab-button:active {
@@ -141,17 +142,17 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
 
         .profile-button {
           display: flex;
-          flex-direction: column;
           align-items: center;
-          gap: 2px;
+          justify-content: center;
           background: transparent;
           color: var(--color-gray-medium);
-          padding: var(--spacing-xs) var(--spacing-sm);
+          padding: 0 var(--spacing-sm);
           border-radius: var(--border-radius-sm);
           transition: all 0.2s ease;
           flex-shrink: 0;
           border: none;
           cursor: pointer;
+          height: 100%;
         }
 
         .profile-button:active {
