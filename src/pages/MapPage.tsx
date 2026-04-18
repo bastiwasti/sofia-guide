@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Layers, Edit, MapPin, Navigation, Building2 } from 'lucide-react'
 import { useLocations } from '../hooks/useLocations'
 import { useCategories } from '../hooks/useCategories'
+import { UserSession } from '../hooks/useUserSessions'
 import MapComponent from '../components/Map'
 import FilterBar from '../components/FilterBar'
 import BottomSheet from '../components/BottomSheet'
@@ -20,6 +21,18 @@ export default function MapPage() {
   const [showCategoryForm, setShowCategoryForm] = useState(false)
   const [newLocationCoords, setNewLocationCoords] = useState<{ lat: number; lng: number } | undefined>()
   const [hotelFlyTrigger, setHotelFlyTrigger] = useState(0)
+  const [userSession, setUserSession] = useState<UserSession | null>(null)
+
+  useEffect(() => {
+    const saved = localStorage.getItem('userSession')
+    if (saved) {
+      try {
+        setUserSession(JSON.parse(saved))
+      } catch (e) {
+        console.error('Failed to parse saved session:', e)
+      }
+    }
+  }, [])
 
   const filteredLocations = useMemo(() => {
     if (selectedCategories.length === 0) return locations
@@ -53,7 +66,11 @@ export default function MapPage() {
 
   async function handleCreateLocation(location: any) {
     try {
-      await createLocation(location)
+      const locationWithSession = {
+        ...location,
+        session_id: userSession?.session_id || null
+      }
+      await createLocation(locationWithSession)
       await refetchLocations()
       setShowLocationForm(false)
       setNewLocationCoords(undefined)
@@ -89,6 +106,12 @@ export default function MapPage() {
 
   function handleMapClick(e: any) {
     if (!editMode) return
+
+    if (!userSession) {
+      alert('Bitte logge dich zuerst ein, um Locations zu erstellen!')
+      return
+    }
+
     const { lat, lng } = e.latlng
     setNewLocationCoords({ lat, lng })
     setShowLocationForm(true)
@@ -204,6 +227,8 @@ export default function MapPage() {
           onMapClick={handleMapClick}
           editMode={editMode}
           onDeleteLocation={handleDeleteLocation}
+          isLoggedIn={!!userSession}
+          onRefetchLocations={refetchLocations}
         />
       </div>
 

@@ -14,6 +14,8 @@ export interface Location {
   category_name: string
   category_color: string
   category_icon: string
+  author_emoji: string | null
+  has_author: number
 }
 
 export function useLocations() {

@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS locations (
   price_range TEXT,
   lat REAL NOT NULL,
   lng REAL NOT NULL,
+  session_id TEXT,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );

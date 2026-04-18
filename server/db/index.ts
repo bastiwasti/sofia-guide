@@ -40,6 +40,24 @@ function migrateNotesTable(db: Database.Database): void {
   }
 }
 
+function migrateLocationsTable(db: Database.Database): void {
+  try {
+    const schema = db.pragma('table_info(locations)') as Array<{ name: string; type: string }>
+    const columnNames = schema.map(col => col.name)
+
+    if (!columnNames.includes('session_id')) {
+      console.log('Adding session_id column to locations table...')
+      db.exec('ALTER TABLE locations ADD COLUMN session_id TEXT')
+      db.exec('CREATE INDEX IF NOT EXISTS idx_locations_session_id ON locations(session_id)')
+      console.log('Locations table migration completed successfully')
+    } else {
+      console.log('Locations table already has session_id column')
+    }
+  } catch (error) {
+    console.log('Locations migration completed or not needed')
+  }
+}
+
 export function initializeDatabase(): void {
   const db = getDatabase()
 
@@ -49,6 +67,7 @@ export function initializeDatabase(): void {
     console.log('Database schema initialized successfully')
 
     migrateNotesTable(db)
+    migrateLocationsTable(db)
   } catch (error) {
     console.error('Error initializing database:', error)
     throw error

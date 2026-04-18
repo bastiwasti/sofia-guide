@@ -15,6 +15,8 @@ interface MapProps {
   editMode?: boolean
   onDeleteLocation?: (id: number) => void
   hotelFlyTrigger?: number
+  isLoggedIn: boolean
+  onRefetchLocations?: () => void
 }
 
 function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
@@ -168,8 +170,18 @@ function UserLocationMarker({ isTracking }: { isTracking: boolean }) {
   )
 }
 
-export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0 }: MapProps) {
+export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, isLoggedIn, onRefetchLocations }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
+
+  useEffect(() => {
+    const handleEmojiChange = () => {
+      console.log('Emoji changed in Map, refreshing locations...')
+      onRefetchLocations?.()
+    }
+
+    window.addEventListener('emojiChanged', handleEmojiChange)
+    return () => window.removeEventListener('emojiChanged', handleEmojiChange)
+  }, [onRefetchLocations])
 
   return (
     <MapContainer
@@ -208,7 +220,7 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
         <Marker
           key={location.id}
           position={[location.lat, location.lng]}
-          icon={createCustomIcon(location.category_color)}
+          icon={createCustomIcon(location.category_color, isLoggedIn && location.author_emoji ? location.author_emoji : undefined)}
           eventHandlers={{
             click: () => onLocationSelect(location)
           }}

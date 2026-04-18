@@ -4,11 +4,31 @@ export const HOTEL_COORDS: [number, number] = [42.690656, 23.316578]
 
 export const SOFIA_CENTER: [number, number] = [42.6977, 23.3219]
 
-export function createCustomIcon(color: string): L.DivIcon {
+export function createCustomIcon(color: string, authorEmoji?: string): L.DivIcon {
+  const emojiBadge = authorEmoji ? `
+    <div style="
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      z-index: 10;
+    ">${authorEmoji}</div>
+  ` : ''
+
   return L.divIcon({
     className: 'custom-marker',
     html: `
       <div style="
+        position: relative;
         width: 32px;
         height: 32px;
         background-color: ${color};
@@ -27,6 +47,7 @@ export function createCustomIcon(color: string): L.DivIcon {
           background-color: white;
           border-radius: 50%;
         "></div>
+        ${emojiBadge}
       </div>
     `,
     iconSize: [32, 32],
