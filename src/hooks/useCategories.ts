@@ -23,7 +23,25 @@ export function useCategories() {
       setLoading(true)
       setError(null)
       const data = await api.get<Category[]>('/categories')
-      setCategories(data)
+
+      const sortOrder = ['Kneipen', 'Essen', 'Nightlife', 'Sehenswürdigkeiten', 'Neu']
+
+      const sortedData = data.sort((a, b) => {
+        const indexA = sortOrder.indexOf(a.name)
+        const indexB = sortOrder.indexOf(b.name)
+
+        if (indexA !== -1 && indexB !== -1) {
+          return indexA - indexB
+        } else if (indexA !== -1) {
+          return -1
+        } else if (indexB !== -1) {
+          return 1
+        } else {
+          return a.name.localeCompare(b.name)
+        }
+      })
+
+      setCategories(sortedData)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to fetch categories')
     } finally {
