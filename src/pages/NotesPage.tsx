@@ -4,7 +4,7 @@ import { useNotes } from '../hooks/useNotes'
 import { UserSession } from '../hooks/useUserSessions'
 
 export default function NotesPage() {
-  const { notes, loading, createNote, deleteNote } = useNotes(true, 30000)
+  const { notes, loading, createNote, deleteNote, refetch } = useNotes(true, 30000)
   const [showForm, setShowForm] = useState(false)
   const [content, setContent] = useState('')
   const [userSession, setUserSession] = useState<UserSession | null>(null)
@@ -13,12 +13,40 @@ export default function NotesPage() {
     const saved = localStorage.getItem('userSession')
     if (saved) {
       try {
-        setUserSession(JSON.parse(saved))
+        const parsed = JSON.parse(saved)
+
+        fetch(`/api/user-sessions/${parsed.session_id}/validate`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.valid) {
+              setUserSession(parsed)
+            } else {
+              localStorage.removeItem('userSession')
+              setUserSession(null)
+              console.log('Invalid session removed from localStorage in NotesPage')
+            }
+          })
+          .catch(err => {
+            console.error('Session validation failed in NotesPage:', err)
+            localStorage.removeItem('userSession')
+            setUserSession(null)
+          })
       } catch (e) {
         console.error('Failed to parse saved session:', e)
+        localStorage.removeItem('userSession')
       }
     }
   }, [])
+
+  useEffect(() => {
+    const handleEmojiChange = () => {
+      console.log('Emoji changed, refreshing notes...')
+      refetch()
+    }
+
+    window.addEventListener('emojiChanged', handleEmojiChange)
+    return () => window.removeEventListener('emojiChanged', handleEmojiChange)
+  }, [refetch])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()

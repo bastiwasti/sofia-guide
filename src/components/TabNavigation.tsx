@@ -19,12 +19,44 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
     const saved = localStorage.getItem('userSession')
     if (saved) {
       try {
-        setSession(JSON.parse(saved))
+        const parsed = JSON.parse(saved)
+
+        fetch(`/api/user-sessions/${parsed.session_id}/validate`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.valid) {
+              setSession(parsed)
+            } else {
+              localStorage.removeItem('userSession')
+              setSession(null)
+              console.log('Invalid session removed from localStorage')
+            }
+          })
+          .catch(err => {
+            console.error('Session validation failed:', err)
+            localStorage.removeItem('userSession')
+            setSession(null)
+          })
       } catch (e) {
         console.error('Failed to parse saved session:', e)
         localStorage.removeItem('userSession')
       }
     }
+
+    const handleEmojiChange = () => {
+      console.log('Emoji changed, updating navigation...')
+      const saved = localStorage.getItem('userSession')
+      if (saved) {
+        try {
+          setSession(JSON.parse(saved))
+        } catch (e) {
+          console.error('Failed to parse session after emoji change:', e)
+        }
+      }
+    }
+
+    window.addEventListener('emojiChanged', handleEmojiChange)
+    return () => window.removeEventListener('emojiChanged', handleEmojiChange)
   }, [])
 
   function handleSave(newSession: UserSession | null) {

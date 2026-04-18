@@ -172,7 +172,8 @@ export async function deleteUserSession(req: Request, res: Response) {
     const { sessionId } = req.params
 
     if (!sessionId) {
-      return res.status(400).json({ error: 'Session ID is required' })
+      res.status(400).json({ error: 'Session ID is required' })
+      return
     }
 
     const db = getDatabase()
@@ -189,5 +190,31 @@ export async function deleteUserSession(req: Request, res: Response) {
   } catch (error) {
     console.error('Error deleting user session:', error)
     res.status(500).json({ error: 'Failed to delete user session' })
+  }
+}
+
+export async function validateSession(req: Request, res: Response) {
+  try {
+    const { sessionId } = req.params
+
+    if (!sessionId) {
+      res.status(400).json({ error: 'Session ID is required' })
+      return
+    }
+
+    const db = getDatabase()
+
+    const session = db.prepare('SELECT session_id, emoji FROM user_sessions WHERE session_id = ?').get(sessionId)
+
+    db.close()
+
+    if (session) {
+      res.json({ valid: true, emoji: (session as { emoji: string }).emoji })
+    } else {
+      res.json({ valid: false })
+    }
+  } catch (error) {
+    console.error('Error validating session:', error)
+    res.status(500).json({ error: 'Failed to validate session' })
   }
 }

@@ -2,7 +2,7 @@ import express from 'express'
 import { getLocations, getLocationById, createLocation, deleteLocation } from './routes/locations'
 import { getCategories, createCategory } from './routes/categories'
 import { getNotes, createNote, deleteNote } from './routes/notes'
-import { getUserSessions, createUserSession, reclaimUserSession, updateUserSessionEmoji, deleteUserSession } from './routes/user-sessions'
+import { getUserSessions, createUserSession, reclaimUserSession, updateUserSessionEmoji, deleteUserSession, validateSession } from './routes/user-sessions'
 import { initializeDatabase } from './db'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -42,6 +42,7 @@ app.post('/api/user-sessions', createUserSession)
 app.put('/api/user-sessions/reclaim', reclaimUserSession)
 app.patch('/api/user-sessions/:sessionId/emoji', updateUserSessionEmoji)
 app.delete('/api/user-sessions/:sessionId', deleteUserSession)
+app.get('/api/user-sessions/:sessionId/validate', validateSession)
 
 if (isDev) {
   app.get('/api/health', (_req, res) => {
