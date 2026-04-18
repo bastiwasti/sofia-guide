@@ -2,6 +2,8 @@ import express from 'express'
 import { getLocations, getLocationById, createLocation, deleteLocation } from './routes/locations'
 import { getCategories, createCategory } from './routes/categories'
 import { getNotes, createNote, deleteNote } from './routes/notes'
+import { getUserSessions, createUserSession, reclaimUserSession, updateUserSessionEmoji, deleteUserSession } from './routes/user-sessions'
+import { initializeDatabase } from './db'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -35,6 +37,12 @@ app.get('/api/notes', getNotes)
 app.post('/api/notes', createNote)
 app.delete('/api/notes/:id', deleteNote)
 
+app.get('/api/user-sessions', getUserSessions)
+app.post('/api/user-sessions', createUserSession)
+app.put('/api/user-sessions/reclaim', reclaimUserSession)
+app.patch('/api/user-sessions/:sessionId/emoji', updateUserSessionEmoji)
+app.delete('/api/user-sessions/:sessionId', deleteUserSession)
+
 if (isDev) {
   app.get('/api/health', (_req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() })
@@ -49,6 +57,8 @@ if (!isDev) {
     res.sendFile(join(distPath, 'index.html'))
   })
 }
+
+initializeDatabase()
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

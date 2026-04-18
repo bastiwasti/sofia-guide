@@ -44,11 +44,6 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
   const takenEmojis = sessions.map(s => s.emoji)
   const isLoggedIn = !!existingSession
 
-  // Filter sessions to only show those matching to recovery code
-  const sessionsWithCode = validateCode(reclaimCode)
-    ? sessions.filter(s => s.recovery_code.toUpperCase() === reclaimCode.toUpperCase())
-    : [] // Show no emojis until a valid code is entered
-
   async function handleLogout() {
     if (!existingSession) return
 
@@ -194,8 +189,8 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
       return null
     }
     if (notLoggedInMode === 'recover') {
-      if (!validateCode(reclaimCode)) return '4-stelligen Recovery-Code eingeben'
       if (!reclaimEmoji) return 'Dein Emoji aus der Liste auswählen'
+      if (!validateCode(reclaimCode)) return '4-stelligen Recovery-Code eingeben'
       return null
     }
     if (!selectedEmoji) return 'Emoji auswählen'
@@ -340,8 +335,29 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
               {notLoggedInMode === 'recover' ? (
                 <div className="reclaim-mode">
                   <div className="instructions">
-                    Gib deinen Recovery-Code ein, um dein Emoji zu finden. Alle Smilies mit diesem Code werden angezeigt.
+                    Wähle deinen Smiley und gib deinen Recovery-Code ein.
                   </div>
+
+                  {sessions.length === 0 ? (
+                    <div className="placeholder-hint">
+                      Noch keine Smilies vergeben. Wechsle zum Tab "Neu wählen".
+                    </div>
+                  ) : (
+                    <div className="emoji-selection">
+                      <label>Dein Smiley</label>
+                      <div className="emoji-grid">
+                        {sessions.map(session => (
+                          <button
+                            key={session.emoji}
+                            className={`emoji-tile ${reclaimEmoji === session.emoji ? 'selected' : ''}`}
+                            onClick={() => setReclaimEmoji(session.emoji)}
+                          >
+                            <span className="emoji-char">{session.emoji}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   <div className="recovery-code-input">
                     <label>Recovery-Code</label>
@@ -354,32 +370,6 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
                       className={validateCode(reclaimCode) ? 'valid' : ''}
                     />
                   </div>
-
-                  {validateCode(reclaimCode) && sessionsWithCode.length > 0 ? (
-                    <div className="matched-sessions-list">
-                      <div className="instructions">
-                        {sessionsWithCode.length === 1
-                          ? 'Ein Smiley mit diesem Code gefunden:'
-                          : `${sessionsWithCode.length} Smilies mit diesem Code gefunden. Wähle deinen:`
-                        }
-                      </div>
-                      <div className="emoji-grid compact">
-                        {sessionsWithCode.map(session => (
-                          <button
-                            key={session.emoji}
-                            className={`emoji-tile ${reclaimEmoji === session.emoji ? 'selected' : ''}`}
-                            onClick={() => setReclaimEmoji(session.emoji)}
-                          >
-                            <span className="emoji-char">{session.emoji}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="placeholder-hint">
-                      Gib deinen 4-stelligen Code ein, um dein Emoji zu finden.
-                    </div>
-                  )}
                 </div>
               ) : (
                 <div className="setup-mode">
