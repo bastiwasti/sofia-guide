@@ -1,4 +1,7 @@
+import { useState, useEffect } from 'react'
 import { Map, Home, BookOpen, Info, MessageSquare } from 'lucide-react'
+import { useUserSessions, UserSession } from '../hooks/useUserSessions'
+import EmojiPickerModal from './EmojiPickerModal'
 
 type Tab = 'karte' | 'hotel' | 'survival' | 'sofia' | 'notizen'
 
@@ -8,6 +11,30 @@ interface TabNavigationProps {
 }
 
 export default function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
+  const [session, setSession] = useState<UserSession | null>(null)
+  const [showPicker, setShowPicker] = useState(false)
+  const { refetch } = useUserSessions()
+
+  useEffect(() => {
+    const saved = localStorage.getItem('userSession')
+    if (saved) {
+      try {
+        setSession(JSON.parse(saved))
+      } catch (e) {
+        console.error('Failed to parse saved session:', e)
+        localStorage.removeItem('userSession')
+      }
+    }
+  }, [])
+
+  function handleSave(newSession: UserSession | null) {
+    if (newSession) {
+      setSession(newSession)
+      localStorage.setItem('userSession', JSON.stringify(newSession))
+      refetch()
+    }
+  }
+
   const tabs = [
     { id: 'karte', label: 'Karte', icon: Map },
     { id: 'hotel', label: 'Hotel', icon: Home },
@@ -33,7 +60,30 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
             </button>
           )
         })}
+
+        <button
+          className="profile-button"
+          onClick={() => {
+            console.log('Profile button clicked')
+            setShowPicker(true)
+          }}
+          aria-label={session ? `Profil: ${session.emoji}` : 'Profil wählen'}
+        >
+          <span className="profile-emoji">{session?.emoji || '👤'}</span>
+          <span className="tab-label">Profil</span>
+        </button>
       </div>
+
+      {showPicker && (
+        <>
+          {console.log('Rendering EmojiPickerModal')}
+          <EmojiPickerModal
+            existingSession={session}
+            onClose={() => setShowPicker(false)}
+            onSave={handleSave}
+          />
+        </>
+      )}
 
       <style>{`
         .tab-navigation {
@@ -55,10 +105,11 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
 
         .tabs-row {
           display: flex;
-          justify-content: space-around;
+          justify-content: space-between;
           align-items: center;
           width: 100%;
-          padding: var(--spacing-sm) 0;
+          padding: var(--spacing-sm) var(--spacing-md);
+          gap: var(--spacing-xs);
         }
 
         .tab-button {
@@ -86,6 +137,44 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
           font-size: 11px;
           font-weight: 500;
           letter-spacing: 0.3px;
+        }
+
+        .profile-button {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2px;
+          background: transparent;
+          color: var(--color-gray-medium);
+          padding: var(--spacing-xs) var(--spacing-sm);
+          border-radius: var(--border-radius-sm);
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+          border: none;
+          cursor: pointer;
+        }
+
+        .profile-button:active {
+          transform: scale(0.95);
+        }
+
+        .profile-emoji {
+          font-size: 24px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: ${session ? '#8B5CF6' : 'var(--color-gray-light)'};
+          color: white;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          transition: all 0.2s ease;
+        }
+
+        .profile-button:hover .profile-emoji {
+          transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
       `}</style>
     </nav>

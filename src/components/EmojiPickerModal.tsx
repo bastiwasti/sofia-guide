@@ -10,6 +10,7 @@ interface EmojiPickerModalProps {
 }
 
 export default function EmojiPickerModal({ existingSession, onClose, onSave }: EmojiPickerModalProps) {
+  console.log('EmojiPickerModal mounted')
   const { sessions, loading, refetch, createSession, reclaimSession, deleteSession, updateSessionEmoji } = useUserSessions()
   const [notLoggedInMode, setNotLoggedInMode] = useState<'choose-new' | 'recover'>('choose-new')
   const [loggedInMode, setLoggedInMode] = useState<'profile' | 'switch'>('profile')
