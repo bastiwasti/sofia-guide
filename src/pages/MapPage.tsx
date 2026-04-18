@@ -229,6 +229,7 @@ export default function MapPage() {
           onDeleteLocation={handleDeleteLocation}
           isLoggedIn={!!userSession}
           onRefetchLocations={refetchLocations}
+          showAuthorEmojis={true}
         />
       </div>
 

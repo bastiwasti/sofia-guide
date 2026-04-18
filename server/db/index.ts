@@ -53,6 +53,14 @@ function migrateLocationsTable(db: Database.Database): void {
     } else {
       console.log('Locations table already has session_id column')
     }
+
+    if (!columnNames.includes('backup_emoji')) {
+      console.log('Adding backup_emoji column to locations table...')
+      db.exec('ALTER TABLE locations ADD COLUMN backup_emoji TEXT')
+      console.log('Locations table backup_emoji migration completed successfully')
+    } else {
+      console.log('Locations table already has backup_emoji column')
+    }
   } catch (error) {
     console.log('Locations migration completed or not needed')
   }

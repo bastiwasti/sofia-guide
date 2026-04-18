@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS locations (
   lat REAL NOT NULL,
   lng REAL NOT NULL,
   session_id TEXT,
+  backup_emoji TEXT,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );

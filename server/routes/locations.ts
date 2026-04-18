@@ -10,8 +10,9 @@ export function getLocations(_req: Request, res: Response): void {
         c.name as category_name,
         c.color as category_color,
         c.icon as category_icon,
+        l.backup_emoji,
         us.emoji as author_emoji,
-        CASE WHEN us.session_id IS NOT NULL THEN 1 ELSE 0 END as has_author
+        CASE WHEN us.session_id IS NOT NULL THEN 1 ELSE 0 END as is_active_user
       FROM locations l
       JOIN categories c ON l.category_id = c.id
       LEFT JOIN user_sessions us ON l.session_id = us.session_id
@@ -36,8 +37,9 @@ export function getLocationById(req: Request, res: Response): void {
         c.name as category_name,
         c.color as category_color,
         c.icon as category_icon,
+        l.backup_emoji,
         us.emoji as author_emoji,
-        CASE WHEN us.session_id IS NOT NULL THEN 1 ELSE 0 END as has_author
+        CASE WHEN us.session_id IS NOT NULL THEN 1 ELSE 0 END as is_active_user
       FROM locations l
       JOIN categories c ON l.category_id = c.id
       LEFT JOIN user_sessions us ON l.session_id = us.session_id
@@ -67,10 +69,19 @@ export function createLocation(req: Request, res: Response): void {
     }
 
     const db = getDatabase()
+
+    let backupEmoji: string | null = null
+    if (session_id) {
+      const session = db.prepare('SELECT emoji FROM user_sessions WHERE session_id = ?').get(session_id)
+      if (session) {
+        backupEmoji = (session as { emoji: string }).emoji
+      }
+    }
+
     const result = db.prepare(`
-      INSERT INTO locations (category_id, name, meta, rating, price_range, lat, lng, session_id)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(category_id, name, meta || null, rating || null, price_range || null, lat, lng, session_id || null)
+      INSERT INTO locations (category_id, name, meta, rating, price_range, lat, lng, session_id, backup_emoji)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `).run(category_id, name, meta || null, rating || null, price_range || null, lat, lng, session_id || null, backupEmoji)
 
     const location = db.prepare(`
       SELECT
@@ -78,8 +89,9 @@ export function createLocation(req: Request, res: Response): void {
         c.name as category_name,
         c.color as category_color,
         c.icon as category_icon,
+        l.backup_emoji,
         us.emoji as author_emoji,
-        CASE WHEN us.session_id IS NOT NULL THEN 1 ELSE 0 END as has_author
+        CASE WHEN us.session_id IS NOT NULL THEN 1 ELSE 0 END as is_active_user
       FROM locations l
       JOIN categories c ON l.category_id = c.id
       LEFT JOIN user_sessions us ON l.session_id = us.session_id

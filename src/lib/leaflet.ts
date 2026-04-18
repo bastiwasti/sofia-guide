@@ -4,8 +4,16 @@ export const HOTEL_COORDS: [number, number] = [42.690656, 23.316578]
 
 export const SOFIA_CENTER: [number, number] = [42.6977, 23.3219]
 
-export function createCustomIcon(color: string, authorEmoji?: string): L.DivIcon {
-  const emojiBadge = authorEmoji ? `
+export function createCustomIcon(color: string, authorEmoji?: string | null, isActiveUser?: boolean, backupEmoji?: string | null): L.DivIcon {
+  let displayEmoji: string | null = authorEmoji || null
+  let isDeprecated = false
+
+  if (!isActiveUser && backupEmoji) {
+    displayEmoji = backupEmoji
+    isDeprecated = true
+  }
+
+  const emojiBadge = displayEmoji ? `
     <div style="
       position: absolute;
       top: -4px;
@@ -21,7 +29,13 @@ export function createCustomIcon(color: string, authorEmoji?: string): L.DivIcon
       justify-content: center;
       font-size: 12px;
       z-index: 10;
-    ">${authorEmoji}</div>
+      ${isDeprecated ? `
+        opacity: 0.6;
+        text-decoration: line-through;
+        text-decoration-thickness: 3px;
+        text-decoration-color: #c62828;
+      ` : ''}
+    ">${displayEmoji}</div>
   ` : ''
 
   return L.divIcon({

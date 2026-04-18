@@ -17,6 +17,7 @@ interface MapProps {
   hotelFlyTrigger?: number
   isLoggedIn: boolean
   onRefetchLocations?: () => void
+  showAuthorEmojis?: boolean
 }
 
 function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
@@ -220,7 +221,12 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
         <Marker
           key={location.id}
           position={[location.lat, location.lng]}
-          icon={createCustomIcon(location.category_color, isLoggedIn && location.author_emoji ? location.author_emoji : undefined)}
+          icon={createCustomIcon(
+            location.category_color,
+            (isLoggedIn || location.is_active_user === 0) && (location.author_emoji || location.backup_emoji) ? (location.author_emoji || location.backup_emoji || undefined) : undefined,
+            location.is_active_user === 1,
+            location.backup_emoji || undefined
+          )}
           eventHandlers={{
             click: () => onLocationSelect(location)
           }}
