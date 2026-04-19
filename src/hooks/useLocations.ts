@@ -51,9 +51,9 @@ export function useLocations() {
     }
   }
 
-  async function deleteLocation(id: number) {
+  async function deleteLocation(id: number, sessionId?: string | null, adminPassword?: string) {
     try {
-      await api.delete(`/locations/${id}`)
+      await api.delete(`/locations/${id}`, { session_id: sessionId || null, admin_password: adminPassword })
       setLocations(prev => prev.filter(l => l.id !== id))
     } catch (err) {
       throw err

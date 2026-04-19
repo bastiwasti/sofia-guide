@@ -77,11 +77,16 @@ export default function MapPage({ session }: MapPageProps) {
       return
     }
     try {
-      await deleteLocation(id)
+      await deleteLocation(id, session?.session_id || null, password)
       await refetchLocations()
       setSelectedLocation(null)
     } catch (error) {
       console.error('Failed to delete location:', error)
+      if (error && typeof error === 'object' && 'message' in error) {
+        alert(`Fehler beim Löschen: ${error.message}`)
+      } else {
+        alert('Fehler beim Löschen der Location')
+      }
     }
   }
 

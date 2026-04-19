@@ -109,7 +109,34 @@ export function createLocation(req: Request, res: Response): void {
 export function deleteLocation(req: Request, res: Response): void {
   try {
     const { id } = req.params
+    const { session_id, admin_password } = req.body
+    
     const db = getDatabase()
+    
+    const location = db.prepare('SELECT session_id FROM locations WHERE id = ?').get(id) as { session_id: string | null } | undefined
+    
+    if (!location) {
+      db.close()
+      res.status(404).json({ error: 'Location not found' })
+      return
+    }
+    
+    let canDelete = false
+    
+    if (admin_password === '24031986') {
+      canDelete = true
+    } else if (location.session_id === null) {
+      canDelete = true
+    } else if (session_id === location.session_id) {
+      canDelete = true
+    }
+    
+    if (!canDelete) {
+      db.close()
+      res.status(403).json({ error: 'You can only delete locations you own or legacy locations' })
+      return
+    }
+    
     const result = db.prepare('DELETE FROM locations WHERE id = ?').run(id)
     db.close()
     
