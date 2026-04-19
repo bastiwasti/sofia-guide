@@ -65,7 +65,7 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
       localStorage.removeItem('userSession')
       onSave(null)
 
-      window.dispatchEvent(new CustomEvent('emojiChanged'))
+      window.dispatchEvent(new CustomEvent('emojiChanged', { detail: { emoji: existingSession.emoji } }))
 
       onClose()
     } catch (err) {
@@ -98,7 +98,7 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
       setTimeout(() => {
         localStorage.setItem('userSession', JSON.stringify(updatedSession))
         onSave(updatedSession)
-        window.dispatchEvent(new CustomEvent('emojiChanged'))
+        window.dispatchEvent(new CustomEvent('emojiChanged', { detail: { emoji: selectedEmoji } }))
         onClose()
       }, 500)
     } catch (err: unknown) {
@@ -136,7 +136,7 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
       setSuccess(true)
       setTimeout(() => {
         onSave(session)
-        window.dispatchEvent(new CustomEvent('emojiChanged'))
+        window.dispatchEvent(new CustomEvent('emojiChanged', { detail: { emoji: selectedEmoji } }))
         onClose()
       }, 500)
     } catch (err: unknown) {
@@ -162,7 +162,7 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
       setSuccess(true)
       setTimeout(() => {
         onSave(session)
-        window.dispatchEvent(new CustomEvent('emojiChanged'))
+        window.dispatchEvent(new CustomEvent('emojiChanged', { detail: { emoji: reclaimEmoji } }))
         onClose()
       }, 500)
     } catch (err: unknown) {

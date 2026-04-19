@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { io, Socket } from 'socket.io-client'
 
 export interface UserLocation {
@@ -15,8 +15,37 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
   const [userLocations, setUserLocations] = useState<UserLocation[]>([])
   const [isSharing, setIsSharing] = useState(false)
   const [gpsMode, setGpsMode] = useState<'off' | 'static' | 'tracking'>('off')
+  const [lastKnownPosition, setLastKnownPosition] = useState<{ lat: number; lng: number; accuracy: number } | null>(null)
   const socketRef = useRef<Socket | null>(null)
   const watchIdRef = useRef<number | null>(null)
+
+  const updateLocationWithNewEmoji = useCallback((newEmoji: string) => {
+    if (!socketRef.current || !lastKnownPosition || !sessionId) return
+    
+    socketRef.current.emit('user-location-update', {
+      session_id: sessionId,
+      emoji: newEmoji,
+      lat: lastKnownPosition.lat,
+      lng: lastKnownPosition.lng,
+      accuracy: lastKnownPosition.accuracy,
+      is_tracking: gpsMode !== 'off'
+    })
+  }, [socketRef, lastKnownPosition, sessionId, gpsMode])
+
+  useEffect(() => {
+    if (!sessionId) return
+
+    const handleEmojiChange = (event: Event) => {
+      const customEvent = event as CustomEvent
+      const newEmoji = customEvent.detail?.emoji
+      if (newEmoji && newEmoji !== userEmoji && lastKnownPosition) {
+        updateLocationWithNewEmoji(newEmoji)
+      }
+    }
+
+    window.addEventListener('emojiChanged', handleEmojiChange)
+    return () => window.removeEventListener('emojiChanged', handleEmojiChange)
+  }, [sessionId, userEmoji, lastKnownPosition, updateLocationWithNewEmoji])
 
   useEffect(() => {
     if (!sessionId || !userEmoji) return
@@ -75,6 +104,7 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           const { latitude, longitude, accuracy } = pos.coords
+          setLastKnownPosition({ lat: latitude, lng: longitude, accuracy })
           socketRef.current?.emit('user-location-update', {
             session_id: sessionId,
             emoji: userEmoji,
@@ -91,6 +121,7 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
       watchIdRef.current = navigator.geolocation.watchPosition(
         (pos) => {
           const { latitude, longitude, accuracy } = pos.coords
+          setLastKnownPosition({ lat: latitude, lng: longitude, accuracy })
           socketRef.current?.emit('user-location-update', {
             session_id: sessionId,
             emoji: userEmoji,
