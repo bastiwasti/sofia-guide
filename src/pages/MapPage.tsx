@@ -250,7 +250,8 @@ export default function MapPage({ session }: MapPageProps) {
       <BottomSheet
         location={selectedLocation}
         onClose={() => setSelectedLocation(null)}
-        onDelete={editMode ? () => selectedLocation && handleDeleteLocation(selectedLocation.id) : undefined}
+        onDelete={() => selectedLocation && handleDeleteLocation(selectedLocation.id)}
+        isLoggedIn={!!session}
       />
 
       {showLocationForm && (

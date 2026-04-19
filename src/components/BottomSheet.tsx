@@ -6,9 +6,10 @@ interface BottomSheetProps {
   location: Location | null
   onClose: () => void
   onDelete?: () => void
+  isLoggedIn?: boolean
 }
 
-export default function BottomSheet({ location, onClose, onDelete }: BottomSheetProps) {
+export default function BottomSheet({ location, onClose, onDelete, isLoggedIn = false }: BottomSheetProps) {
   if (!location) return null
 
   const distance = calculateDistance(HOTEL_COORDS[0], HOTEL_COORDS[1], location.lat, location.lng)
@@ -56,7 +57,7 @@ export default function BottomSheet({ location, onClose, onDelete }: BottomSheet
             <small>{location.lat.toFixed(5)}, {location.lng.toFixed(5)}</small>
           </div>
 
-          {onDelete && (
+          {onDelete && isLoggedIn && (
             <button className="delete-button" onClick={onDelete}>
               Location löschen
             </button>
