@@ -38,17 +38,17 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
     const handleEmojiChange = (event: Event) => {
       const customEvent = event as CustomEvent
       const newEmoji = customEvent.detail?.emoji
-      if (newEmoji && newEmoji !== userEmoji && lastKnownPosition) {
+      if (newEmoji && lastKnownPosition) {
         updateLocationWithNewEmoji(newEmoji)
       }
     }
 
     window.addEventListener('emojiChanged', handleEmojiChange)
     return () => window.removeEventListener('emojiChanged', handleEmojiChange)
-  }, [sessionId, userEmoji, lastKnownPosition, updateLocationWithNewEmoji])
+  }, [sessionId, lastKnownPosition, updateLocationWithNewEmoji])
 
   useEffect(() => {
-    if (!sessionId || !userEmoji) return
+    if (!sessionId) return
 
     const wsUrl = (import.meta as any).env.PROD ? window.location.origin : 'http://localhost:3002'
     const newSocket = io(wsUrl, {
@@ -86,7 +86,7 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
       }
       newSocket.disconnect()
     }
-  }, [sessionId, userEmoji])
+  }, [sessionId])
 
   const startSharing = (mode: 'static' | 'tracking') => {
     if (!socketRef.current || !sessionId || !userEmoji || !navigator.geolocation) return

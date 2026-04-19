@@ -26,6 +26,7 @@ export default function MapPage({ session }: MapPageProps) {
   const [showCategoryForm, setShowCategoryForm] = useState(false)
   const [newLocationCoords, setNewLocationCoords] = useState<{ lat: number; lng: number } | undefined>()
   const [hotelFlyTrigger, setHotelFlyTrigger] = useState(0)
+  const [showOwnMarker, setShowOwnMarker] = useState(false)
 
   const { userLocations, toggleGpsMode: toggleLocationSharing, gpsMode: sharedGpsMode } = useUserLocations(
     session?.session_id || null,
@@ -203,6 +204,15 @@ export default function MapPage({ session }: MapPageProps) {
             <span>{gpsMode === 'off' ? 'GPS' : gpsMode === 'static' ? 'Follow' : 'Off'}</span>
           </button>
           <button
+            className={`toggle-button ${showOwnMarker ? 'active' : ''}`}
+            onClick={() => setShowOwnMarker(!showOwnMarker)}
+            aria-label="Eigener Marker anzeigen"
+            title="Zeigt deinen eigenen Smiley auf der Karte"
+          >
+            <MapPin size={16} />
+            <span>Ich</span>
+          </button>
+          <button
             className={`edit-button ${editMode ? 'active' : ''}`}
             onClick={() => setEditMode(!editMode)}
             aria-label="Edit-Modus umschalten"
@@ -244,6 +254,7 @@ export default function MapPage({ session }: MapPageProps) {
           showAuthorEmojis={true}
           userLocations={userLocations}
           currentSessionId={session?.session_id || null}
+          showOwnMarker={showOwnMarker}
         />
       </div>
 

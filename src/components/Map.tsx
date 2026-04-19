@@ -18,10 +18,11 @@ interface MapProps {
   onDeleteLocation?: (id: number) => void
   hotelFlyTrigger?: number
   isLoggedIn: boolean
+  showAuthorEmojis: boolean
+  userLocations: UserLocation[]
+  currentSessionId: string | null
+  showOwnMarker?: boolean
   onRefetchLocations?: () => void
-  showAuthorEmojis?: boolean
-  userLocations?: UserLocation[]
-  currentSessionId?: string | null
 }
 
 function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
@@ -211,7 +212,7 @@ function OtherUserMarker({ user, currentSessionId }: { user: UserLocation; curre
   )
 }
 
-export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, isLoggedIn, onRefetchLocations, userLocations = [], currentSessionId }: MapProps) {
+export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, isLoggedIn, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
 
   useEffect(() => {
@@ -244,7 +245,7 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
       {showUserLocation && <UserLocationMarker isTracking={!!isTracking} />}
 
       {userLocations
-        .filter(user => user.session_id !== currentSessionId)
+        .filter(user => showOwnMarker || user.session_id !== currentSessionId)
         .map(user => (
           <OtherUserMarker key={user.session_id} user={user} currentSessionId={currentSessionId ?? null} />
         ))}
