@@ -10,6 +10,7 @@ export interface Location {
   price_range: string | null
   lat: number
   lng: number
+  session_id: string | null
   created_at: string
   category_name: string
   category_color: string

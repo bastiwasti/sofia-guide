@@ -71,11 +71,27 @@ export default function MapPage({ session }: MapPageProps) {
   }
 
   async function handleDeleteLocation(id: number) {
-    const password = prompt("Passwort zum Löschen eingeben ( Basti's Geburtstag ):")
-    if (password !== '24031986') {
-      alert('Falsches Passwort!')
-      return
+    const location = locations.find(l => l.id === id)
+    
+    let canDelete = false
+    let password = undefined
+    
+    if (location) {
+      if (location.session_id === null) {
+        canDelete = true
+      } else if (session?.session_id === location.session_id) {
+        canDelete = true
+      }
     }
+    
+    if (!canDelete) {
+      password = prompt("Passwort zum Löschen eingeben ( Basti's Geburtstag ):")
+      if (password !== '24031986') {
+        alert('Falsches Passwort!')
+        return
+      }
+    }
+    
     try {
       await deleteLocation(id, session?.session_id || null, password)
       await refetchLocations()
