@@ -50,7 +50,7 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
   useEffect(() => {
     if (!sessionId) return
 
-    const wsUrl = (import.meta as any).env.PROD ? window.location.origin : 'http://localhost:3002'
+    const wsUrl = window.location.origin
     const newSocket = io(wsUrl, {
       path: '/socket.io/',
       transports: ['websocket', 'polling']
