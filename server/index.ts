@@ -77,7 +77,8 @@ io.on('connection', (socket) => {
   })
 
   socket.on('user-location-update', async (data) => {
-    const { session_id, lat, lng, accuracy, is_tracking } = data
+    const { session_id, emoji, lat, lng, accuracy, is_tracking } = data
+    console.log('user-location-update received:', { session_id, emoji, lat, lng, accuracy, is_tracking })
 
     try {
       const db = getDatabase()
@@ -103,7 +104,7 @@ io.on('connection', (socket) => {
 
       io.to('sofia-guide').emit('user-location-broadcast', {
         session_id: userLocation.session_id,
-        emoji: userLocation.emoji,
+        emoji: emoji || userLocation.emoji,
         lat: userLocation.lat,
         lng: userLocation.lng,
         accuracy: userLocation.accuracy,

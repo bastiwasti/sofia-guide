@@ -223,9 +223,14 @@ function OtherUserMarker({ user, currentSessionId }: { user: UserLocation; curre
 
 export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, isLoggedIn, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
+  console.log('userLocations:', userLocations)
+  console.log('currentSessionId:', currentSessionId)
 
   const currentUser = userLocations.find(user => user.session_id === currentSessionId)
   const currentUserEmoji = currentUser?.emoji || null
+
+  console.log('currentUser:', currentUser)
+  console.log('currentUserEmoji:', currentUserEmoji)
 
   useEffect(() => {
     const handleEmojiChange = () => {

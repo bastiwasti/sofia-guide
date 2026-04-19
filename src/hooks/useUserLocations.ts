@@ -92,6 +92,8 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
   const startSharing = (mode: 'static' | 'tracking') => {
     if (!socketRef.current || !sessionId || !userEmoji || !navigator.geolocation) return
 
+    console.log('startSharing called with mode:', mode, 'userEmoji:', userEmoji, 'sessionId:', sessionId)
+
     setGpsMode(mode)
     setIsSharing(true)
 
