@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, Circle, CircleMarker, ZoomControl, useMap, useMapEvents } from 'react-leaflet'
 import { createCustomIcon, HOTEL_COORDS, calculateDistance, formatDistance } from '../lib/leaflet'
 import { Location } from '../hooks/useLocations'
+import { UserLocation } from '../hooks/useUserLocations'
+import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 interface MapProps {
@@ -18,6 +20,8 @@ interface MapProps {
   isLoggedIn: boolean
   onRefetchLocations?: () => void
   showAuthorEmojis?: boolean
+  userLocations?: UserLocation[]
+  currentSessionId?: string | null
 }
 
 function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
@@ -171,7 +175,43 @@ function UserLocationMarker({ isTracking }: { isTracking: boolean }) {
   )
 }
 
-export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, isLoggedIn, onRefetchLocations }: MapProps) {
+function OtherUserMarker({ user, currentSessionId }: { user: UserLocation; currentSessionId: string | null }) {
+  const icon = L.divIcon({
+    className: 'user-marker',
+    html: `
+      <div class="user-marker-content ${user.is_tracking ? 'tracking' : ''}">
+        <span class="user-emoji">${user.emoji}</span>
+        ${user.is_tracking ? '<div class="pulse-ring"></div>' : ''}
+      </div>
+    `,
+    iconSize: [40, 40],
+    iconAnchor: [20, 20]
+  })
+
+  return (
+    <Marker
+      position={[user.lat, user.lng]}
+      icon={icon}
+    >
+      <Popup>
+        <div style={{ fontFamily: 'var(--font-body)', minWidth: '150px' }}>
+          <strong style={{ fontSize: '18px' }}>{user.emoji}</strong>
+          <div style={{ marginTop: '4px', fontSize: '12px', color: '#666' }}>
+            Genauigkeit: {Math.round(user.accuracy)}m<br />
+            {user.is_tracking ? '🔴 Live-Tracking' : '📍 Statische Position'}
+          </div>
+          {currentSessionId === user.session_id && (
+            <div style={{ marginTop: '6px', fontSize: '11px', color: '#999' }}>
+              Das bist du!
+            </div>
+          )}
+        </div>
+      </Popup>
+    </Marker>
+  )
+}
+
+export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, isLoggedIn, onRefetchLocations, userLocations = [], currentSessionId }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
 
   useEffect(() => {
@@ -203,6 +243,12 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
 
       {showUserLocation && <UserLocationMarker isTracking={!!isTracking} />}
 
+      {userLocations
+        .filter(user => user.session_id !== currentSessionId)
+        .map(user => (
+          <OtherUserMarker key={user.session_id} user={user} currentSessionId={currentSessionId ?? null} />
+        ))}
+
       {onMapClick && (
         <MapClickHandler onClick={onMapClick} enabled={!!editMode} />
       )}
@@ -223,9 +269,9 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
           position={[location.lat, location.lng]}
           icon={createCustomIcon(
             location.category_color,
-            (isLoggedIn || location.is_active_user === 0) && (location.author_emoji || location.backup_emoji) ? (location.author_emoji || location.backup_emoji || undefined) : undefined,
+            (isLoggedIn || location.is_active_user === 0) && (location.author_emoji || location.backup_emoji) ? (location.author_emoji || location.backup_emoji || null) : null,
             location.is_active_user === 1,
-            location.backup_emoji || undefined
+            location.backup_emoji || null
           )}
           eventHandlers={{
             click: () => onLocationSelect(location)
@@ -248,6 +294,71 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
           </Popup>
         </Marker>
       ))}
+
+      <style>{`
+        .user-marker {
+          background: transparent;
+          border: none;
+        }
+
+        .user-marker-content {
+          position: relative;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
+        }
+
+        .user-marker-content .user-emoji {
+          z-index: 2;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .user-marker-content::before {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: white;
+          border-radius: 50%;
+          z-index: 1;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-marker-content.tracking .pulse-ring {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background: rgba(66, 133, 244, 0.3);
+          animation: pulse 2s ease-out infinite;
+          z-index: 0;
+        }
+
+        .user-marker-content.tracking::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: rgba(66, 133, 244, 0.5);
+          border-radius: 50%;
+          animation: pulse 2s ease-out infinite 1s;
+          z-index: 0;
+        }
+
+        @keyframes pulse {
+          0% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </MapContainer>
   )
 }

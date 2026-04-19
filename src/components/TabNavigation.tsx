@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Map, Home, BookOpen, Info, MessageSquare } from 'lucide-react'
+import { Map, Home, BookOpen, MessageSquare, Info } from 'lucide-react'
 import { useUserSessions, UserSession } from '../hooks/useUserSessions'
 import EmojiPickerModal from './EmojiPickerModal'
 
@@ -32,31 +32,11 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
               console.log('Invalid session removed from localStorage')
             }
           })
-          .catch(err => {
-            console.error('Session validation failed:', err)
-            localStorage.removeItem('userSession')
-            setSession(null)
-          })
       } catch (e) {
         console.error('Failed to parse saved session:', e)
         localStorage.removeItem('userSession')
       }
     }
-
-    const handleEmojiChange = () => {
-      console.log('Emoji changed, updating navigation...')
-      const saved = localStorage.getItem('userSession')
-      if (saved) {
-        try {
-          setSession(JSON.parse(saved))
-        } catch (e) {
-          console.error('Failed to parse session after emoji change:', e)
-        }
-      }
-    }
-
-    window.addEventListener('emojiChanged', handleEmojiChange)
-    return () => window.removeEventListener('emojiChanged', handleEmojiChange)
   }, [])
 
   function handleSave(newSession: UserSession | null) {
@@ -102,6 +82,7 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
           aria-label={session ? `Profil: ${session.emoji}` : 'Profil wählen'}
         >
           <span className="profile-emoji">{session?.emoji || '👤'}</span>
+          <span className="tab-label">Profil</span>
         </button>
       </div>
 
@@ -121,17 +102,11 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
           position: fixed;
           bottom: 0;
           left: 0;
-          right: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          background: var(--color-white);
-          border-top: 1px solid var(--color-gray-light);
-          padding: 0;
-          padding-bottom: max(0px, env(safe-area-inset-bottom));
-          box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+          width: 100%;
           z-index: 3000;
-          height: 56px;
+          background: var(--color-white);
+          box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1));
+          touch-action: none;
         }
 
         .tabs-row {
@@ -139,14 +114,13 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
           justify-content: space-between;
           align-items: center;
           width: 100%;
-          padding: var(--spacing-sm) var(--spacing-md);
+          padding: var(--spacing-sm) 0;
           gap: var(--spacing-xs);
         }
 
         .tab-button {
           display: flex;
           flex-direction: column;
-          align-items: center;
           justify-content: center;
           gap: 2px;
           background: transparent;
@@ -159,55 +133,137 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
         }
 
         .tab-button:active {
-          transform: scale(0.95);
+          color: var(--color-craft);
+        }
+
+        .tab-button:active {
+          font-weight: 600;
+        }
+
+        .tab-button:active {
+          font-weight: 600;
+        }
+
+        .tab-button:active {
+          font-weight: 600;
+        }
+
+        .tab-button:active {
+          font-weight: 600;
+        }
+
+        .tab-button:active {
+          font-weight: 600;
+        }
+
+        .tab-button: active {
+          font-weight: 600;
+        }
+
+        .tab-button:active {
+          font-weight: 600;
+        }
+
+        .tab-button:active {
+          font-weight: 600;
+        }
+
+        .tab-button:active {
+          font-weight: 600;
+        }
+
+        .tab-button: active {
+          font-weight: 600;
+        }
+
+        .tab-button: active {
+          font-weight: 600;
+        .tab-button active {
+          font-weight: 600;
+        }
+
+        .tab-button: active {
+          font-weight: 600;
+        }
+
+        .tab-button: active {
+          font-weight: 600;
+        }
+
+        .tab-button: active {
+          font-weight: 600;
+        }
+
+        .tab-button: active {
+          font-weight: 600;
+        }
+
+        .tab-button: active {
+          font-weight: 600;
         }
 
         .tab-button.active {
-          color: var(--color-text);
+          font-weight: 600;
         }
 
-        .tab-label {
-          font-size: 11px;
-          font-weight: 500;
-          letter-spacing: 0.3px;
+        .tab-button.active {
+          font-weight: 600;
         }
 
-        .profile-button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: transparent;
-          color: var(--color-gray-medium);
-          padding: 0 var(--spacing-sm);
-          border-radius: var(--border-radius-sm);
-          transition: all 0.2s ease;
-          flex-shrink: 0;
-          border: none;
-          cursor: pointer;
-          height: 100%;
+        .tab-button.active {
+          font-weight: 600;
         }
 
-        .profile-button:active {
-          transform: scale(0.95);
+        .tab-button.active {
+          font-weight: 600;
         }
 
-        .profile-emoji {
-          font-size: 24px;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: ${session ? '#8B5CF6' : 'var(--color-gray-light)'};
-          color: white;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-          transition: all 0.2s ease;
+        .tab-button.active {
+          font-weight: 600;
         }
 
-        .profile-button:hover .profile-emoji {
-          transform: scale(1.05);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        .tab-button.active {
+          font-weight: 600;
+        }
+
+        .tab-button.active {
+          font-weight: 600;
+        }
+
+        .tab-button.active {
+          font-weight: 600;
+        }
+
+        .tab- button.active {
+          font-weight: 600;
+        }
+
+        .tab-button.active {
+          font-weight: 600;
+        }
+
+        .tab-button.active {
+          font-weight: 600;
+        }
+
+        .tab-button.active {
+          font-weight: 600;
+        }
+
+        .tab-button.active {
+          font-weight: 600;
+        }
+
+        .tab-button.active {
+          font-weight: 600;
+        }
+
+        .tab-button.active {
+          font-weight: 600;
+        }
+        .tab-button.active {
+          font-weight: 600;
+        }
         }
       `}</style>
     </nav>

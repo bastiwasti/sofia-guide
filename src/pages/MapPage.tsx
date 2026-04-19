@@ -3,6 +3,7 @@ import { Layers, Edit, MapPin, Navigation, Building2 } from 'lucide-react'
 import { useLocations } from '../hooks/useLocations'
 import { useCategories } from '../hooks/useCategories'
 import { UserSession } from '../hooks/useUserSessions'
+import { useUserLocations } from '../hooks/useUserLocations'
 import MapComponent from '../components/Map'
 import FilterBar from '../components/FilterBar'
 import BottomSheet from '../components/BottomSheet'
@@ -22,6 +23,11 @@ export default function MapPage() {
   const [newLocationCoords, setNewLocationCoords] = useState<{ lat: number; lng: number } | undefined>()
   const [hotelFlyTrigger, setHotelFlyTrigger] = useState(0)
   const [userSession, setUserSession] = useState<UserSession | null>(null)
+
+  const { userLocations, toggleGpsMode: toggleLocationSharing, gpsMode: sharedGpsMode } = useUserLocations(
+    userSession?.session_id || null,
+    userSession?.emoji || null
+  )
 
   useEffect(() => {
     const saved = localStorage.getItem('userSession')
@@ -50,19 +56,12 @@ export default function MapPage() {
   }
 
   function toggleGpsMode() {
-    setGpsMode(prev => {
-      switch (prev) {
-        case 'off':
-          return 'static'
-        case 'static':
-          return 'tracking'
-        case 'tracking':
-          return 'off'
-        default:
-          return 'off'
-      }
-    })
+    toggleLocationSharing()
   }
+
+  useEffect(() => {
+    setGpsMode(sharedGpsMode)
+  }, [sharedGpsMode])
 
   async function handleCreateLocation(location: any) {
     try {
@@ -230,6 +229,8 @@ export default function MapPage() {
           isLoggedIn={!!userSession}
           onRefetchLocations={refetchLocations}
           showAuthorEmojis={true}
+          userLocations={userLocations}
+          currentSessionId={userSession?.session_id || null}
         />
       </div>
 
@@ -387,6 +388,10 @@ export default function MapPage() {
             padding: 5px 6px;
             font-size: 10px;
             gap: 3px;
+          }
+
+          .header-actions {
+            gap: 4px;
           }
 
           .header-actions {

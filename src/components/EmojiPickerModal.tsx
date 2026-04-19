@@ -61,9 +61,12 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
 
     try {
       await deleteSession(existingSession.session_id)
+
       localStorage.removeItem('userSession')
       onSave(null)
+
       window.dispatchEvent(new CustomEvent('emojiChanged'))
+
       onClose()
     } catch (err) {
       alert('Aufgeben fehlgeschlagen')
