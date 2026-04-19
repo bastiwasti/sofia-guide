@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useSession } from './hooks/useSession'
+import { useSocket } from './hooks/useSocket'
 import TabNavigation from './components/TabNavigation'
 import MapPage from './pages/MapPage'
 import HotelPage from './pages/HotelPage'
@@ -12,6 +13,7 @@ type Tab = 'karte' | 'hotel' | 'survival' | 'sofia' | 'notizen'
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('karte')
   const { session, setSession } = useSession()
+  useSocket()
 
   const renderPage = () => {
     switch (activeTab) {

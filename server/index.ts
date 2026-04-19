@@ -36,11 +36,11 @@ app.use((req, res, next) => {
 
 app.get('/api/locations', getLocations)
 app.get('/api/locations/:id', getLocationById)
-app.post('/api/locations', createLocation)
-app.delete('/api/locations/:id', deleteLocation)
+app.post('/api/locations', createLocation(io))
+app.delete('/api/locations/:id', deleteLocation(io))
 
 app.get('/api/categories', getCategories)
-app.post('/api/categories', createCategory)
+app.post('/api/categories', createCategory(io))
 
 app.get('/api/notes', getNotes)
 app.post('/api/notes', createNote)
@@ -70,7 +70,11 @@ if (!isDev) {
 
 io.on('connection', (socket) => {
   console.log('Client connected:', socket.id)
-  socket.join('sofia-guide')
+
+  socket.on('join', (room: string) => {
+    socket.join(room)
+    console.log(`Socket ${socket.id} joined room: ${room}`)
+  })
 
   socket.on('user-location-update', async (data) => {
     const { session_id, lat, lng, accuracy, is_tracking } = data

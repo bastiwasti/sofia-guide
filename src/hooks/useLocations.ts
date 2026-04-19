@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { api } from '../lib/api'
+import { getSocket } from './useSocket'
 
 export interface Location {
   id: number
@@ -27,6 +28,30 @@ export function useLocations() {
 
   useEffect(() => {
     fetchLocations()
+
+    const socket = getSocket()
+
+    if (socket) {
+      socket.on('location-created', (newLocation: Location) => {
+        setLocations(prev => {
+          if (prev.some(l => l.id === newLocation.id)) {
+            return prev
+          }
+          return [...prev, newLocation]
+        })
+      })
+
+      socket.on('location-deleted', ({ id }: { id: number }) => {
+        setLocations(prev => prev.filter(l => l.id !== id))
+      })
+    }
+
+    return () => {
+      if (socket) {
+        socket.off('location-created')
+        socket.off('location-deleted')
+      }
+    }
   }, [])
 
   async function fetchLocations() {

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { getDatabase } from '../db/index'
+import { Server as SocketIOServer } from 'socket.io'
 
 export function getLocations(_req: Request, res: Response): void {
   try {
@@ -59,95 +60,103 @@ export function getLocationById(req: Request, res: Response): void {
   }
 }
 
-export function createLocation(req: Request, res: Response): void {
-  try {
-    const { category_id, name, meta, rating, price_range, lat, lng, session_id } = req.body
+export function createLocation(io: SocketIOServer) {
+  return function(req: Request, res: Response): void {
+    try {
+      const { category_id, name, meta, rating, price_range, lat, lng, session_id } = req.body
 
-    if (!category_id || !name || !lat || !lng) {
-      res.status(400).json({ error: 'Missing required fields' })
-      return
-    }
-
-    const db = getDatabase()
-
-    let backupEmoji: string | null = null
-    if (session_id) {
-      const session = db.prepare('SELECT emoji FROM user_sessions WHERE session_id = ?').get(session_id)
-      if (session) {
-        backupEmoji = (session as { emoji: string }).emoji
+      if (!category_id || !name || !lat || !lng) {
+        res.status(400).json({ error: 'Missing required fields' })
+        return
       }
+
+      const db = getDatabase()
+
+      let backupEmoji: string | null = null
+      if (session_id) {
+        const session = db.prepare('SELECT emoji FROM user_sessions WHERE session_id = ?').get(session_id)
+        if (session) {
+          backupEmoji = (session as { emoji: string }).emoji
+        }
+      }
+
+      const result = db.prepare(`
+        INSERT INTO locations (category_id, name, meta, rating, price_range, lat, lng, session_id, backup_emoji)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).run(category_id, name, meta || null, rating || null, price_range || null, lat, lng, session_id || null, backupEmoji)
+
+      const location = db.prepare(`
+        SELECT
+          l.*,
+          c.name as category_name,
+          c.color as category_color,
+          c.icon as category_icon,
+          l.backup_emoji,
+          us.emoji as author_emoji,
+          CASE WHEN us.session_id IS NOT NULL THEN 1 ELSE 0 END as is_active_user
+        FROM locations l
+        JOIN categories c ON l.category_id = c.id
+        LEFT JOIN user_sessions us ON l.session_id = us.session_id
+        WHERE l.id = ?
+      `).get(result.lastInsertRowid)
+      db.close()
+
+      io.to('sofia-guide').emit('location-created', location)
+
+      res.status(201).json(location)
+    } catch (error) {
+      console.error('Error creating location:', error)
+      res.status(500).json({ error: 'Failed to create location' })
     }
-
-    const result = db.prepare(`
-      INSERT INTO locations (category_id, name, meta, rating, price_range, lat, lng, session_id, backup_emoji)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(category_id, name, meta || null, rating || null, price_range || null, lat, lng, session_id || null, backupEmoji)
-
-    const location = db.prepare(`
-      SELECT
-        l.*,
-        c.name as category_name,
-        c.color as category_color,
-        c.icon as category_icon,
-        l.backup_emoji,
-        us.emoji as author_emoji,
-        CASE WHEN us.session_id IS NOT NULL THEN 1 ELSE 0 END as is_active_user
-      FROM locations l
-      JOIN categories c ON l.category_id = c.id
-      LEFT JOIN user_sessions us ON l.session_id = us.session_id
-      WHERE l.id = ?
-    `).get(result.lastInsertRowid)
-    db.close()
-
-    res.status(201).json(location)
-  } catch (error) {
-    console.error('Error creating location:', error)
-    res.status(500).json({ error: 'Failed to create location' })
   }
 }
 
-export function deleteLocation(req: Request, res: Response): void {
-  try {
-    const { id } = req.params
-    const { session_id, admin_password } = req.body
-    
-    const db = getDatabase()
-    
-    const location = db.prepare('SELECT session_id FROM locations WHERE id = ?').get(id) as { session_id: string | null } | undefined
-    
-    if (!location) {
+export function deleteLocation(io: SocketIOServer) {
+  return function(req: Request, res: Response): void {
+    try {
+      const { id } = req.params
+      const { session_id, admin_password } = req.body
+
+      const db = getDatabase()
+
+      const location = db.prepare('SELECT session_id FROM locations WHERE id = ?').get(id) as { session_id: string | null } | undefined
+
+      if (!location) {
+        db.close()
+        res.status(404).json({ error: 'Location not found' })
+        return
+      }
+
+      let canDelete = false
+
+      if (admin_password === '24031986') {
+        canDelete = true
+      } else if (location.session_id === null) {
+        canDelete = true
+      } else if (session_id === location.session_id) {
+        canDelete = true
+      }
+
+      if (!canDelete) {
+        db.close()
+        res.status(403).json({ error: 'You can only delete locations you own or legacy locations' })
+        return
+      }
+
+      const result = db.prepare('DELETE FROM locations WHERE id = ?').run(id)
       db.close()
-      res.status(404).json({ error: 'Location not found' })
-      return
+
+      if (result.changes === 0) {
+        res.status(404).json({ error: 'Location not found' })
+        return
+      }
+
+      io.to('sofia-guide').emit('location-deleted', { id })
+
+      res.json({ success: true })
+    } catch (error) {
+      console.error('Error deleting location:', error)
+      res.status(500).json({ error: 'Failed to delete location' })
     }
-    
-    let canDelete = false
-    
-    if (admin_password === '24031986') {
-      canDelete = true
-    } else if (location.session_id === null) {
-      canDelete = true
-    } else if (session_id === location.session_id) {
-      canDelete = true
-    }
-    
-    if (!canDelete) {
-      db.close()
-      res.status(403).json({ error: 'You can only delete locations you own or legacy locations' })
-      return
-    }
-    
-    const result = db.prepare('DELETE FROM locations WHERE id = ?').run(id)
-    db.close()
-    
-    if (result.changes === 0) {
-      res.status(404).json({ error: 'Location not found' })
-      return
-    }
-    
-    res.json({ success: true })
-  } catch (error) {
-    console.error('Error deleting location:', error)
-    res.status(500).json({ error: 'Failed to delete location' })
   }
 }

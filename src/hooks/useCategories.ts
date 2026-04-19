@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { api } from '../lib/api'
+import { getSocket } from './useSocket'
 
 export interface Category {
   id: number
@@ -16,6 +17,25 @@ export function useCategories() {
 
   useEffect(() => {
     fetchCategories()
+
+    const socket = getSocket()
+
+    if (socket) {
+      socket.on('category-created', (newCategory: Category) => {
+        setCategories(prev => {
+          if (prev.some(c => c.id === newCategory.id)) {
+            return prev
+          }
+          return [...prev, newCategory]
+        })
+      })
+    }
+
+    return () => {
+      if (socket) {
+        socket.off('category-created')
+      }
+    }
   }, [])
 
   async function fetchCategories() {
