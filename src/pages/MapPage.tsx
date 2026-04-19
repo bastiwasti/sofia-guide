@@ -251,7 +251,7 @@ export default function MapPage({ session }: MapPageProps) {
         location={selectedLocation}
         onClose={() => setSelectedLocation(null)}
         onDelete={() => selectedLocation && handleDeleteLocation(selectedLocation.id)}
-        isLoggedIn={!!session}
+        currentSessionId={session?.session_id || null}
       />
 
       {showLocationForm && (

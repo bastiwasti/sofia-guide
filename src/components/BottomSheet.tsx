@@ -6,13 +6,15 @@ interface BottomSheetProps {
   location: Location | null
   onClose: () => void
   onDelete?: () => void
-  isLoggedIn?: boolean
+  currentSessionId?: string | null
 }
 
-export default function BottomSheet({ location, onClose, onDelete, isLoggedIn = false }: BottomSheetProps) {
+export default function BottomSheet({ location, onClose, onDelete, currentSessionId }: BottomSheetProps) {
   if (!location) return null
 
   const distance = calculateDistance(HOTEL_COORDS[0], HOTEL_COORDS[1], location.lat, location.lng)
+  
+  const canDelete = location.session_id === null || location.session_id === currentSessionId
 
   return (
     <div className="bottom-sheet-overlay" onClick={onClose}>
@@ -57,7 +59,7 @@ export default function BottomSheet({ location, onClose, onDelete, isLoggedIn = 
             <small>{location.lat.toFixed(5)}, {location.lng.toFixed(5)}</small>
           </div>
 
-          {onDelete && isLoggedIn && (
+          {onDelete && canDelete && (
             <button className="delete-button" onClick={onDelete}>
               Location löschen
             </button>
