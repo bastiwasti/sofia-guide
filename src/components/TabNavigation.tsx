@@ -56,7 +56,6 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
           aria-label={session ? `Profil: ${session.emoji}` : 'Profil wählen'}
         >
           <span className="profile-emoji">{session?.emoji || '👤'}</span>
-          <span className="tab-label">Profil</span>
         </button>
       </div>
 
@@ -79,7 +78,7 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
           width: 100%;
           z-index: 3000;
           background: var(--color-white);
-          box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1));
+          box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.1);
           touch-action: none;
         }
 
@@ -106,134 +105,14 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
           height: 100%;
         }
 
-        .tab-button:active {
-          color: var(--color-craft);
-        }
-
-        .tab-button:active {
-          font-weight: 600;
-        }
-
-        .tab-button:active {
-          font-weight: 600;
-        }
-
-        .tab-button:active {
-          font-weight: 600;
-        }
-
-        .tab-button:active {
-          font-weight: 600;
-        }
-
-        .tab-button:active {
-          font-weight: 600;
-        }
-
-        .tab-button: active {
-          font-weight: 600;
-        }
-
-        .tab-button:active {
-          font-weight: 600;
-        }
-
-        .tab-button:active {
-          font-weight: 600;
-        }
-
-        .tab-button:active {
-          font-weight: 600;
-        }
-
-        .tab-button: active {
-          font-weight: 600;
-        }
-
-        .tab-button: active {
-          font-weight: 600;
-        .tab-button active {
-          font-weight: 600;
-        }
-
-        .tab-button: active {
-          font-weight: 600;
-        }
-
-        .tab-button: active {
-          font-weight: 600;
-        }
-
-        .tab-button: active {
-          font-weight: 600;
-        }
-
-        .tab-button: active {
-          font-weight: 600;
-        }
-
-        .tab-button: active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab- button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
-        .tab-button.active {
-          font-weight: 600;
-        }
-
         .tab-button.active {
           color: var(--color-craft);
+          font-weight: 600;
+        }
+
+        .tab-button:active {
+          color: var(--color-craft);
+          font-weight: 600;
         }
 
         .profile-button {
@@ -242,13 +121,15 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
           align-items: center;
           background: transparent;
           padding: 0 var(--spacing-sm);
-          height: 100%;
           border-radius: var(--border-radius-sm);
           transition: all 0.2s ease;
+          position: relative;
         }
 
         .profile-emoji {
-          font-size: 36px;
+          font-size: 26px !important;
+          line-height: 1 !important;
+          display: block !important;
         }
       `}</style>
     </nav>
