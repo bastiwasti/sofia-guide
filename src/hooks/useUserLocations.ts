@@ -60,6 +60,7 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
 
     newSocket.on('connect', () => {
       console.log('Connected to WebSocket')
+      newSocket.emit('join', 'sofia-guide')
       newSocket.emit('request-user-locations')
     })
 

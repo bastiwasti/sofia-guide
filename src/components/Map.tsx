@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, Circle, CircleMarker, ZoomControl, useMap, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Circle, ZoomControl, useMap, useMapEvents } from 'react-leaflet'
 import { createCustomIcon, HOTEL_COORDS, calculateDistance, formatDistance } from '../lib/leaflet'
 import { Location } from '../hooks/useLocations'
 import { UserLocation } from '../hooks/useUserLocations'
@@ -58,11 +58,23 @@ function MapClickHandler({ onClick, enabled }: { onClick: (e: any) => void, enab
   return null
 }
 
-function UserLocationMarker({ isTracking }: { isTracking: boolean }) {
-  console.log('UserLocationMarker rendering, isTracking:', isTracking)
+function UserLocationMarker({ isTracking, userEmoji }: { isTracking: boolean; userEmoji: string | null }) {
+  console.log('UserLocationMarker rendering, isTracking:', isTracking, 'userEmoji:', userEmoji)
   const [position, setPosition] = useState<[number, number] | null>(null)
   const [accuracy, setAccuracy] = useState<number | null>(null)
   const map = useMap()
+
+  const icon = L.divIcon({
+    className: 'user-marker',
+    html: `
+      <div class="user-marker-content ${isTracking ? 'tracking' : ''}">
+        <span class="user-emoji">${userEmoji || '📍'}</span>
+        ${isTracking ? '<div class="pulse-ring"></div>' : ''}
+      </div>
+    `,
+    iconSize: [40, 40],
+    iconAnchor: [20, 20]
+  })
 
   useEffect(() => {
     console.log('UserLocationMarker mounted, starting geolocation...')
@@ -154,24 +166,21 @@ function UserLocationMarker({ isTracking }: { isTracking: boolean }) {
           weight: 1
         }}
       />
-      <CircleMarker
-        center={position}
-        radius={8}
-        pathOptions={{
-          fillColor: '#4285F4',
-          color: '#fff',
-          weight: 3,
-          opacity: 1,
-          fillOpacity: 1
-        }}
+      <Marker
+        position={position}
+        icon={icon}
       >
         <Popup>
-          <div style={{ fontFamily: 'var(--font-body)' }}>
-            <strong>Deine Position</strong><br />
-            <small>Genauigkeit: {Math.round(accuracy)}m</small>
+          <div style={{ fontFamily: 'var(--font-body)', minWidth: '150px' }}>
+            <strong style={{ fontSize: '18px' }}>{userEmoji || '📍'}</strong>
+            <div style={{ marginTop: '4px', fontSize: '12px', color: '#666' }}>
+              Deine Position<br />
+              Genauigkeit: {Math.round(accuracy)}m<br />
+              {isTracking ? '🔴 Live-Tracking' : '📍 Statische Position'}
+            </div>
           </div>
         </Popup>
-      </CircleMarker>
+      </Marker>
     </>
   )
 }
@@ -215,6 +224,9 @@ function OtherUserMarker({ user, currentSessionId }: { user: UserLocation; curre
 export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, isLoggedIn, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
 
+  const currentUser = userLocations.find(user => user.session_id === currentSessionId)
+  const currentUserEmoji = currentUser?.emoji || null
+
   useEffect(() => {
     const handleEmojiChange = () => {
       console.log('Emoji changed in Map, refreshing locations...')
@@ -242,7 +254,7 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
       <HotelFlyController trigger={hotelFlyTrigger} />
       <ZoomControl position="bottomright" />
 
-      {showUserLocation && <UserLocationMarker isTracking={!!isTracking} />}
+      {showUserLocation && <UserLocationMarker isTracking={!!isTracking} userEmoji={currentUserEmoji} />}
 
       {userLocations
         .filter(user => showOwnMarker || user.session_id !== currentSessionId)

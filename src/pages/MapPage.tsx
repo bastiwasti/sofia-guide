@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import { Layers, Edit, MapPin, Navigation, Building2 } from 'lucide-react'
 import { useLocations } from '../hooks/useLocations'
 import { useCategories } from '../hooks/useCategories'
@@ -20,13 +20,11 @@ export default function MapPage({ session }: MapPageProps) {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
   const [selectedLocation, setSelectedLocation] = useState<any>(null)
   const [showDistanceRings, setShowDistanceRings] = useState(true)
-  const [gpsMode, setGpsMode] = useState<'off' | 'static' | 'tracking'>('off')
   const [editMode, setEditMode] = useState(false)
   const [showLocationForm, setShowLocationForm] = useState(false)
   const [showCategoryForm, setShowCategoryForm] = useState(false)
   const [newLocationCoords, setNewLocationCoords] = useState<{ lat: number; lng: number } | undefined>()
   const [hotelFlyTrigger, setHotelFlyTrigger] = useState(0)
-  const [showOwnMarker, setShowOwnMarker] = useState(false)
 
   const { userLocations, toggleGpsMode: toggleLocationSharing, gpsMode: sharedGpsMode } = useUserLocations(
     session?.session_id || null,
@@ -51,10 +49,6 @@ export default function MapPage({ session }: MapPageProps) {
   function toggleGpsMode() {
     toggleLocationSharing()
   }
-
-  useEffect(() => {
-    setGpsMode(sharedGpsMode)
-  }, [sharedGpsMode])
 
   async function handleCreateLocation(location: any) {
     try {
@@ -195,22 +189,13 @@ export default function MapPage({ session }: MapPageProps) {
             <span>Ringe</span>
           </button>
           <button
-            className={`toggle-button ${gpsMode !== 'off' ? 'active' : ''}`}
+            className={`toggle-button ${sharedGpsMode !== 'off' ? 'active' : ''}`}
             onClick={toggleGpsMode}
             aria-label="GPS umschalten"
-            title={gpsMode === 'off' ? 'GPS aktivieren' : gpsMode === 'static' ? 'Live-Tracking starten' : 'Live-Tracking stoppen'}
+            title={sharedGpsMode === 'off' ? 'GPS aktivieren' : sharedGpsMode === 'static' ? 'Live-Tracking starten' : 'Live-Tracking stoppen'}
           >
-            {gpsMode === 'tracking' ? <Navigation size={16} className="animate-spin" /> : <MapPin size={16} />}
-            <span>{gpsMode === 'off' ? 'GPS' : gpsMode === 'static' ? 'Follow' : 'Off'}</span>
-          </button>
-          <button
-            className={`toggle-button ${showOwnMarker ? 'active' : ''}`}
-            onClick={() => setShowOwnMarker(!showOwnMarker)}
-            aria-label="Eigener Marker anzeigen"
-            title="Zeigt deinen eigenen Smiley auf der Karte"
-          >
-            <MapPin size={16} />
-            <span>Ich</span>
+            {sharedGpsMode === 'tracking' ? <Navigation size={16} className="animate-spin" /> : <MapPin size={16} />}
+            <span>{sharedGpsMode === 'off' ? 'GPS' : sharedGpsMode === 'static' ? 'Follow' : 'Off'}</span>
           </button>
           <button
             className={`edit-button ${editMode ? 'active' : ''}`}
@@ -243,8 +228,8 @@ export default function MapPage({ session }: MapPageProps) {
           selectedLocation={selectedLocation}
           onLocationSelect={setSelectedLocation}
           showDistanceRings={showDistanceRings}
-          showUserLocation={gpsMode !== 'off'}
-          isTracking={gpsMode === 'tracking'}
+          showUserLocation={sharedGpsMode !== 'off'}
+          isTracking={sharedGpsMode === 'tracking'}
           hotelFlyTrigger={hotelFlyTrigger}
           onMapClick={handleMapClick}
           editMode={editMode}
@@ -254,7 +239,7 @@ export default function MapPage({ session }: MapPageProps) {
           showAuthorEmojis={true}
           userLocations={userLocations}
           currentSessionId={session?.session_id || null}
-          showOwnMarker={showOwnMarker}
+          showOwnMarker={true}
         />
       </div>
 
