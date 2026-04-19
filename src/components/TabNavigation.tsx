@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Map, Home, BookOpen, MessageSquare, Info } from 'lucide-react'
-import { useUserSessions, UserSession } from '../hooks/useUserSessions'
+import { UserSession } from '../hooks/useUserSessions'
 import EmojiPickerModal from './EmojiPickerModal'
 
 type Tab = 'karte' | 'hotel' | 'survival' | 'sofia' | 'notizen'
@@ -8,42 +8,16 @@ type Tab = 'karte' | 'hotel' | 'survival' | 'sofia' | 'notizen'
 interface TabNavigationProps {
   activeTab: Tab
   onTabChange: (tab: Tab) => void
+  session: UserSession | null
+  setSession: (session: UserSession | null) => void
 }
 
-export default function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
-  const [session, setSession] = useState<UserSession | null>(null)
+export default function TabNavigation({ activeTab, onTabChange, session, setSession }: TabNavigationProps) {
   const [showPicker, setShowPicker] = useState(false)
-  const { refetch } = useUserSessions()
-
-  useEffect(() => {
-    const saved = localStorage.getItem('userSession')
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved)
-
-        fetch(`/api/user-sessions/${parsed.session_id}/validate`)
-          .then(res => res.json())
-          .then(data => {
-            if (data.valid) {
-              setSession(parsed)
-            } else {
-              localStorage.removeItem('userSession')
-              setSession(null)
-              console.log('Invalid session removed from localStorage')
-            }
-          })
-      } catch (e) {
-        console.error('Failed to parse saved session:', e)
-        localStorage.removeItem('userSession')
-      }
-    }
-  }, [])
 
   function handleSave(newSession: UserSession | null) {
     if (newSession) {
       setSession(newSession)
-      localStorage.setItem('userSession', JSON.stringify(newSession))
-      refetch()
     }
   }
 
@@ -259,11 +233,22 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
         }
 
         .tab-button.active {
-          font-weight: 600;
+          color: var(--color-craft);
         }
-        .tab-button.active {
-          font-weight: 600;
+
+        .profile-button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: transparent;
+          padding: 0 var(--spacing-sm);
+          height: 100%;
+          border-radius: var(--border-radius-sm);
+          transition: all 0.2s ease;
         }
+
+        .profile-emoji {
+          font-size: 36px;
         }
       `}</style>
     </nav>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSession } from './hooks/useSession'
 import TabNavigation from './components/TabNavigation'
 import MapPage from './pages/MapPage'
 import HotelPage from './pages/HotelPage'
@@ -10,11 +11,12 @@ type Tab = 'karte' | 'hotel' | 'survival' | 'sofia' | 'notizen'
 
 function App() {
   const [activeTab, setActiveTab] = useState<Tab>('karte')
+  const { session, setSession } = useSession()
 
   const renderPage = () => {
     switch (activeTab) {
       case 'karte':
-        return <MapPage />
+        return <MapPage session={session} />
       case 'hotel':
         return <HotelPage />
       case 'survival':
@@ -24,7 +26,7 @@ function App() {
       case 'notizen':
         return <NotesPage />
       default:
-        return <MapPage />
+        return <MapPage session={session} />
     }
   }
 
@@ -33,7 +35,7 @@ function App() {
       <main className="page-content">
         {renderPage()}
       </main>
-      <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} session={session} setSession={setSession} />
     </div>
   )
 }

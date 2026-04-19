@@ -10,7 +10,11 @@ import BottomSheet from '../components/BottomSheet'
 import LocationForm from '../components/LocationForm'
 import CategoryForm from '../components/CategoryForm'
 
-export default function MapPage() {
+interface MapPageProps {
+  session: UserSession | null
+}
+
+export default function MapPage({ session }: MapPageProps) {
   const { locations, loading, createLocation, deleteLocation, refetch: refetchLocations } = useLocations()
   const { categories, createCategory, refetch: refetchCategories } = useCategories()
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
@@ -22,23 +26,11 @@ export default function MapPage() {
   const [showCategoryForm, setShowCategoryForm] = useState(false)
   const [newLocationCoords, setNewLocationCoords] = useState<{ lat: number; lng: number } | undefined>()
   const [hotelFlyTrigger, setHotelFlyTrigger] = useState(0)
-  const [userSession, setUserSession] = useState<UserSession | null>(null)
 
   const { userLocations, toggleGpsMode: toggleLocationSharing, gpsMode: sharedGpsMode } = useUserLocations(
-    userSession?.session_id || null,
-    userSession?.emoji || null
+    session?.session_id || null,
+    session?.emoji || null
   )
-
-  useEffect(() => {
-    const saved = localStorage.getItem('userSession')
-    if (saved) {
-      try {
-        setUserSession(JSON.parse(saved))
-      } catch (e) {
-        console.error('Failed to parse saved session:', e)
-      }
-    }
-  }, [])
 
   const filteredLocations = useMemo(() => {
     if (selectedCategories.length === 0) return locations
@@ -67,7 +59,7 @@ export default function MapPage() {
     try {
       const locationWithSession = {
         ...location,
-        session_id: userSession?.session_id || null
+        session_id: session?.session_id || null
       }
       await createLocation(locationWithSession)
       await refetchLocations()
@@ -106,7 +98,7 @@ export default function MapPage() {
   function handleMapClick(e: any) {
     if (!editMode) return
 
-    if (!userSession) {
+    if (!session) {
       alert('Bitte logge dich zuerst ein, um Locations zu erstellen!')
       return
     }
@@ -226,11 +218,11 @@ export default function MapPage() {
           onMapClick={handleMapClick}
           editMode={editMode}
           onDeleteLocation={handleDeleteLocation}
-          isLoggedIn={!!userSession}
+          isLoggedIn={!!session}
           onRefetchLocations={refetchLocations}
           showAuthorEmojis={true}
           userLocations={userLocations}
-          currentSessionId={userSession?.session_id || null}
+          currentSessionId={session?.session_id || null}
         />
       </div>
 
