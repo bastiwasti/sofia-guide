@@ -376,6 +376,10 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
             opacity: 0;
           }
         }
+
+        .leaflet-bottom {
+          bottom: 85px !important;
+        }
       `}</style>
     </MapContainer>
   )

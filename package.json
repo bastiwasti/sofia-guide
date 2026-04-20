@@ -11,7 +11,9 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "server": "tsx server/index.ts",
     "server:dev": "tsx watch server/index.ts",
-    "db:migrate": "tsx server/db/migrate.ts"
+    "db:migrate": "tsx server/db/migrate.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "workspaces": [
     "server"
@@ -35,14 +37,17 @@
     "@types/leaflet": "^1.9.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "@types/supertest": "^6.0.3",
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
+    "supertest": "^7.2.2",
     "typescript": "^5.5.2",
     "vite": "^5.3.1",
-    "vite-plugin-pwa": "^0.20.0"
+    "vite-plugin-pwa": "^0.20.0",
+    "vitest": "^2.1.9"
   }
 }

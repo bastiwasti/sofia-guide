@@ -6,10 +6,14 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-const dbPath = join(__dirname, '../../data/sofia-guide.db')
+const defaultDbPath = join(__dirname, '../../data/sofia-guide.db')
+
+function resolveDbPath(): string {
+  return process.env.SQLITE_DB_PATH ?? defaultDbPath
+}
 
 export function getDatabase(): Database.Database {
-  const db = new Database(dbPath)
+  const db = new Database(resolveDbPath())
   db.pragma('journal_mode = WAL')
   return db
 }

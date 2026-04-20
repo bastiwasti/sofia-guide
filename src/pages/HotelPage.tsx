@@ -20,9 +20,19 @@ export default function HotelPage() {
         </div>
 
         <div className="info-card">
-          <h3>🕐 Check-in / Check-out</h3>
+          <h3>🕐 Check-in / Check-out / Frühstück</h3>
           <p><strong>Ein:</strong> {hotelContent.checkIn}</p>
           <p><strong>Aus:</strong> {hotelContent.checkOut}</p>
+          <p><strong>Frühstück:</strong> {hotelContent.breakfast}</p>
+        </div>
+
+        <div className="info-card">
+          <h3>⚡ Wichtig zu wissen</h3>
+          <ul className="notes-list">
+            {hotelContent.importantNotes.map((note, index) => (
+              <li key={index}>{note}</li>
+            ))}
+          </ul>
         </div>
 
         <div className="content-block">
@@ -156,6 +166,18 @@ export default function HotelPage() {
         .phone {
           color: var(--color-craft);
           font-weight: 600;
+        }
+
+        .notes-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+
+        .notes-list li {
+          font-size: 14px;
+          margin: 6px 0;
+          line-height: 1.4;
         }
 
         .content-block {

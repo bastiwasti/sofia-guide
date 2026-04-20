@@ -4,6 +4,15 @@ export const hotelContent = {
   phone: '+359 2 952 3058',
   checkIn: '14:00',
   checkOut: '12:00',
+  breakfast: '08:00–10:00 Uhr (kontinental inklusive)',
+  importantNotes: [
+    '⚠️ Keine Klimaanlage in den Zimmern (für Mai meistens okay)',
+    '🚗 Keine Hotel-Parkplätze verfügbar',
+    '🏨 26 Zimmer auf 5 Etagen mit Aufzug',
+    '💰 Tourismusabgabe: 1.02 EUR pro Person/Nacht',
+    '✈️ Flughafentransfer auf Anfrage: 20.45 EUR pro Person',
+    '🚭 Nichtraucherhotel'
+  ],
   coordinates: {
     lat: 42.6953,
     lng: 23.3219

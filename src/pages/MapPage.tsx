@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react'
-import { Layers, Edit, MapPin, Navigation, Building2 } from 'lucide-react'
 import { useLocations } from '../hooks/useLocations'
 import { useCategories } from '../hooks/useCategories'
 import { UserSession } from '../hooks/useUserSessions'
@@ -9,6 +8,7 @@ import FilterBar from '../components/FilterBar'
 import BottomSheet from '../components/BottomSheet'
 import LocationForm from '../components/LocationForm'
 import CategoryForm from '../components/CategoryForm'
+import FloatingDock from '../components/FloatingDock'
 
 interface MapPageProps {
   session: UserSession | null
@@ -164,48 +164,11 @@ export default function MapPage({ session }: MapPageProps) {
     )
   }
 
-  return (
+   return (
     <div className="map-page">
       <div className="map-header">
-        <div>
-          <h1>Karte</h1>
-          <p>{filteredLocations.length} Locations</p>
-        </div>
-        <div className="header-actions">
-          <button
-            className="toggle-button"
-            onClick={() => setHotelFlyTrigger(t => t + 1)}
-            aria-label="Zum Hotel"
-          >
-            <Building2 size={16} />
-            <span>Hotel</span>
-          </button>
-          <button
-            className={`toggle-button ${showDistanceRings ? 'active' : ''}`}
-            onClick={() => setShowDistanceRings(!showDistanceRings)}
-            aria-label="Entfernungsringe umschalten"
-          >
-            <Layers size={16} />
-            <span>Ringe</span>
-          </button>
-          <button
-            className={`toggle-button ${sharedGpsMode !== 'off' ? 'active' : ''}`}
-            onClick={toggleGpsMode}
-            aria-label="GPS umschalten"
-            title={sharedGpsMode === 'off' ? 'GPS aktivieren' : sharedGpsMode === 'static' ? 'Live-Tracking starten' : 'Live-Tracking stoppen'}
-          >
-            {sharedGpsMode === 'tracking' ? <Navigation size={16} className="animate-spin" /> : <MapPin size={16} />}
-            <span>{sharedGpsMode === 'off' ? 'GPS' : sharedGpsMode === 'static' ? 'Follow' : 'Off'}</span>
-          </button>
-          <button
-            className={`edit-button ${editMode ? 'active' : ''}`}
-            onClick={() => setEditMode(!editMode)}
-            aria-label="Edit-Modus umschalten"
-          >
-            <Edit size={16} />
-            <span>Neu</span>
-          </button>
-        </div>
+        <h1>Karte</h1>
+        <p>{filteredLocations.length} Locations</p>
       </div>
 
       {editMode && (
@@ -240,6 +203,16 @@ export default function MapPage({ session }: MapPageProps) {
           userLocations={userLocations}
           currentSessionId={session?.session_id || null}
           showOwnMarker={true}
+        />
+
+        <FloatingDock
+          showDistanceRings={showDistanceRings}
+          onToggleRings={() => setShowDistanceRings(!showDistanceRings)}
+          gpsMode={sharedGpsMode}
+          onToggleGps={toggleGpsMode}
+          editMode={editMode}
+          onToggleEdit={() => setEditMode(!editMode)}
+          onFlyToHotel={() => setHotelFlyTrigger(t => t + 1)}
         />
       </div>
 
@@ -276,10 +249,7 @@ export default function MapPage({ session }: MapPageProps) {
         }
 
         .map-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          padding: var(--spacing-md);
+          padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm) var(--spacing-md);
           background: var(--color-white);
         }
 
@@ -292,57 +262,6 @@ export default function MapPage({ session }: MapPageProps) {
           margin: 4px 0 0 0;
           font-size: 13px;
           color: var(--color-gray-medium);
-        }
-
-        .toggle-button {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          padding: 6px 8px;
-          background: var(--color-gray-light);
-          border: none;
-          border-radius: var(--border-radius-sm);
-          font-size: 11px;
-          font-weight: 600;
-          color: var(--color-gray-dark);
-          transition: all 0.2s ease;
-        }
-
-        .toggle-button.active {
-          background: var(--color-craft);
-          color: white;
-        }
-
-        .toggle-button:active {
-          transform: scale(0.95);
-        }
-
-        .header-actions {
-          display: flex;
-          gap: 6px;
-        }
-
-        .edit-button {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          padding: 6px 8px;
-          background: var(--color-gray-light);
-          border: none;
-          border-radius: var(--border-radius-sm);
-          font-size: 11px;
-          font-weight: 600;
-          color: var(--color-gray-dark);
-          transition: all 0.2s ease;
-        }
-
-        .edit-button.active {
-          background: var(--color-sights);
-          color: white;
-        }
-
-        .edit-button:active {
-          transform: scale(0.95);
         }
 
         .edit-mode-bar {
@@ -387,31 +306,6 @@ export default function MapPage({ session }: MapPageProps) {
         .map-container {
           flex: 1;
           position: relative;
-        }
-        .map-container .leaflet-bottom {
-          bottom: 70px;
-        }
-
-        @media (max-width: 390px) {
-          .toggle-button,
-          .edit-button {
-            padding: 5px 6px;
-            font-size: 10px;
-            gap: 3px;
-          }
-
-          .header-actions {
-            gap: 4px;
-          }
-
-          .header-actions {
-            gap: 4px;
-          }
-
-          .toggle-button span,
-          .edit-button span {
-            display: none;
-          }
         }
       `}</style>
     </div>
