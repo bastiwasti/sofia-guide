@@ -15,16 +15,7 @@ function connect(url: string): Promise<Socket> {
 }
 
 function joinRoom(socket: Socket, room: string): Promise<void> {
-  // Wait for the server's `socket.join(room)` to complete before the caller
-  // proceeds. The server logs the join but doesn't emit an ack, so we
-  // piggy-back on socket.io's built-in acknowledgement protocol via emit().
-  return new Promise((resolve) => {
-    socket.emit('join', room)
-    // A short microtask boundary is sufficient because socket.io delivers the
-    // event in-order from the same client. We await a round-trip by pinging
-    // ourselves: emit an event the server will echo via broadcast, then wait.
-    setImmediate(resolve)
-  })
+  return new Promise((resolve) => socket.emit('join', room, resolve))
 }
 
 describe('GPS live-location — own emoji visible, others visible', () => {

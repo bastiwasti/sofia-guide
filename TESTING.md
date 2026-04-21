@@ -125,12 +125,35 @@ npx vitest         # Watch-Mode während Entwicklung
 
 - **Frontend-Hooks** (`useLocations`, `useNotes`, `EmojiPickerModal`) — separat
   möglich, wenn du willst; braucht `jsdom` + `@testing-library/react`.
-- **Dokumentierte, aber nicht implementierte Features:**
-  1. `EMOJI_SYSTEM.md` sagt Recovery-Codes wären case-insensitive — der Code
-     vergleicht mit strengem `!==` ([user-sessions.ts:95](server/routes/user-sessions.ts#L95)).
-  2. `EMOJI_SYSTEM.md` sagt "Emoji wechseln" braucht das Admin-Passwort — der
-     Code prüft nur den Recovery-Code. Tests assertieren das aktuelle Code-Verhalten;
-     ob Doc oder Code angepasst werden soll, ist deine Entscheidung.
+
+## Bekannte Lücken, die die Tests aufgedeckt haben
+
+Diese Tests assertieren **aktuelles Verhalten** — nicht das dokumentierte.
+Wenn dir hier was auffällt, kann separat gefixt werden.
+
+1. **`EMOJI_SYSTEM.md`: case-insensitive Recovery-Code — Code: strenge
+   Gleichheit.** [user-sessions.ts:95](server/routes/user-sessions.ts#L95)
+   vergleicht mit `!==`. Der Test "rejects recover with wrong recovery code"
+   würde grün bleiben, selbst wenn der Doc-Text umgesetzt wäre — aber heute
+   passt der Doc-Text nicht zum Code.
+
+2. **`EMOJI_SYSTEM.md`: "Emoji wechseln" braucht Admin-Passwort — Code
+   fordert nur den Recovery-Code.** [user-sessions.ts:115](server/routes/user-sessions.ts#L115)
+   prüft kein `admin_password`. Tests reflektieren Code-Verhalten.
+
+3. **Session löschen schlägt mit 500 fehl, sobald der User Notizen hat.**
+   `notes.session_id` hat `FOREIGN KEY REFERENCES user_sessions(session_id)`
+   ohne `ON DELETE`-Klausel, und `better-sqlite3` erzwingt FKs. Der Test
+   "DELETE /api/user-sessions currently fails with 500 when the user has
+   notes" dokumentiert das. In der UI bedeutet das: "Smiley aufgeben"
+   funktioniert nicht mehr, sobald jemand eine Notiz gepostet hat. Fix
+   wäre `ON DELETE SET NULL` auf `notes.session_id` + Migration; der
+   `backup_emoji`-Fallback im GET ist bereits vorbereitet.
+
+4. **Der `author_emoji`-JOIN liefert `null`, wenn die Session weg ist —
+   `backup_emoji` übernimmt.** Das ist korrekt implementiert und wird für
+   Notes und Locations getestet. Nur: wegen Gap #3 tritt der Fallback für
+   Notes in der Praxis nie ein.
 
 ## Regeln, nach denen die Tests geschrieben sind
 

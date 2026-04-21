@@ -5,9 +5,10 @@ export function registerSocketHandlers(io: SocketIOServer): void {
   io.on('connection', (socket) => {
     console.log('Client connected:', socket.id)
 
-    socket.on('join', (room: string) => {
+    socket.on('join', (room: string, ack?: () => void) => {
       socket.join(room)
       console.log(`Socket ${socket.id} joined room: ${room}`)
+      ack?.()
     })
 
     socket.on('user-location-update', async (data) => {
