@@ -185,9 +185,9 @@ CREATE TABLE user_sessions (
 
 ✅ **Emoji-Eindeutigkeit:** Kein Emoji kann doppelt vergeben werden  
 ✅ **Recovery-Code-Validierung:** Muss 4 alphanumerische Zeichen sein  
-✅ **Passwort-Schutz:** Wechseln + Aufgeben erfordert Passwort  
+✅ **Passwort-Schutz:** Wechseln + Aufgeben erfordert Passwort (nur Frontend, siehe Known gaps)  
 ✅ **Session-ID:** Zufällige UUID pro Session  
-✅ **Case-insensitive:** Recovery-Code funktioniert groß/kleingeschrieben  
+✅ **Code-Normalisierung bei Erstellung:** Der Recovery-Code wird beim Anlegen automatisch in Großbuchstaben gespeichert ([EmojiPickerModal.tsx:135](src/components/EmojiPickerModal.tsx#L135)). Beim Wiederherstellen und Wechseln vergleicht der Server strikt ([user-sessions.ts:95](server/routes/user-sessions.ts#L95)), also muss der Code so eingegeben werden wie er gespeichert wurde.  
 
 ### Verbesserungsmöglichkeiten
 
@@ -254,7 +254,7 @@ CREATE TABLE user_sessions (
 **Ursache:** Recovery-Code stimmt nicht überein
 
 **Lösung:**
-- Groß-/Kleinschreibung ignorieren (case-insensitive)
+- Groß-/Kleinschreibung zählt — bei der Erstellung wurde dein Code in Großbuchstaben gespeichert, gib ihn so ein
 - Code aufschreiben? Screenshot checken?
 - Nach Eingabe eines gültigen Codes wird das passende Emoji **automatisch** angezeigt und ausgewählt
 
@@ -270,6 +270,30 @@ CREATE TABLE user_sessions (
 **Lösung:**
 - Bastis Geburtstag: 24031986
 - Format: ddmmyyyy
+
+---
+
+## Known gaps
+
+Stand 2026-04-21, durch die Test-Suite aufgedeckt.
+
+### Admin-Passwort beim Emoji-Wechsel: nur Frontend-Gate
+Das Frontend blockt den "Wechseln"-Button, bis Bastis Geburtstag eingegeben ist
+([EmojiPickerModal.tsx:87](src/components/EmojiPickerModal.tsx#L87)). Der
+Server-Endpoint ([user-sessions.ts:115-168](server/routes/user-sessions.ts#L115-L168))
+prüft das Admin-Passwort **nicht** — nur den Recovery-Code. Ein direkter
+API-Call (curl, Postman) umgeht den Passwort-Check. Risiko niedrig, da der
+URL-Zugang ohnehin offen ist, aber Doku und Code sind inkonsistent.
+
+### "Smiley aufgeben" schlägt fehl, sobald der User Notizen hat
+`notes.session_id` hat `FOREIGN KEY REFERENCES user_sessions(session_id)` ohne
+`ON DELETE`-Klausel, und `better-sqlite3` erzwingt Foreign Keys. Folge:
+`DELETE /api/user-sessions/:id` returniert 500, sobald der User mindestens
+eine Notiz geschrieben hat. Fix wäre `ON DELETE SET NULL` auf
+`notes.session_id` + Migration; der `backup_emoji`-Fallback im GET ist bereits
+vorbereitet und funktioniert für Locations (dort existiert der FK nicht).
+Der Integrationstest `DELETE /api/user-sessions currently fails with 500
+when the user has notes` dokumentiert das aktuelle Verhalten.
 
 ---
 

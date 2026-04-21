@@ -16,9 +16,7 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
   const [showPicker, setShowPicker] = useState(false)
 
   function handleSave(newSession: UserSession | null) {
-    if (newSession) {
-      setSession(newSession)
-    }
+    setSession(newSession)
   }
 
   const tabs = [
