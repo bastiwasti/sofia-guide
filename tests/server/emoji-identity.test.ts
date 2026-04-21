@@ -4,6 +4,7 @@ import type { Express } from 'express'
 import { createTestDbEnv, openTestDb, type TestDbEnv } from '../helpers/testDb'
 import { buildRestApp } from '../helpers/testApp'
 import { createSessionViaApi } from '../helpers/sessions'
+import { ALL_EMOJIS } from '../../src/data/emojis'
 
 describe('emoji identity — create / switch / recover / give up', () => {
   let env: TestDbEnv
@@ -65,7 +66,7 @@ describe('emoji identity — create / switch / recover / give up', () => {
       expect(withSymbol.status).toBe(400)
     })
 
-    it('rejects malformed emojis (empty or too long)', async () => {
+    it('rejects malformed emojis (empty or absurdly long)', async () => {
       const empty = await request(app)
         .post('/api/user-sessions')
         .send({ emoji: '', recovery_code: 'A7X2' })
@@ -73,9 +74,26 @@ describe('emoji identity — create / switch / recover / give up', () => {
 
       const tooLong = await request(app)
         .post('/api/user-sessions')
-        .send({ emoji: 'abcde', recovery_code: 'A7X2' })
+        .send({ emoji: 'a'.repeat(33), recovery_code: 'A7X2' })
       expect(tooLong.status).toBe(400)
     })
+
+    it('accepts every emoji the frontend can pick (covers ZWJ sequences like 👨‍💻 which have .length > 4)', async () => {
+      const complexOnes = ALL_EMOJIS.filter(e => e.length > 4)
+      expect(complexOnes.length).toBeGreaterThan(0)
+
+      const failures: Array<{ emoji: string; length: number; status: number; body: unknown }> = []
+      for (const emoji of ALL_EMOJIS) {
+        const res = await request(app)
+          .post('/api/user-sessions')
+          .send({ emoji, recovery_code: 'TEST' })
+        if (res.status !== 200) {
+          failures.push({ emoji, length: emoji.length, status: res.status, body: res.body })
+        }
+      }
+
+      expect(failures).toEqual([])
+    }, 30_000)
   })
 
   describe('recover', () => {

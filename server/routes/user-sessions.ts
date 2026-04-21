@@ -35,7 +35,7 @@ export async function createUserSession(req: Request, res: Response) {
       return res.status(400).json({ error: 'Emoji and recovery code are required' })
     }
 
-    if (typeof emoji !== 'string' || emoji.length === 0 || emoji.length > 4) {
+    if (typeof emoji !== 'string' || emoji.length === 0 || emoji.length > 32) {
       return res.status(400).json({ error: 'Invalid emoji' })
     }
 
@@ -121,7 +121,7 @@ export async function updateUserSessionEmoji(req: Request, res: Response) {
       return res.status(400).json({ error: 'sessionId, emoji and recovery_code are required' })
     }
 
-    if (typeof emoji !== 'string' || emoji.length === 0 || emoji.length > 4) {
+    if (typeof emoji !== 'string' || emoji.length === 0 || emoji.length > 32) {
       return res.status(400).json({ error: 'Invalid emoji' })
     }
 
