@@ -17,8 +17,6 @@ interface MapProps {
   editMode?: boolean
   onDeleteLocation?: (id: number) => void
   hotelFlyTrigger?: number
-  isLoggedIn: boolean
-  showAuthorEmojis: boolean
   userLocations: UserLocation[]
   currentSessionId: string | null
   showOwnMarker?: boolean
@@ -221,7 +219,7 @@ function OtherUserMarker({ user, currentSessionId }: { user: UserLocation; curre
   )
 }
 
-export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, isLoggedIn, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false }: MapProps) {
+export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
   console.log('userLocations:', userLocations)
   console.log('currentSessionId:', currentSessionId)
@@ -287,7 +285,7 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
           position={[location.lat, location.lng]}
           icon={createCustomIcon(
             location.category_color,
-            (isLoggedIn || location.is_active_user === 0) && (location.author_emoji || location.backup_emoji) ? (location.author_emoji || location.backup_emoji || null) : null,
+            location.author_emoji || location.backup_emoji || null,
             location.is_active_user === 1,
             location.backup_emoji || null
           )}

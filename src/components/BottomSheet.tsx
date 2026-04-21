@@ -14,7 +14,10 @@ export default function BottomSheet({ location, onClose, onDelete, currentSessio
 
   const distance = calculateDistance(HOTEL_COORDS[0], HOTEL_COORDS[1], location.lat, location.lng)
   
-  const canDelete = location.session_id === null || location.session_id === currentSessionId
+  const canDelete =
+    location.session_id === null ||
+    location.is_active_user === 0 ||
+    location.session_id === currentSessionId
 
   return (
     <div className="bottom-sheet-overlay" onClick={onClose}>

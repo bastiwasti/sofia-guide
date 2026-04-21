@@ -240,6 +240,44 @@ describe('locations API — create/list/delete with emoji propagation', () => {
       expect(res.status).toBe(200)
     })
 
+    it('lets anyone delete an orphaned location (owner gave up their emoji) without admin password', async () => {
+      const owner = await createSessionViaApi(app, '🦊', 'A7X2')
+      const loc = await request(app).post('/api/locations').send({
+        category_id: categoryId,
+        name: 'Orphaned.loc',
+        lat: 42.7,
+        lng: 23.3,
+        session_id: owner.session_id,
+      })
+
+      await request(app).delete(`/api/user-sessions/${owner.session_id}`).expect(200)
+
+      const other = await createSessionViaApi(app, '🐼', 'B3C4')
+      const res = await request(app)
+        .delete(`/api/locations/${loc.body.id}`)
+        .send({ session_id: other.session_id })
+      expect(res.status).toBe(200)
+
+      const list = await request(app).get('/api/locations').expect(200)
+      expect(list.body.find((l: { id: number }) => l.id === loc.body.id)).toBeUndefined()
+    })
+
+    it('lets an unauthenticated caller delete an orphaned location', async () => {
+      const owner = await createSessionViaApi(app, '🦊', 'A7X2')
+      const loc = await request(app).post('/api/locations').send({
+        category_id: categoryId,
+        name: 'Orphaned.loc',
+        lat: 42.7,
+        lng: 23.3,
+        session_id: owner.session_id,
+      })
+
+      await request(app).delete(`/api/user-sessions/${owner.session_id}`).expect(200)
+
+      const res = await request(app).delete(`/api/locations/${loc.body.id}`).send({})
+      expect(res.status).toBe(200)
+    })
+
     it('returns 404 when deleting a non-existent location', async () => {
       const session = await createSessionViaApi(app, '🦊', 'A7X2')
       const res = await request(app)

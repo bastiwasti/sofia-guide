@@ -133,8 +133,15 @@ export function deleteLocation(io: SocketIOServer) {
         canDelete = true
       } else if (location.session_id === null) {
         canDelete = true
-      } else if (session_id === location.session_id) {
-        canDelete = true
+      } else {
+        const ownerExists = db
+          .prepare('SELECT 1 FROM user_sessions WHERE session_id = ?')
+          .get(location.session_id)
+        if (!ownerExists) {
+          canDelete = true
+        } else if (session_id === location.session_id) {
+          canDelete = true
+        }
       }
 
       if (!canDelete) {

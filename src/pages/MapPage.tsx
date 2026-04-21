@@ -74,6 +74,8 @@ export default function MapPage({ session }: MapPageProps) {
     if (location) {
       if (location.session_id === null) {
         canDelete = true
+      } else if (location.is_active_user === 0) {
+        canDelete = true
       } else if (session?.session_id === location.session_id) {
         canDelete = true
       }
@@ -197,9 +199,7 @@ export default function MapPage({ session }: MapPageProps) {
           onMapClick={handleMapClick}
           editMode={editMode}
           onDeleteLocation={handleDeleteLocation}
-          isLoggedIn={!!session}
           onRefetchLocations={refetchLocations}
-          showAuthorEmojis={true}
           userLocations={userLocations}
           currentSessionId={session?.session_id || null}
           showOwnMarker={true}
