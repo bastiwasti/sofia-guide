@@ -204,9 +204,9 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
 
    return (
     <div className="map-page">
-      <div className="map-header">
+      <div className="hero-section">
         <h1>Karte</h1>
-        <p>{filteredLocations.length} Locations</p>
+        <p className="subtitle">Entdecke Sofias Locations ({filteredLocations.length} Locations)</p>
       </div>
 
       {editMode && (
@@ -285,20 +285,23 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
           height: 100%;
         }
 
-        .map-header {
-          padding: var(--spacing-md) var(--spacing-md) var(--spacing-sm) var(--spacing-md);
-          background: var(--color-white);
+        .hero-section {
+          background: linear-gradient(135deg, var(--color-map) 0%, #2E550D 100%);
+          color: white;
+          padding: var(--spacing-xl) var(--spacing-md);
+          text-align: center;
         }
 
-        .map-header h1 {
+        .hero-section h1 {
+          font-size: 32px;
+          margin-bottom: var(--spacing-xs);
+          color: white;
+        }
+
+        .subtitle {
+          font-size: 16px;
+          opacity: 0.95;
           margin: 0;
-          font-size: 24px;
-        }
-
-        .map-header p {
-          margin: 4px 0 0 0;
-          font-size: 13px;
-          color: var(--color-gray-medium);
         }
 
         .edit-mode-bar {

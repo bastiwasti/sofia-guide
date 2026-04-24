@@ -3,6 +3,7 @@ import type { Server as SocketIOServer } from 'socket.io'
 import { getLocations, getLocationById, createLocation, deleteLocation } from '../../server/routes/locations'
 import { getCategories, createCategory } from '../../server/routes/categories'
 import { getNotes, createNote, deleteNote } from '../../server/routes/notes'
+import { getEvents, createEvent, deleteEvent } from '../../server/routes/events'
 import {
   getUserSessions,
   createUserSession,
@@ -32,6 +33,10 @@ export function buildRestApp(io: SocketIOServer = buildStubIo()): Express {
   app.get('/api/notes', getNotes)
   app.post('/api/notes', createNote)
   app.delete('/api/notes/:id', deleteNote)
+
+  app.get('/api/events', getEvents)
+  app.post('/api/events', createEvent(io))
+  app.delete('/api/events/:id', deleteEvent(io))
 
   app.get('/api/user-sessions', getUserSessions)
   app.post('/api/user-sessions', createUserSession)

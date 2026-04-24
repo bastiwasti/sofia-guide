@@ -96,9 +96,9 @@ export default function NotesPage() {
   if (loading) {
     return (
       <div className="notes-page">
-        <div className="page-header">
+        <div className="hero-section">
           <h1>Notizen</h1>
-          <p>Lade Notizen...</p>
+          <p className="subtitle">Lade Notizen...</p>
         </div>
         <div className="loading-spinner">
           <div className="spinner"></div>
@@ -106,10 +106,23 @@ export default function NotesPage() {
         <style>{`
           .notes-page {
             min-height: 100%;
-            padding: var(--spacing-md);
+            background: var(--color-cream);
           }
-          .page-header {
-            margin-bottom: var(--spacing-md);
+          .hero-section {
+            background: linear-gradient(135deg, var(--color-notes) 0%, #5A1580 100%);
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+          }
+          .hero-section h1 {
+            font-size: 32px;
+            margin-bottom: var(--spacing-xs);
+            color: white;
+          }
+          .subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+            margin: 0;
           }
           .loading-spinner {
             display: flex;
@@ -121,7 +134,7 @@ export default function NotesPage() {
             width: 40px;
             height: 40px;
             border: 3px solid var(--color-gray-light);
-            border-top-color: var(--color-craft);
+            border-top-color: var(--color-notes);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
           }
@@ -135,52 +148,44 @@ export default function NotesPage() {
 
   return (
     <div className="notes-page">
-      <div className="page-header">
-        <div>
-          <h1>Notizen</h1>
-          <p>Teile deine Gedanken mit der Gruppe</p>
-        </div>
-        <button
-          className="fab-button"
-          onClick={() => setShowForm(!showForm)}
-          aria-label="Neue Notiz"
-        >
-          <Plus size={24} />
-        </button>
+      <div className="hero-section">
+        <h1>Notizen</h1>
+        <p className="subtitle">Teile deine Gedanken mit der Gruppe</p>
       </div>
 
-      {showForm && !userSession?.session_id && (
-        <div className="note-form">
-          <p className="login-hint">Bitte logge dich ein, um Notizen zu erstellen.</p>
-          <button className="submit-button" onClick={() => setShowForm(false)}>
-            Schließen
-          </button>
-        </div>
-      )}
-
-      {showForm && userSession?.session_id && (
-        <form className="note-form" onSubmit={handleSubmit}>
-          <textarea
-            placeholder="Was möchtest du teilen?"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            rows={3}
-            maxLength={500}
-          />
-
-          <div className="form-actions">
-            <button type="button" className="cancel-button" onClick={() => setShowForm(false)}>
-              Abbrechen
-            </button>
-            <button type="submit" className="submit-button" disabled={!content.trim()}>
-              <Send size={18} />
-              <span>Senden</span>
+      <div className="content-section">
+        {showForm && !userSession?.session_id && (
+          <div className="note-form">
+            <p className="login-hint">Bitte logge dich ein, um Notizen zu erstellen.</p>
+            <button className="submit-button" onClick={() => setShowForm(false)}>
+              Schließen
             </button>
           </div>
-        </form>
-      )}
+        )}
 
-      <div className="notes-list">
+        {showForm && userSession?.session_id && (
+          <form className="note-form" onSubmit={handleSubmit}>
+            <textarea
+              placeholder="Was möchtest du teilen?"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              rows={3}
+              maxLength={500}
+            />
+
+            <div className="form-actions">
+              <button type="button" className="cancel-button" onClick={() => setShowForm(false)}>
+                Abbrechen
+              </button>
+              <button type="submit" className="submit-button" disabled={!content.trim()}>
+                <Send size={18} />
+                <span>Senden</span>
+              </button>
+            </div>
+          </form>
+        )}
+
+        <div className="notes-list">
         {notes.length === 0 ? (
           <div className="empty-state">
             <p>Noch keine Notizen</p>
@@ -211,45 +216,65 @@ export default function NotesPage() {
               )}
             </div>
           ))
-        )}
+         )}
+       </div>
       </div>
+
+      <button
+        className="fab-button"
+        onClick={() => setShowForm(!showForm)}
+        aria-label="Neue Notiz"
+      >
+        <Plus size={24} />
+      </button>
 
       <style>{`
         .notes-page {
           min-height: 100%;
-          padding: var(--spacing-md);
+          background: var(--color-cream);
         }
 
-        .page-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          margin-bottom: var(--spacing-md);
+        .hero-section {
+          background: linear-gradient(135deg, var(--color-notes) 0%, #5A1580 100%);
+          color: white;
+          padding: var(--spacing-xl) var(--spacing-md);
+          text-align: center;
         }
 
-        .page-header h1 {
+        .hero-section h1 {
+          font-size: 32px;
+          margin-bottom: var(--spacing-xs);
+          color: white;
+        }
+
+        .subtitle {
+          font-size: 16px;
+          opacity: 0.95;
           margin: 0;
-          font-size: 24px;
         }
 
-        .page-header p {
-          margin: 4px 0 0 0;
-          font-size: 13px;
-          color: var(--color-gray-medium);
+        .content-section {
+          padding: var(--spacing-lg) var(--spacing-md);
+          max-width: 600px;
+          margin: 0 auto;
         }
 
         .fab-button {
-          width: 48px;
-          height: 48px;
+          position: fixed;
+          bottom: 80px;
+          right: 24px;
+          width: 56px;
+          height: 56px;
           border-radius: 50%;
-          background: var(--color-craft);
+          background: var(--color-notes);
           color: white;
           border: none;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: var(--shadow-md);
+          box-shadow: var(--shadow-lg);
           transition: transform 0.2s ease;
+          z-index: 1000;
         }
 
         .fab-button:active {
@@ -283,7 +308,7 @@ export default function NotesPage() {
         }
 
         .note-form textarea:focus {
-          outline: 2px solid var(--color-craft);
+          outline: 2px solid var(--color-notes);
           border-color: transparent;
         }
 
@@ -305,7 +330,7 @@ export default function NotesPage() {
         .submit-button {
           flex: 2;
           padding: 10px;
-          background: var(--color-craft);
+          background: var(--color-notes);
           color: white;
           border: none;
           border-radius: var(--border-radius-sm);

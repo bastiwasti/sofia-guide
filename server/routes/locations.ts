@@ -60,11 +60,42 @@ export function getLocationById(req: Request, res: Response): void {
   }
 }
 
-export function createLocation(io: SocketIOServer) {
+  export function createLocation(io: SocketIOServer) {
   return function(req: Request, res: Response): void {
     try {
-      const { category_id, name, meta, rating, price_range, lat, lng, session_id } = req.body
-
+      const {
+        category_id,
+        name,
+        meta,
+        rating,
+        price_range,
+        lat,
+        lng,
+        session_id,
+        website_url,
+        address,
+        opening_hours,
+        payment_methods,
+        phone,
+        beer_menu,
+        cocktails_menu,
+        food_menu,
+        local_specialties,
+        music_type,
+        crowd_type,
+        pro_tips,
+        fun_facts,
+        seating_options,
+        entry_fee,
+        visit_duration,
+        best_time_to_visit,
+        photo_allowed,
+        guided_tours,
+        key_features,
+        dress_code,
+        service_times
+      } = req.body
+      
       if (!category_id || !name || !lat || !lng) {
         res.status(400).json({ error: 'Missing required fields' })
         return
@@ -81,9 +112,47 @@ export function createLocation(io: SocketIOServer) {
       }
 
       const result = db.prepare(`
-        INSERT INTO locations (category_id, name, meta, rating, price_range, lat, lng, session_id, backup_emoji)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `).run(category_id, name, meta || null, rating || null, price_range || null, lat, lng, session_id || null, backupEmoji)
+        INSERT INTO locations (
+          category_id, name, meta, rating, price_range, lat, lng, session_id, backup_emoji,
+          website_url, address, opening_hours, phone, payment_methods,
+          beer_menu, cocktails_menu, food_menu, local_specialties,
+          music_type, crowd_type, pro_tips, fun_facts, seating_options,
+          entry_fee, visit_duration, best_time_to_visit, photo_allowed, guided_tours, key_features, dress_code, service_times
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `).run(
+        category_id,
+        name,
+        meta || null,
+        rating || null,
+        price_range || null,
+        lat,
+        lng,
+        session_id || null,
+        backupEmoji,
+        website_url || null,
+        address || null,
+        opening_hours || null,
+        phone || null,
+        payment_methods || null,
+        beer_menu || null,
+        cocktails_menu || null,
+        food_menu || null,
+        local_specialties || null,
+        music_type || null,
+        crowd_type || null,
+        pro_tips || null,
+        fun_facts || null,
+        seating_options || null,
+        entry_fee || null,
+        visit_duration || null,
+        best_time_to_visit || null,
+        photo_allowed || null,
+        guided_tours || null,
+        key_features || null,
+        dress_code || null,
+        service_times || null
+      )
 
       const location = db.prepare(`
         SELECT
@@ -119,7 +188,7 @@ export function deleteLocation(io: SocketIOServer) {
 
       const db = getDatabase()
 
-      const location = db.prepare('SELECT session_id FROM locations WHERE id = ?').get(id) as { session_id: string | null } | undefined
+      const location = db.prepare('SELECT session_id, category_id FROM locations WHERE id = ?').get(id) as { session_id: string | null; category_id: number } | undefined
 
       if (!location) {
         db.close()
@@ -131,9 +200,9 @@ export function deleteLocation(io: SocketIOServer) {
 
       if (admin_password === '24031986') {
         canDelete = true
-      } else if (location.session_id === null) {
+      } else if (location.category_id === 6 && location.session_id === null) {
         canDelete = true
-      } else {
+      } else if (location.category_id === 6 && location.session_id !== null) {
         const ownerExists = db
           .prepare('SELECT 1 FROM user_sessions WHERE session_id = ?')
           .get(location.session_id)
@@ -142,6 +211,8 @@ export function deleteLocation(io: SocketIOServer) {
         } else if (session_id === location.session_id) {
           canDelete = true
         }
+      } else if (session_id === location.session_id) {
+        canDelete = true
       }
 
       if (!canDelete) {

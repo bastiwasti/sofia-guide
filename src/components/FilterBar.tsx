@@ -27,12 +27,9 @@ export default function FilterBar({ categories, selectedCategories, onCategoryTo
       </div>
       <style>{`
         .filter-bar {
-          position: sticky;
-          top: 0;
-          z-index: 1000;
           background: var(--color-white);
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-          padding: var(--spacing-sm) 0;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          padding: var(--spacing-sm) var(--spacing-md);
         }
 
         .filter-scroll {

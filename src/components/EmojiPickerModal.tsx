@@ -51,7 +51,7 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
     const password = prompt(
       `Smiley ${existingSession.emoji} wirklich aufgeben?\n\n` +
       `Dein Recovery-Code wird gelöscht, der Smiley wird wieder frei und kann von jemand anderem gepickt werden. Das lässt sich nicht rückgängig machen.\n\n` +
-      `Passwort zum Bestätigen (Bastis Geburtstag):`
+      `Passwort zum Bestätigen (Bastis Geburtsdatum):`
     )
     if (password === null) return
     if (password !== '24031986') {
@@ -277,7 +277,7 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
                   </div>
 
                   <div className="recovery-code-input">
-                    <label>Passwort (Bastis Geburtstag)</label>
+                    <label>Passwort (Bastis Geburtsdatum)</label>
                     <input
                       type="password"
                       value={switchPassword}

@@ -7,6 +7,7 @@ interface UserSession {
   session_id: string
   emoji: string
   recovery_code: string
+  role: 'user' | 'admin'
   created_at: string
   last_seen: string
 }
@@ -16,7 +17,7 @@ export async function getUserSessions(_req: Request, res: Response) {
     const db = getDatabase()
 
     const sessions = db
-      .prepare('SELECT id, session_id, emoji, created_at, last_seen FROM user_sessions ORDER BY created_at DESC')
+      .prepare('SELECT id, session_id, emoji, role, created_at, last_seen FROM user_sessions ORDER BY created_at DESC')
       .all() as UserSession[]
 
     db.close()
@@ -58,11 +59,11 @@ export async function createUserSession(req: Request, res: Response) {
     const now = new Date().toISOString()
 
     const result = db
-      .prepare('INSERT INTO user_sessions (session_id, emoji, recovery_code, created_at, last_seen) VALUES (?, ?, ?, ?, ?)')
-      .run(sessionId, emoji, recovery_code, now, now)
+      .prepare('INSERT INTO user_sessions (session_id, emoji, recovery_code, role, created_at, last_seen) VALUES (?, ?, ?, ?, ?, ?)')
+      .run(sessionId, emoji, recovery_code, 'user', now, now)
 
     const newSession = db
-      .prepare('SELECT id, session_id, emoji, recovery_code, created_at, last_seen FROM user_sessions WHERE id = ?')
+      .prepare('SELECT id, session_id, emoji, recovery_code, role, created_at, last_seen FROM user_sessions WHERE id = ?')
       .get(result.lastInsertRowid) as UserSession
 
     db.close()
@@ -84,7 +85,7 @@ export async function reclaimUserSession(req: Request, res: Response) {
     const db = getDatabase()
 
     const session = db
-      .prepare('SELECT id, session_id, emoji, recovery_code, created_at, last_seen FROM user_sessions WHERE emoji = ?')
+      .prepare('SELECT id, session_id, emoji, recovery_code, role, created_at, last_seen FROM user_sessions WHERE emoji = ?')
       .get(emoji) as UserSession | undefined
 
     if (!session) {
@@ -101,7 +102,7 @@ export async function reclaimUserSession(req: Request, res: Response) {
     db.prepare('UPDATE user_sessions SET last_seen = ? WHERE id = ?').run(now, session.id)
 
     const updatedSession = db
-      .prepare('SELECT id, session_id, emoji, recovery_code, created_at, last_seen FROM user_sessions WHERE id = ?')
+      .prepare('SELECT id, session_id, emoji, recovery_code, role, created_at, last_seen FROM user_sessions WHERE id = ?')
       .get(session.id) as UserSession
 
     db.close()
@@ -128,7 +129,7 @@ export async function updateUserSessionEmoji(req: Request, res: Response) {
     const db = getDatabase()
 
     const session = db
-      .prepare('SELECT id, session_id, emoji, recovery_code FROM user_sessions WHERE session_id = ?')
+      .prepare('SELECT id, session_id, emoji, recovery_code, role FROM user_sessions WHERE session_id = ?')
       .get(sessionId) as UserSession | undefined
 
     if (!session) {
@@ -156,7 +157,7 @@ export async function updateUserSessionEmoji(req: Request, res: Response) {
     db.prepare('UPDATE user_sessions SET emoji = ?, last_seen = ? WHERE session_id = ?').run(emoji, now, sessionId)
 
     const updated = db
-      .prepare('SELECT id, session_id, emoji, recovery_code, created_at, last_seen FROM user_sessions WHERE session_id = ?')
+      .prepare('SELECT id, session_id, emoji, recovery_code, role, created_at, last_seen FROM user_sessions WHERE session_id = ?')
       .get(sessionId) as UserSession
 
     db.close()
@@ -204,7 +205,7 @@ export async function validateSession(req: Request, res: Response) {
 
     const db = getDatabase()
 
-    const session = db.prepare('SELECT session_id, emoji FROM user_sessions WHERE session_id = ?').get(sessionId)
+    const session = db.prepare('SELECT session_id, emoji, role FROM user_sessions WHERE session_id = ?').get(sessionId)
 
     db.close()
 

@@ -2,6 +2,34 @@ import { useState, useEffect } from 'react'
 import { api } from '../lib/api'
 import { getSocket } from './useSocket'
 
+export interface BeerMenuItem {
+  name: string
+  brewery?: string
+  price: string
+  style?: string
+}
+
+export interface CocktailMenuItem {
+  name: string
+  price: string
+  ingredients?: string
+}
+
+export interface FoodMenuItem {
+  name: string
+  price: string
+  description?: string
+}
+
+export interface LocalSpecialty {
+  name: string
+  description: string
+  price?: string
+}
+
+export type SeatingOption = "indoor" | "terrace" | "garden" | "rooftop"
+export type PaymentMethod = "cash" | "card" | "revolut"
+
 export interface Location {
   id: number
   category_id: number
@@ -19,6 +47,29 @@ export interface Location {
   backup_emoji: string | null
   author_emoji: string | null
   is_active_user: number
+  
+  website_url?: string | null
+  address?: string | null
+  opening_hours?: string | null
+  phone?: string | null
+  payment_methods?: string | null
+  beer_menu?: string | null
+  cocktails_menu?: string | null
+  food_menu?: string | null
+  local_specialties?: string | null
+  music_type?: string | null
+  crowd_type?: string | null
+  pro_tips?: string | null
+  fun_facts?: string | null
+  seating_options?: string | null
+  entry_fee?: string | null
+  visit_duration?: string | null
+  best_time_to_visit?: string | null
+  photo_allowed?: string | null
+  guided_tours?: string | null
+  key_features?: string | null
+  dress_code?: string | null
+  service_times?: string | null
 }
 
 export function useLocations() {

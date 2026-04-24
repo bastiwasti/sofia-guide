@@ -101,6 +101,12 @@ function migrateLocationsTable(db: Database.Database): void {
     } else {
       console.log('Locations table already has sight details columns')
     }
+
+    if (!columnNames.includes('description')) {
+      console.log('Adding description column to locations table...')
+      db.exec('ALTER TABLE locations ADD COLUMN description TEXT')
+      console.log('Description column migration completed successfully')
+    }
   } catch (error) {
     console.log('Locations migration completed or not needed')
   }

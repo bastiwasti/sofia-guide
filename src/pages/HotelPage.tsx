@@ -5,12 +5,40 @@ import { Search, X, AlertCircle } from 'lucide-react'
 export default function HotelPage() {
   const [showInsignificanceModal, setShowInsignificanceModal] = useState(false)
 
+  const tocItems = [
+    { id: 'about', label: 'Hotel' },
+    { id: 'arrival', label: 'Anreise' },
+    { id: 'surroundings', label: 'Umgebung' },
+    { id: 'tips', label: 'Locals' }
+  ]
+
   return (
     <div className="hotel-page">
       <div className="hero-section">
         <h1>Hotel Niky</h1>
         <p className="subtitle">Dein Zuhause in Sofia</p>
       </div>
+
+      <nav className="sticky-nav">
+        <div className="nav-items">
+          {tocItems.map(item => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="nav-item"
+              onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById(item.id)
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
 
       <div className="content-section">
         <div className="info-card">
@@ -35,7 +63,7 @@ export default function HotelPage() {
           </ul>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="about">
           <h2>Über das Hotel</h2>
           <div className="text-content" dangerouslySetInnerHTML={{ __html: hotelContent.history }} />
         </div>
@@ -52,7 +80,7 @@ export default function HotelPage() {
           <p className="tap-hint">👆 Tippe hier für die vollständige Recherche</p>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="arrival">
           <h2>Anreise</h2>
           
           <div className="arrival-option">
@@ -70,7 +98,7 @@ export default function HotelPage() {
           </div>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="surroundings">
           <h2>In der Umgebung</h2>
           <div className="surroundings-list">
             {hotelContent.surroundings.items.map((item, index) => (
@@ -82,7 +110,7 @@ export default function HotelPage() {
           </div>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="tips">
           <h2>Tipps von den Locals</h2>
           <ul className="tips-list">
             {hotelContent.tips.map((tip, index) => (
@@ -470,6 +498,62 @@ export default function HotelPage() {
           background: var(--color-gray-light);
           padding: var(--spacing-sm) var(--spacing-md);
           border-radius: var(--border-radius-sm);
+        }
+
+        .sticky-nav {
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          background: var(--color-white);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          padding: var(--spacing-sm) var(--spacing-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nav-items {
+          display: flex;
+          gap: var(--spacing-sm);
+          justify-content: center;
+          max-width: 600px;
+          width: auto;
+        }
+
+        .nav-items::-webkit-scrollbar {
+          display: none;
+        }
+
+        .nav-items {
+          scrollbar-width: none;
+        }
+
+        .nav-item {
+          font-family: var(--font-body);
+          font-size: 13px;
+          color: var(--color-text);
+          text-decoration: none;
+          white-space: nowrap;
+          padding: 4px 8px;
+          border-radius: var(--border-radius-sm);
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+        }
+
+        .nav-item:hover {
+          background: var(--color-hotel);
+          color: white;
+        }
+
+        .nav-item:active {
+          transform: scale(0.95);
+        }
+
+        #about,
+        #arrival,
+        #surroundings,
+        #tips {
+          scroll-margin-top: 60px;
         }
       `}</style>
     </div>

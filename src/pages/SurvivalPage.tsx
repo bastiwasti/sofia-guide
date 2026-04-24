@@ -49,12 +49,42 @@ export default function SurvivalPage() {
     return match ? match[1].trim() : example.split('=')[0].trim()
   }
 
+  const tocItems = [
+    { id: 'phrases', label: 'Bulg. Phrasen' },
+    { id: 'alphabet', label: 'Kyr. Alphabet' },
+    { id: 'prices', label: 'Preise' },
+    { id: 'transport', label: 'Transport' },
+    { id: 'emergency', label: 'Notfall' },
+    { id: 'culture', label: 'Kultur' }
+  ]
+
   return (
     <div className="survival-page">
       <div className="hero-section">
         <h1>Survival Guide</h1>
         <p className="subtitle">Alles was du wissen musst</p>
       </div>
+
+      <nav className="sticky-nav">
+        <div className="nav-items">
+          {tocItems.map(item => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="nav-item"
+              onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById(item.id)
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
 
       <div className="content-section">
         <div className="schafkopf-box">
@@ -76,7 +106,7 @@ export default function SurvivalPage() {
           <p className="tip">💡 {survivalContent.headShakeWarning.tip}</p>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="phrases">
           <h2>🗣️ Bulgarische Phrasen</h2>
           <div className="phrases-table">
             <div className="table-header">
@@ -102,7 +132,7 @@ export default function SurvivalPage() {
           </div>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="alphabet">
           <h2>🔤 Kyrillisches Alphabet</h2>
           <p className="alphabet-description">{survivalContent.cyrillicAlphabet.description}</p>
           <div className="alphabet-grid">
@@ -120,7 +150,7 @@ export default function SurvivalPage() {
           </div>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="prices">
           <h2>💰 Preisübersicht</h2>
           <div className="prices-grid">
             {survivalContent.prices.items.map((item, index) => (
@@ -133,7 +163,7 @@ export default function SurvivalPage() {
           </div>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="transport">
           <h2>🚗 Fortbewegung</h2>
           <div className="transport-options">
             {survivalContent.transport.options.map((option, index) => (
@@ -151,7 +181,7 @@ export default function SurvivalPage() {
           </div>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="emergency">
           <h2>🚨 Notfallnummern</h2>
           <div className="emergency-numbers">
             {survivalContent.emergencies.numbers.map((item, index) => (
@@ -163,7 +193,7 @@ export default function SurvivalPage() {
           </div>
         </div>
 
-        <div className="content-block">
+        <div className="content-block" id="culture">
           <h2>🎭 Kulturtipps</h2>
           <ul className="tips-list">
             {survivalContent.culturalTips.map((tip, index) => (
@@ -732,6 +762,65 @@ export default function SurvivalPage() {
         .phrase-audio-button:disabled {
           background: var(--color-gray-medium);
           cursor: not-allowed;
+        }
+
+        .sticky-nav {
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          background: var(--color-white);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          padding: var(--spacing-sm) var(--spacing-md);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .nav-items {
+          display: flex;
+          gap: var(--spacing-sm);
+          overflow-x: auto;
+          max-width: 600px;
+          width: 100%;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-items::-webkit-scrollbar {
+          display: none;
+        }
+
+        .nav-items {
+          scrollbar-width: none;
+        }
+
+        .nav-item {
+          font-family: var(--font-body);
+          font-size: 13px;
+          color: var(--color-text);
+          text-decoration: none;
+          white-space: nowrap;
+          padding: 4px 8px;
+          border-radius: var(--border-radius-sm);
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+        }
+
+        .nav-item:hover {
+          background: var(--color-craft);
+          color: white;
+        }
+
+        .nav-item:active {
+          transform: scale(0.95);
+        }
+
+        #phrases,
+        #alphabet,
+        #prices,
+        #transport,
+        #emergency,
+        #culture {
+          scroll-margin-top: 60px;
         }
       `}</style>
     </div>
