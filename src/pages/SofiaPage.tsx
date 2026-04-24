@@ -26,7 +26,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 200)
+      setIsScrolled(window.scrollY > 100)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
@@ -41,8 +41,13 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
     return byDay
   }, [events])
 
-  function handleVenueTap(locationId: number) {
-    onFocusOnMap?.({ locationId })
+  function handleVenueTap(evt: EventOccurrence) {
+    if (evt.location_id == null) return
+    onFocusOnMap?.({
+      locationId: evt.location_id,
+      lat: evt.location_lat,
+      lng: evt.location_lng,
+    })
   }
 
   const speakText = (text: string) => {
@@ -88,34 +93,32 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         <p className="subtitle">Fun Facts & Kulturschocks - dieses Wochenende</p>
       </div>
 
-      {isScrolled && (
-        <nav className="sticky-nav">
-          <div className="nav-title">Sofia</div>
-          <div className="nav-items">
-            {tocItems.map(item => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="nav-item"
-                onClick={(e) => {
-                  e.preventDefault()
-                  const element = document.getElementById(item.id)
-                  if (element) {
-                    const offset = 60
-                    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-                    window.scrollTo({
-                      top: elementPosition - offset,
-                      behavior: 'smooth'
-                    })
-                  }
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </nav>
-      )}
+      <nav className="sticky-nav">
+        <div className="nav-title">Sofia</div>
+        <div className="nav-items">
+          {tocItems.map(item => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="nav-item"
+              onClick={(e) => {
+                e.preventDefault()
+                const element = document.getElementById(item.id)
+                if (element) {
+                  const offset = 60
+                  const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+                  window.scrollTo({
+                    top: elementPosition - offset,
+                    behavior: 'smooth'
+                  })
+                }
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
 
       <section id="weekend" className="weekend-section">
         <div className="weekend-header">
