@@ -7,6 +7,9 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      devOptions: {
+        enabled: false
+      },
       includeAssets: ['icons/*.png', 'images/*.jpg', 'images/*.webp'],
       manifest: {
         name: 'Sofia Guide',
