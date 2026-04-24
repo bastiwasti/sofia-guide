@@ -65,8 +65,101 @@ function migrateLocationsTable(db: Database.Database): void {
     } else {
       console.log('Locations table already has backup_emoji column')
     }
+
+    if (!columnNames.includes('website_url')) {
+      console.log('Adding kneipen details columns to locations table...')
+      db.exec('ALTER TABLE locations ADD COLUMN website_url TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN address TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN opening_hours TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN payment_methods TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN phone TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN beer_menu TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN cocktails_menu TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN food_menu TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN local_specialties TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN music_type TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN crowd_type TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN pro_tips TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN fun_facts TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN seating_options TEXT')
+      console.log('Kneipen details migration completed successfully')
+    } else {
+      console.log('Locations table already has kneipen details columns')
+    }
+
+    if (!columnNames.includes('entry_fee')) {
+      console.log('Adding sight details columns to locations table...')
+      db.exec('ALTER TABLE locations ADD COLUMN entry_fee TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN visit_duration TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN best_time_to_visit TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN photo_allowed TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN guided_tours TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN key_features TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN dress_code TEXT')
+      db.exec('ALTER TABLE locations ADD COLUMN service_times TEXT')
+      console.log('Sight details migration completed successfully')
+    } else {
+      console.log('Locations table already has sight details columns')
+    }
   } catch (error) {
     console.log('Locations migration completed or not needed')
+  }
+}
+
+function migrateEventsTable(db: Database.Database): void {
+  try {
+    const tableExists = db.prepare(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='events'"
+    ).get()
+
+    if (!tableExists) {
+      console.log('Creating events table...')
+      db.exec(`
+        CREATE TABLE events (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          title TEXT NOT NULL,
+          event_type TEXT NOT NULL CHECK(event_type IN ('concert','sport','festival','market','theater','opera')),
+          location_id INTEGER REFERENCES locations(id) ON DELETE SET NULL,
+          venue_name TEXT,
+          venue_address TEXT,
+          venue_lat REAL,
+          venue_lng REAL,
+          start_date TEXT,
+          end_date TEXT,
+          start_time TEXT,
+          end_time TEXT,
+          recurrence TEXT,
+          recurrence_until TEXT,
+          price TEXT,
+          external_url TEXT,
+          description TEXT,
+          emoji TEXT,
+          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+      `)
+      db.exec('CREATE INDEX IF NOT EXISTS idx_events_start_date ON events(start_date)')
+      db.exec('CREATE INDEX IF NOT EXISTS idx_events_location_id ON events(location_id)')
+      console.log('Events table migration completed successfully')
+    }
+  } catch (error) {
+    console.log('Events migration completed or not needed')
+  }
+}
+
+function migrateUserRoleTable(db: Database.Database): void {
+  try {
+    const schema = db.pragma('table_info(user_sessions)') as Array<{ name: string }>
+    const columnNames = schema.map(col => col.name)
+
+    if (!columnNames.includes('role')) {
+      console.log('Adding role column to user_sessions table...')
+      db.exec('ALTER TABLE user_sessions ADD COLUMN role TEXT DEFAULT "user"')
+      console.log('User sessions role migration completed successfully')
+    } else {
+      console.log('User sessions already has role column')
+    }
+  } catch (error) {
+    console.log('User sessions role migration completed or not needed')
   }
 }
 
@@ -80,6 +173,8 @@ export function initializeDatabase(): void {
 
     migrateNotesTable(db)
     migrateLocationsTable(db)
+    migrateEventsTable(db)
+    migrateUserRoleTable(db)
   } catch (error) {
     console.error('Error initializing database:', error)
     throw error
