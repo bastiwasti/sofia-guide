@@ -92,10 +92,10 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
 
         .tab-button {
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           justify-content: center;
           align-items: center;
-          gap: 4px;
+          gap: 2px;
           background: transparent;
           color: var(--color-gray-medium);
           padding: 0 var(--spacing-sm);
@@ -103,11 +103,13 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
           transition: all 0.2s ease;
           flex-shrink: 0;
           height: 100%;
+          text-align: center;
         }
 
         .tab-label {
           font-size: 11px;
           font-weight: 500;
+          line-height: 1;
         }
 
         .tab-button.active {
