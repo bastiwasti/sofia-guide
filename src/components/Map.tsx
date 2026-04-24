@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, Circle, ZoomControl, useMap, useMapEvents } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Circle, useMap, useMapEvents } from 'react-leaflet'
 import { createCustomIcon, HOTEL_COORDS, calculateDistance, formatDistance } from '../lib/leaflet'
 import { Location } from '../hooks/useLocations'
 import { UserLocation } from '../hooks/useUserLocations'
@@ -22,14 +22,16 @@ interface MapProps {
   currentSessionId: string | null
   showOwnMarker?: boolean
   onRefetchLocations?: () => void
+  onMapReady?: (map: L.Map) => void
 }
 
-function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
+function MapController({ center, zoom, onMapReady }: { center: [number, number]; zoom: number; onMapReady?: (map: L.Map) => void }) {
   const map = useMap()
 
   useEffect(() => {
     map.setView(center, zoom)
-  }, [center, zoom, map])
+    onMapReady?.(map)
+  }, [center, zoom, map, onMapReady])
 
   return null
 }
@@ -241,7 +243,7 @@ function OtherUserMarker({ user, currentSessionId }: { user: UserLocation; curre
   )
 }
 
-export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, flyToTarget, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false }: MapProps) {
+export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, flyToTarget, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false, onMapReady }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
   console.log('userLocations:', userLocations)
   console.log('currentSessionId:', currentSessionId)
@@ -275,10 +277,9 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
         maxZoom={19}
       />
 
-      <MapController center={HOTEL_COORDS} zoom={15} />
+      <MapController center={HOTEL_COORDS} zoom={15} onMapReady={onMapReady} />
       <HotelFlyController trigger={hotelFlyTrigger} />
       <FlyToLocationController target={flyToTarget} />
-      <ZoomControl position="bottomright" />
 
       {showUserLocation && <UserLocationMarker isTracking={!!isTracking} userEmoji={currentUserEmoji} />}
 
@@ -396,19 +397,6 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
             transform: scale(2);
             opacity: 0;
           }
-        }
-
-        .leaflet-bottom {
-          bottom: 90px !important;
-        }
-
-        .leaflet-bottom.leaflet-right {
-          bottom: 90px !important;
-          right: 10px !important;
-        }
-
-        .leaflet-control-zoom {
-          margin-bottom: 0 !important;
         }
       `}</style>
     </MapContainer>

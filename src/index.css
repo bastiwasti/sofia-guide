@@ -517,14 +517,14 @@ input::placeholder, textarea::placeholder {
 .floating-dock {
   position: fixed;
   bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  padding: calc(var(--spacing-sm) * 0.7);
+  padding: var(--spacing-sm);
   border-radius: 16px;
   box-shadow: var(--shadow-lg);
   z-index: 1000;
@@ -532,20 +532,25 @@ input::placeholder, textarea::placeholder {
 }
 
 .floating-dock.menu-collapsed {
-  width: 40px;
-  left: 8px;
-  transform: none;
-  justify-content: flex-start;
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
 }
 
-.floating-dock.menu-collapsed .dock-button:not(.dock-toggle) {
+.floating-dock.menu-collapsed {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: var(--spacing-xs);
+}
+
+.floating-dock.menu-collapsed .dock-button:not(.dock-toggle):not(.zoom-button) {
   opacity: 0;
   pointer-events: none;
-  transform: translateY(10px);
+  transform: translateX(-10px);
   position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .dock-toggle {
@@ -553,8 +558,8 @@ input::placeholder, textarea::placeholder {
   color: white;
   border: none;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -573,17 +578,17 @@ input::placeholder, textarea::placeholder {
 
 .dock-button {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1px;
-  padding: calc(var(--spacing-sm) * 0.7) calc(var(--spacing-md) * 0.7);
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm);
   background: transparent;
   color: var(--color-text);
   border-radius: var(--border-radius-sm);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
   transition: all 0.2s ease;
-  min-width: 40px;
+  white-space: nowrap;
 }
 
 .dock-button:hover {
@@ -601,6 +606,7 @@ input::placeholder, textarea::placeholder {
 
 .dock-label {
   white-space: nowrap;
+  font-size: 11px;
 }
 
 .animate-spin {

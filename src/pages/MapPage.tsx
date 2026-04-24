@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useRef } from 'react'
 import { ArrowUp, ArrowDown } from 'lucide-react'
 import { useLocations, Location } from '../hooks/useLocations'
 import { useCategories, Category } from '../hooks/useCategories'
@@ -44,6 +44,7 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
     const saved = localStorage.getItem('sofia-map-header-minimized')
     return saved === 'true'
   })
+  const mapRef = useRef<any>(null)
 
   useEffect(() => {
     if (!focusRequest) return
@@ -121,6 +122,22 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
       setShowLocationPanel(false)
       setIsPanelClosing(false)
     }, 300)
+  }
+
+  function handleZoomIn() {
+    if (mapRef.current) {
+      mapRef.current.zoomIn()
+    }
+  }
+
+  function handleZoomOut() {
+    if (mapRef.current) {
+      mapRef.current.zoomOut()
+    }
+  }
+
+  function handleMapReady(map: any) {
+    mapRef.current = map
   }
 
   async function handleCreateLocation(location: any) {
@@ -279,6 +296,7 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
           userLocations={userLocations}
           currentSessionId={session?.session_id || null}
           showOwnMarker={true}
+          onMapReady={handleMapReady}
         />
 
         <FloatingDock
@@ -289,6 +307,8 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
           editMode={editMode}
           onToggleEdit={() => setEditMode(!editMode)}
           onFlyToHotel={() => setHotelFlyTrigger(t => t + 1)}
+          onZoomIn={handleZoomIn}
+          onZoomOut={handleZoomOut}
         />
       </div>
 
