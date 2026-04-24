@@ -17,6 +17,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
   const { events, loading: eventsLoading } = useEvents()
 
   const tocItems = [
+    { id: 'weekend', label: 'Dieses Wochenende' },
     { id: 'fun-facts', label: 'Fun Facts' },
     { id: 'culture-shocks', label: 'Kulturschocks' },
     { id: 'ordering', label: 'Wie bestelle ich' },
@@ -116,7 +117,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         </nav>
       )}
 
-      <section className="weekend-section">
+      <section id="weekend" className="weekend-section">
         <div className="weekend-header">
           <h2>Dieses Wochenende</h2>
           <p className="weekend-sub">15.–17. Mai 2026 in Sofia</p>
