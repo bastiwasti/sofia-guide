@@ -226,7 +226,6 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
           padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
           max-width: 600px;
           margin: 0 auto;
-          background: #ff0000;
         }
 
         .weekend-header {
@@ -359,12 +358,13 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         }
 
         .content-section {
-          padding: var(--spacing-lg) var(--spacing-md);
-          max-width: 600px;
-          margin: 0 auto;
-          display: flex;
-          flex-direction: column;
-          gap: var(--spacing-xl);
+          padding: var(--spacing-lg) var(--spacing-md) !important;
+          max-width: 600px !important;
+          margin: 0 auto !important;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: var(--spacing-xl) !important;
+          background: #00ff00 !important;
         }
 
         .content-block {
