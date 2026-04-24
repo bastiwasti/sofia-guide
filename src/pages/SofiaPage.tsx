@@ -90,11 +90,9 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
     <div className="sofia-page">
       <div className="hero-section">
         <h1>Sofia</h1>
-        <p className="subtitle">Fun Facts & Kulturschocks - dieses Wochenende</p>
       </div>
 
       <nav className="sticky-nav">
-        <div className="nav-title">Sofia</div>
         <div className="nav-items">
           {tocItems.map(item => (
             <a
@@ -228,6 +226,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
           padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
           max-width: 600px;
           margin: 0 auto;
+          padding-top: 80px;
         }
 
         .weekend-header {
@@ -306,31 +305,26 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         }
 
         .sticky-nav {
-          position: sticky;
+          position: fixed;
           top: 0;
+          left: 0;
+          right: 0;
           z-index: 1000;
           background: var(--color-white);
           box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
           padding: var(--spacing-sm) var(--spacing-md);
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: center;
           gap: var(--spacing-md);
-        }
-
-        .nav-title {
-          font-family: var(--font-heading);
-          font-size: 18px;
-          font-weight: 700;
-          color: var(--color-sights);
-          flex-shrink: 0;
         }
 
         .nav-items {
           display: flex;
           gap: var(--spacing-sm);
           overflow-x: auto;
-          flex: 1;
+          max-width: 600px;
+          width: 100%;
           -webkit-overflow-scrolling: touch;
         }
 
@@ -370,6 +364,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
           padding: var(--spacing-lg) var(--spacing-md);
           max-width: 600px;
           margin: 0 auto;
+          padding-top: 80px;
         }
 
         .content-block {
