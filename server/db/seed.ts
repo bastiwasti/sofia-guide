@@ -4,12 +4,6 @@ import { categories, locations } from './seed-data'
 import { events, SeedEvent } from './events-seed'
 
 function ensureEventVenueExtras(db: Database.Database): void {
-  const insertCat = db.prepare(
-    'INSERT OR REPLACE INTO categories (id, name, color, icon) VALUES (?, ?, ?, ?)'
-  )
-  insertCat.run(7, 'Kultur & Bühne', '#6A4C93', 'culture')
-  insertCat.run(8, 'Sport & Stadion', '#2E7D32', 'sport')
-
   const venueRows: Array<[number, string, string, number, number]> = [
     [7, 'Sofia Opera and Ballet', 'Hauptbühne · klassische Oper, Ballett, Wagner-Festival', 42.6983, 23.3294],
     [7, 'Vidas Art Arena', 'Velodrome Serdika · Open-Air-Konzerte im Borisova-Park', 42.6817, 23.3398],
@@ -39,13 +33,21 @@ export function seedDatabase(force = false): void {
       db.prepare('DELETE FROM events').run()
     }
 
-    if (needsBaseSeed || !force) {
-      console.log('Seeding categories...')
-      const insertCategory = db.prepare(`
-        INSERT OR REPLACE INTO categories (id, name, color, icon)
-        VALUES (@id, @name, @color, @icon)
-      `)
+    // Seed all categories first (including event venue extras)
+    console.log('Seeding categories...')
+    const insertCategory = db.prepare(`
+      INSERT OR REPLACE INTO categories (id, name, color, icon)
+      VALUES (@id, @name, @color, @icon)
+    `)
 
+    for (const cat of categories) {
+      insertCategory.run({ id: cat.id, name: cat.name, color: cat.color, icon: cat.icon })
+    }
+    insertCategory.run({ id: 7, name: 'Kultur & Bühne', color: '#6A4C93', icon: 'culture' })
+    insertCategory.run({ id: 8, name: 'Sport & Stadion', color: '#2E7D32', icon: 'sport' })
+    console.log(`Seeded ${categories.length} base categories + 2 event venue categories`)
+
+    if (needsBaseSeed || !force) {
       const insertLocation = db.prepare(`
         INSERT OR IGNORE INTO locations (
           category_id, name, meta, rating, price_range, lat, lng,
@@ -64,11 +66,6 @@ export function seedDatabase(force = false): void {
           @description
         )
       `)
-
-      for (const cat of categories) {
-        insertCategory.run({ id: cat.id, name: cat.name, color: cat.color, icon: cat.icon })
-      }
-      console.log(`Seeded ${categories.length} categories`)
 
       for (let i = 0; i < locations.length; i++) {
         const loc = locations[i]
