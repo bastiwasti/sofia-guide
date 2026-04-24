@@ -358,13 +358,20 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         }
 
         .content-section {
-          padding: var(--spacing-lg) var(--spacing-md);
+          padding: 0;
           max-width: 600px;
           margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-lg);
         }
 
         .content-block {
-          margin-bottom: var(--spacing-xl);
+          background: var(--color-white);
+          padding: var(--spacing-md);
+          border-radius: var(--border-radius-md);
+          box-shadow: var(--shadow-sm);
+          margin: 0;
         }
 
         .content-block h2 {
@@ -385,10 +392,11 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         .fact-card,
         .shock-card,
         .trap-card {
-          background: var(--color-white);
-          padding: var(--spacing-md);
-          border-radius: var(--border-radius-md);
-          box-shadow: var(--shadow-sm);
+          background: transparent;
+          padding: 0;
+          border-radius: 0;
+          margin: 0;
+          box-shadow: none;
         }
 
         .fact-card h3,
@@ -435,11 +443,12 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         }
 
         .ordering-card {
-          background: var(--color-white);
-          padding: var(--spacing-md);
-          border-radius: var(--border-radius-md);
-          box-shadow: var(--shadow-sm);
+          background: transparent;
+          padding: 0;
+          border-radius: 0;
+          box-shadow: none;
           border-left: 4px solid var(--color-sights);
+          margin: 0;
         }
 
         .ordering-card-header {
