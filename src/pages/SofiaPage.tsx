@@ -1,6 +1,6 @@
 import { useMemo, useState, useEffect } from 'react'
 import { sofiaContent } from '../data/sofiaContent'
-import { Play, Pause, Menu, X } from 'lucide-react'
+import { Play, Pause } from 'lucide-react'
 import { useEvents, EventOccurrence } from '../hooks/useEvents'
 import { WEEKEND_DAYS } from '../lib/weekend'
 import EventCard from '../components/EventCard'
