@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Map, Home, BookOpen, MessageSquare, Info } from 'lucide-react'
+import { Map, Home, BookOpen, MessageSquare, Info, Dice5 } from 'lucide-react'
 import { UserSession } from '../hooks/useUserSessions'
 import EmojiPickerModal from './EmojiPickerModal'
 
-type Tab = 'karte' | 'hotel' | 'survival' | 'sofia' | 'notizen'
+type Tab = 'karte' | 'hotel' | 'survival' | 'sofia' | 'notizen' | 'plan'
 
 interface TabNavigationProps {
   activeTab: Tab
@@ -24,7 +24,8 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
     { id: 'hotel', label: 'Hotel', icon: Home },
     { id: 'survival', label: 'Survival', icon: BookOpen },
     { id: 'sofia', label: 'Sofia', icon: Info },
-    { id: 'notizen', label: 'Notizen', icon: MessageSquare }
+    { id: 'notizen', label: 'Notizen', icon: MessageSquare },
+    { id: 'plan', label: 'Der Plan', icon: Dice5 }
   ]
 
   return (
@@ -91,9 +92,10 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
 
         .tab-button {
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
           justify-content: center;
-          gap: 2px;
+          align-items: center;
+          gap: 4px;
           background: transparent;
           color: var(--color-gray-medium);
           padding: 0 var(--spacing-sm);
@@ -103,8 +105,17 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
           height: 100%;
         }
 
+        .tab-label {
+          font-size: 11px;
+          font-weight: 500;
+        }
+
         .tab-button.active {
           color: var(--color-craft);
+          font-weight: 600;
+        }
+
+        .tab-button.active .tab-label {
           font-weight: 600;
         }
 
