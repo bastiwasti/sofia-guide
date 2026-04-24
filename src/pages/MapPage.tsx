@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { ArrowUp, ArrowDown } from 'lucide-react'
 import { useLocations, Location } from '../hooks/useLocations'
-import { useCategories, Category } from '../hooks/useCategories'
+import { useCategories } from '../hooks/useCategories'
 import { UserSession } from '../hooks/useUserSessions'
 import { useUserLocations } from '../hooks/useUserLocations'
 import MapComponent from '../components/Map'
@@ -346,7 +346,6 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
           onClose={handleLocationPanelClose}
           isClosing={isPanelClosing}
           showHeader={showPanelHeader}
-          onHideHeader={() => setShowPanelHeader(false)}
         />
       )}
 

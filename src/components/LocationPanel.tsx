@@ -12,7 +12,6 @@ interface LocationPanelProps {
   onClose: () => void
   isClosing?: boolean
   showHeader?: boolean
-  onHideHeader?: () => void
 }
 
 const HOTEL_COORDS = { lat: 42.6953, lng: 23.3219 }
@@ -24,8 +23,7 @@ export default function LocationPanel({
   onLocationClick,
   onClose,
   isClosing = false,
-  showHeader = true,
-  onHideHeader
+  showHeader = true
 }: LocationPanelProps) {
   const groupedLocations = useMemo(() => {
     const groups: Record<string, { category: Category; locations: Location[] }> = {}

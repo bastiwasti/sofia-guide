@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState } from 'react'
 import { sofiaContent } from '../data/sofiaContent'
 import { Play, Pause } from 'lucide-react'
 import { useEvents, EventOccurrence } from '../hooks/useEvents'
@@ -13,7 +13,6 @@ interface SofiaPageProps {
 export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [playingText, setPlayingText] = useState<string | null>(null)
-  const [isScrolled, setIsScrolled] = useState(false)
   const { events, loading: eventsLoading } = useEvents()
 
   const tocItems = [
@@ -23,14 +22,6 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
     { id: 'ordering', label: 'Wie bestelle ich' },
     { id: 'tourist-traps', label: 'Touristenfallen' }
   ]
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   const eventsByDay = useMemo(() => {
     const byDay: Record<string, EventOccurrence[]> = {}
