@@ -6,6 +6,7 @@ export interface UserSession {
   session_id: string
   emoji: string
   recovery_code: string
+  role: 'user' | 'admin'
   created_at: string
   last_seen: string
 }
@@ -17,6 +18,16 @@ export function useUserSessions() {
 
   useEffect(() => {
     fetchSessions()
+  }, [])
+
+  useEffect(() => {
+    const handleEmojiChange = () => {
+      console.log('Emoji changed, refetching user sessions...')
+      fetchSessions()
+    }
+
+    window.addEventListener('emojiChanged', handleEmojiChange)
+    return () => window.removeEventListener('emojiChanged', handleEmojiChange)
   }, [])
 
   async function fetchSessions() {
