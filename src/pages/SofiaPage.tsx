@@ -1,10 +1,32 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { sofiaContent } from '../data/sofiaContent'
 import { Play, Pause } from 'lucide-react'
+import { useEvents, EventOccurrence } from '../hooks/useEvents'
+import { WEEKEND_DAYS } from '../lib/weekend'
+import EventCard from '../components/EventCard'
+import { MapFocusRequest } from './MapPage'
 
-export default function SofiaPage() {
+interface SofiaPageProps {
+  onFocusOnMap?: (req: MapFocusRequest) => void
+}
+
+export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [playingText, setPlayingText] = useState<string | null>(null)
+  const { events, loading: eventsLoading } = useEvents()
+
+  const eventsByDay = useMemo(() => {
+    const byDay: Record<string, EventOccurrence[]> = {}
+    for (const day of WEEKEND_DAYS) byDay[day.date] = []
+    for (const evt of events) {
+      if (byDay[evt.occurrence_date]) byDay[evt.occurrence_date].push(evt)
+    }
+    return byDay
+  }, [events])
+
+  function handleVenueTap(locationId: number) {
+    onFocusOnMap?.({ locationId })
+  }
 
   const speakText = (text: string) => {
     if (!window.speechSynthesis) {
@@ -46,8 +68,45 @@ export default function SofiaPage() {
     <div className="sofia-page">
       <div className="hero-section">
         <h1>Sofia</h1>
-        <p className="subtitle">Fun Facts & Kulturschocks</p>
+        <p className="subtitle">Fun Facts & Kulturschocks - dieses Wochenende</p>
       </div>
+
+      <section className="weekend-section">
+        <div className="weekend-header">
+          <h2>Dieses Wochenende</h2>
+          <p className="weekend-sub">15.–17. Mai 2026 in Sofia</p>
+        </div>
+
+        {eventsLoading ? (
+          <p className="weekend-empty">Lade Events…</p>
+        ) : events.length === 0 ? (
+          <p className="weekend-empty">Noch keine Events eingetragen.</p>
+        ) : (
+          <div className="weekend-days">
+            {WEEKEND_DAYS.map(day => {
+              const dayEvents = eventsByDay[day.date]
+              return (
+                <div key={day.date} className="day-block">
+                  <h3>{day.short}</h3>
+                  {dayEvents.length === 0 ? (
+                    <p className="day-empty">Nichts eingetragen.</p>
+                  ) : (
+                    <div className="day-events">
+                      {dayEvents.map(evt => (
+                        <EventCard
+                          key={`${evt.id}-${evt.occurrence_date}`}
+                          event={evt}
+                          onVenueTap={handleVenueTap}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </section>
 
       <div className="content-section">
         <div className="content-block">
@@ -114,6 +173,68 @@ export default function SofiaPage() {
         .sofia-page {
           min-height: 100%;
           background: var(--color-cream);
+        }
+
+        .weekend-section {
+          padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .weekend-header {
+          margin-bottom: var(--spacing-md);
+        }
+
+        .weekend-section h2 {
+          font-size: 22px;
+          margin: 0 0 4px 0;
+          color: var(--color-text);
+          border-bottom: 2px solid #6A4C93;
+          padding-bottom: var(--spacing-sm);
+        }
+
+        .weekend-sub {
+          font-size: 13px;
+          color: var(--color-gray-medium);
+          margin: 6px 0 0 0;
+        }
+
+        .weekend-empty {
+          font-size: 14px;
+          color: var(--color-gray-medium);
+          background: var(--color-white);
+          padding: var(--spacing-md);
+          border-radius: var(--border-radius-md);
+          box-shadow: var(--shadow-sm);
+          text-align: center;
+        }
+
+        .weekend-days {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-lg);
+        }
+
+        .day-block h3 {
+          font-size: 15px;
+          margin: 0 0 var(--spacing-sm) 0;
+          color: var(--color-gray-dark);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          font-weight: 700;
+        }
+
+        .day-empty {
+          font-size: 12px;
+          color: var(--color-gray-medium);
+          margin: 0;
+          font-style: italic;
+        }
+
+        .day-events {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-sm);
         }
 
         .hero-section {
