@@ -513,3 +513,96 @@ input::placeholder, textarea::placeholder {
   font-size: 12px;
   color: var(--color-gray-medium);
 }
+
+.floating-dock {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: var(--spacing-sm);
+  border-radius: 20px;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.floating-dock.menu-collapsed {
+  width: 52px;
+  left: 8px;
+  transform: none;
+  justify-content: flex-start;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.floating-dock.menu-collapsed .dock-button:not(.dock-toggle) {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  position: absolute;
+}
+
+.dock-toggle {
+  background: var(--color-craft);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dock-toggle:hover {
+  transform: scale(1.05);
+}
+
+.dock-toggle:active {
+  transform: scale(0.95);
+}
+
+.dock-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: transparent;
+  color: var(--color-text);
+  border-radius: var(--border-radius-md);
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 52px;
+}
+
+.dock-button:hover {
+  background: var(--color-gray-light);
+}
+
+.dock-button:active {
+  transform: scale(0.95);
+}
+
+.dock-button.active {
+  background: var(--color-craft);
+  color: white;
+}
+
+.dock-label {
+  white-space: nowrap;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}

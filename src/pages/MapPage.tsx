@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
+import { ArrowUp, ArrowDown } from 'lucide-react'
 import { useLocations, Location } from '../hooks/useLocations'
-import { useCategories } from '../hooks/useCategories'
+import { useCategories, Category } from '../hooks/useCategories'
 import { UserSession } from '../hooks/useUserSessions'
 import { useUserLocations } from '../hooks/useUserLocations'
 import MapComponent from '../components/Map'
@@ -9,6 +10,7 @@ import BottomSheet from '../components/BottomSheet'
 import LocationForm from '../components/LocationForm'
 import CategoryForm from '../components/CategoryForm'
 import FloatingDock from '../components/FloatingDock'
+import LocationPanel from '../components/LocationPanel'
 
 export interface MapFocusRequest {
   locationId?: number | null
@@ -35,6 +37,13 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
   const [newLocationCoords, setNewLocationCoords] = useState<{ lat: number; lng: number } | undefined>()
   const [hotelFlyTrigger, setHotelFlyTrigger] = useState(0)
   const [flyTo, setFlyTo] = useState<{ lat: number; lng: number; token: number } | null>(null)
+  const [showLocationPanel, setShowLocationPanel] = useState(false)
+  const [isPanelClosing, setIsPanelClosing] = useState(false)
+  const [showPanelHeader, setShowPanelHeader] = useState(true)
+  const [isHeaderMinimized, setIsHeaderMinimized] = useState(() => {
+    const saved = localStorage.getItem('sofia-map-header-minimized')
+    return saved === 'true'
+  })
 
   useEffect(() => {
     if (!focusRequest) return
@@ -68,6 +77,20 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
     session?.emoji || null
   )
 
+  useEffect(() => {
+    localStorage.setItem('sofia-map-header-minimized', String(isHeaderMinimized))
+  }, [isHeaderMinimized])
+
+  useEffect(() => {
+    if (selectedCategories.length > 0 && !showLocationPanel) {
+      setShowLocationPanel(true)
+      setIsPanelClosing(false)
+      setShowPanelHeader(true)
+    } else if (selectedCategories.length === 0 && showLocationPanel) {
+      handleLocationPanelClose()
+    }
+  }, [selectedCategories.length, showLocationPanel])
+
   const filteredLocations = useMemo(() => {
     if (selectedCategories.length === 0) return locations
     return locations.filter(loc =>
@@ -85,6 +108,21 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
 
   function toggleGpsMode() {
     toggleLocationSharing()
+  }
+
+  function handleLocationPanelClick(location: Location) {
+    setFlyTo({ lat: location.lat, lng: location.lng, token: Date.now() })
+    setSelectedLocation(location)
+    setShowPanelHeader(false)
+  }
+
+  function handleLocationPanelClose() {
+    if (isPanelClosing) return
+    setIsPanelClosing(true)
+    setTimeout(() => {
+      setShowLocationPanel(false)
+      setIsPanelClosing(false)
+    }, 300)
   }
 
   async function handleCreateLocation(location: any) {
@@ -204,7 +242,10 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
 
    return (
     <div className="map-page">
-      <div className="hero-section">
+      <div className={`hero-section ${isHeaderMinimized ? 'minimized' : ''}`}>
+        <button className="header-toggle" onClick={() => setIsHeaderMinimized(!isHeaderMinimized)} aria-label="Header ausblenden">
+          {isHeaderMinimized ? <ArrowDown size={16} /> : <ArrowUp size={16} />}
+        </button>
         <h1>Karte</h1>
         <p className="subtitle">Entdecke Sofias Locations ({filteredLocations.length} Locations)</p>
       </div>
@@ -278,6 +319,19 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
         />
       )}
 
+      {showLocationPanel && (
+        <LocationPanel
+          selectedCategories={selectedCategories}
+          locations={locations}
+          categories={categories}
+          onLocationClick={handleLocationPanelClick}
+          onClose={handleLocationPanelClose}
+          isClosing={isPanelClosing}
+          showHeader={showPanelHeader}
+          onHideHeader={() => setShowPanelHeader(false)}
+        />
+      )}
+
       <style>{`
         .map-page {
           display: flex;
@@ -290,18 +344,58 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
           color: white;
           padding: var(--spacing-xl) var(--spacing-md);
           text-align: center;
+          position: relative;
+          transition: all 0.3s ease;
+          overflow: hidden;
         }
 
-        .hero-section h1 {
-          font-size: 32px;
-          margin-bottom: var(--spacing-xs);
+        .header-toggle {
+          position: absolute;
+          bottom: 8px;
+          left: 8px;
+          background: rgba(255, 255, 255, 0.2);
           color: white;
+          border: none;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
         }
 
-        .subtitle {
+        .header-toggle:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+
+        .header-toggle:active {
+          transform: scale(0.95);
+        }
+
+        .hero-section.minimized {
+          padding: var(--spacing-sm) var(--spacing-md);
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .hero-section.minimized h1 {
           font-size: 16px;
-          opacity: 0.95;
           margin: 0;
+        }
+
+        .hero-section.minimized .subtitle {
+          display: none;
+        }
+
+        .hero-section.minimized .header-toggle {
+          bottom: 4px;
+          left: 4px;
+          width: 28px;
+          height: 28px;
         }
 
         .edit-mode-bar {
