@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { sofiaContent } from '../data/sofiaContent'
-import { Play, Pause } from 'lucide-react'
+import { Play, Pause, Menu, X } from 'lucide-react'
 import { useEvents, EventOccurrence } from '../hooks/useEvents'
 import { WEEKEND_DAYS } from '../lib/weekend'
 import EventCard from '../components/EventCard'
@@ -13,7 +13,23 @@ interface SofiaPageProps {
 export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
   const [isPlaying, setIsPlaying] = useState(false)
   const [playingText, setPlayingText] = useState<string | null>(null)
+  const [isScrolled, setIsScrolled] = useState(false)
   const { events, loading: eventsLoading } = useEvents()
+
+  const tocItems = [
+    { id: 'fun-facts', label: 'Fun Facts' },
+    { id: 'culture-shocks', label: 'Kulturschocks' },
+    { id: 'ordering', label: 'Wie bestelle ich' },
+    { id: 'tourist-traps', label: 'Touristenfallen' }
+  ]
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 200)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const eventsByDay = useMemo(() => {
     const byDay: Record<string, EventOccurrence[]> = {}
@@ -71,6 +87,35 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         <p className="subtitle">Fun Facts & Kulturschocks - dieses Wochenende</p>
       </div>
 
+      {isScrolled && (
+        <nav className="sticky-nav">
+          <div className="nav-title">Sofia</div>
+          <div className="nav-items">
+            {tocItems.map(item => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className="nav-item"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const element = document.getElementById(item.id)
+                  if (element) {
+                    const offset = 60
+                    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+                    window.scrollTo({
+                      top: elementPosition - offset,
+                      behavior: 'smooth'
+                    })
+                  }
+                }}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+      )}
+
       <section className="weekend-section">
         <div className="weekend-header">
           <h2>Dieses Wochenende</h2>
@@ -109,7 +154,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
       </section>
 
       <div className="content-section">
-        <div className="content-block">
+        <div id="fun-facts" className="content-block">
           <h2>🎉 Fun Facts</h2>
           <div className="facts-list">
             {sofiaContent.funFacts.map((fact, index) => (
@@ -121,7 +166,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
           </div>
         </div>
 
-        <div className="content-block">
+        <div id="culture-shocks" className="content-block">
           <h2>🤯 Kulturschocks</h2>
           <div className="shocks-list">
             {sofiaContent.cultureShocks.map((shock, index) => (
@@ -133,7 +178,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
           </div>
         </div>
 
-        <div className="content-block">
+        <div id="ordering" className="content-block">
           <h2>🍺 Wie bestelle ich wie ein Einheimischer</h2>
           <div className="ordering-guide">
             {sofiaContent.orderingGuide.tips.map((tip, index) => (
@@ -155,7 +200,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
           </div>
         </div>
 
-        <div className="content-block">
+        <div id="tourist-traps" className="content-block">
           <h2>⚠️ Touristenfallen</h2>
           <div className="traps-list">
             {sofiaContent.touristTraps.map((trap, index) => (
@@ -252,6 +297,67 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
 
         .subtitle {
           font-size: 16px;
+          opacity: 0.95;
+          margin: 0;
+        }
+
+        .sticky-nav {
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          background: var(--color-white);
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          padding: var(--spacing-sm) var(--spacing-md);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--spacing-md);
+        }
+
+        .nav-title {
+          font-family: var(--font-heading);
+          font-size: 18px;
+          font-weight: 700;
+          color: var(--color-sights);
+          flex-shrink: 0;
+        }
+
+        .nav-items {
+          display: flex;
+          gap: var(--spacing-sm);
+          overflow-x: auto;
+          flex: 1;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-items::-webkit-scrollbar {
+          display: none;
+        }
+
+        .nav-items {
+          scrollbar-width: none;
+        }
+
+        .nav-item {
+          font-family: var(--font-body);
+          font-size: 13px;
+          color: var(--color-text);
+          text-decoration: none;
+          white-space: nowrap;
+          padding: 4px 8px;
+          border-radius: var(--border-radius-sm);
+          transition: all 0.2s ease;
+          flex-shrink: 0;
+        }
+
+        .nav-item:hover {
+          background: var(--color-sights);
+          color: white;
+        }
+
+        .nav-item:active {
+          transform: scale(0.95);
+        }
           opacity: 0.95;
           margin: 0;
         }
