@@ -90,6 +90,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
     <div className="sofia-page">
       <div className="hero-section">
         <h1>Sofia</h1>
+        <p className="subtitle">Es wächst, aber es altert nicht</p>
       </div>
 
       <nav className="sticky-nav">
@@ -103,12 +104,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
                 e.preventDefault()
                 const element = document.getElementById(item.id)
                 if (element) {
-                  const offset = 80
-                  const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-                  window.scrollTo({
-                    top: elementPosition - offset,
-                    behavior: 'smooth'
-                  })
+                  element.scrollIntoView({ behavior: 'smooth' })
                 }
               }}
             >
@@ -353,18 +349,14 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         .nav-item:active {
           transform: scale(0.95);
         }
-          opacity: 0.95;
-          margin: 0;
-        }
 
         .content-section {
-          padding: var(--spacing-lg) var(--spacing-md) !important;
-          max-width: 600px !important;
-          margin: 0 auto !important;
-          display: flex !important;
-          flex-direction: column !important;
-          gap: var(--spacing-xl) !important;
-          background: #00ff00 !important;
+          padding: var(--spacing-lg) var(--spacing-md);
+          max-width: 600px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-xl);
         }
 
         .content-block {
@@ -502,6 +494,14 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
           color: var(--color-craft);
           font-style: italic;
           margin: 0;
+        }
+
+        #weekend,
+        #fun-facts,
+        #culture-shocks,
+        #ordering,
+        #tourist-traps {
+          scroll-margin-top: 60px;
         }
       `}</style>
     </div>

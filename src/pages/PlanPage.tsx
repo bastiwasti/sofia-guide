@@ -181,34 +181,55 @@ export default function PlanPage({ sessions }: PlanPageProps) {
   if (sessions.length === 0) {
     return (
       <div className="plan-page">
-        <div className="plan-container">
-          <h1 className="plan-title">Der Plan 🎲</h1>
-          <div className="plan-empty">
-            <User size={64} />
-            <p>Noch keine Emojis erstellt!</p>
-            <p>Bitte zuerst rechts unten im Profil ein Emoji wählen.</p>
+        <div className="hero-section">
+          <h1>Der Plan 🎲</h1>
+          <p className="subtitle">Wer bestimmt die nächste Location?</p>
+        </div>
+
+        <div className="content-section">
+          <div className="plan-container">
+            <div className="plan-empty">
+              <User size={64} />
+              <p>Noch keine Emojis erstellt!</p>
+              <p>Bitte zuerst rechts unten im Profil ein Emoji wählen.</p>
+            </div>
           </div>
         </div>
 
         <style>{`
           .plan-page {
-            padding: var(--spacing-md);
-            padding-bottom: 120px;
-            min-height: 100vh;
+            min-height: 100%;
             background: var(--color-cream);
+          }
+
+          .hero-section {
+            background: linear-gradient(135deg, var(--color-plan) 0%, #00796B 100%);
+            color: white;
+            padding: var(--spacing-xl) var(--spacing-md);
+            text-align: center;
+          }
+
+          .hero-section h1 {
+            font-size: 32px;
+            margin-bottom: var(--spacing-xs);
+            color: white;
+          }
+
+          .subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+            margin: 0;
+          }
+
+          .content-section {
+            padding: var(--spacing-lg) var(--spacing-md) 100px var(--spacing-md);
+            max-width: 600px;
+            margin: 0 auto;
           }
 
           .plan-container {
             max-width: 600px;
             margin: 0 auto;
-          }
-
-          .plan-title {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--color-text);
-            margin-bottom: var(--spacing-lg);
-            text-align: center;
           }
 
           .plan-empty {
@@ -230,10 +251,14 @@ export default function PlanPage({ sessions }: PlanPageProps) {
 
   return (
     <div className="plan-page">
-      <div className="plan-container">
-        <h1 className="plan-title">Der Plan 🎲</h1>
-        
-        <div className="plan-rules">
+      <div className="hero-section">
+        <h1>Der Plan 🎲</h1>
+        <p className="subtitle">Wer bestimmt die nächste Location?</p>
+      </div>
+
+      <div className="content-section">
+        <div className="plan-container">
+          <div className="plan-rules">
           <div className="rules-header" onClick={toggleRules}>
             <h2>Die Spielregeln 📋</h2>
             <span className="rules-toggle">{rulesCollapsed ? '▼' : '▲'}</span>
@@ -327,26 +352,42 @@ export default function PlanPage({ sessions }: PlanPageProps) {
           </div>
         )}
       </div>
+    </div>
 
       <style>{`
         .plan-page {
-          padding: var(--spacing-md);
-          padding-bottom: 120px;
-          min-height: 100vh;
+          min-height: 100%;
           background: var(--color-cream);
+        }
+
+        .hero-section {
+          background: linear-gradient(135deg, var(--color-plan) 0%, #00796B 100%);
+          color: white;
+          padding: var(--spacing-xl) var(--spacing-md);
+          text-align: center;
+        }
+
+        .hero-section h1 {
+          font-size: 32px;
+          margin-bottom: var(--spacing-xs);
+          color: white;
+        }
+
+        .subtitle {
+          font-size: 16px;
+          opacity: 0.95;
+          margin: 0;
+        }
+
+        .content-section {
+          padding: var(--spacing-lg) var(--spacing-md) 100px var(--spacing-md);
+          max-width: 600px;
+          margin: 0 auto;
         }
 
         .plan-container {
           max-width: 600px;
           margin: 0 auto;
-        }
-
-        .plan-title {
-          font-family: var(--font-heading);
-          font-size: 2rem;
-          color: var(--color-text);
-          margin-bottom: var(--spacing-lg);
-          text-align: center;
         }
 
         .plan-rules {
@@ -420,7 +461,7 @@ export default function PlanPage({ sessions }: PlanPageProps) {
           gap: var(--spacing-sm);
           width: 100%;
           padding: var(--spacing-xl);
-          background: var(--color-craft);
+          background: var(--color-plan);
           color: white;
           border: none;
           border-radius: var(--border-radius-lg);
@@ -429,7 +470,7 @@ export default function PlanPage({ sessions }: PlanPageProps) {
           font-size: 1.3rem;
           font-weight: 600;
           transition: all 0.2s ease;
-          box-shadow: 0 4px 8px rgba(24, 95, 165, 0.3);
+          box-shadow: 0 4px 8px rgba(0, 150, 136, 0.3);
         }
 
         .plan-big-button:disabled {
@@ -441,7 +482,7 @@ export default function PlanPage({ sessions }: PlanPageProps) {
 
         .plan-big-button:active:not(:disabled) {
           transform: scale(0.98);
-          box-shadow: 0 2px 4px rgba(24, 95, 165, 0.2);
+          box-shadow: 0 2px 4px rgba(0, 150, 136, 0.2);
         }
 
         .plan-current-player {
@@ -528,7 +569,7 @@ export default function PlanPage({ sessions }: PlanPageProps) {
         }
 
         .plan-next-player {
-          background: rgba(24, 95, 165, 0.1);
+          background: rgba(0, 150, 136, 0.1);
           padding: var(--spacing-md);
           border-radius: var(--border-radius-md);
           margin-bottom: var(--spacing-lg);
@@ -578,13 +619,13 @@ export default function PlanPage({ sessions }: PlanPageProps) {
         }
 
         .plan-player-card.current {
-          border: 3px solid var(--color-craft);
-          box-shadow: 0 4px 12px rgba(24, 95, 165, 0.3);
+          border: 3px solid var(--color-plan);
+          box-shadow: 0 4px 12px rgba(0, 150, 136, 0.3);
         }
 
         .plan-player-card.admin.current {
-          border: 3px solid var(--color-craft);
-          box-shadow: 0 4px 12px rgba(24, 95, 165, 0.3);
+          border: 3px solid var(--color-plan);
+          box-shadow: 0 4px 12px rgba(0, 150, 136, 0.3);
         }
 
         .plan-player-card.done {
@@ -610,7 +651,7 @@ export default function PlanPage({ sessions }: PlanPageProps) {
           top: -8px;
           left: 50%;
           transform: translateX(-50%);
-          background: var(--color-craft);
+          background: var(--color-plan);
           color: white;
           font-family: var(--font-body);
           font-size: 0.7rem;

@@ -20,12 +20,12 @@ export default function TabNavigation({ activeTab, onTabChange, session, setSess
   }
 
   const tabs = [
-    { id: 'karte', label: 'Karte', icon: Map },
+    { id: 'plan', label: 'Der Plan', icon: Dice5 },
     { id: 'hotel', label: 'Hotel', icon: Home },
-    { id: 'survival', label: 'Survival', icon: BookOpen },
     { id: 'sofia', label: 'Sofia', icon: Info },
-    { id: 'notizen', label: 'Notizen', icon: MessageSquare },
-    { id: 'plan', label: 'Der Plan', icon: Dice5 }
+    { id: 'karte', label: 'Karte', icon: Map },
+    { id: 'survival', label: 'Survival', icon: BookOpen },
+    { id: 'notizen', label: 'Notizen', icon: MessageSquare }
   ]
 
   return (

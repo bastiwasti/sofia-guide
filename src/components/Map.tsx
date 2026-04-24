@@ -17,6 +17,7 @@ interface MapProps {
   editMode?: boolean
   onDeleteLocation?: (id: number) => void
   hotelFlyTrigger?: number
+  flyToTarget?: { lat: number; lng: number; token: number } | null
   userLocations: UserLocation[]
   currentSessionId: string | null
   showOwnMarker?: boolean
@@ -42,6 +43,27 @@ function HotelFlyController({ trigger }: { trigger: number }) {
       map.flyTo(HOTEL_COORDS, 16)
     }
   }, [trigger, map])
+  return null
+}
+
+function FlyToLocationController({ target }: { target: { lat: number; lng: number; token: number } | null | undefined }) {
+  const map = useMap()
+  const prevToken = useRef<number | null>(null)
+  const [mapReady, setMapReady] = useState(false)
+
+  useEffect(() => {
+    if (map && !mapReady) {
+      setMapReady(true)
+    }
+  }, [map, mapReady])
+
+  useEffect(() => {
+    if (!target) return
+    if (!mapReady) return
+    if (prevToken.current === target.token) return
+    prevToken.current = target.token
+    map.flyTo([target.lat, target.lng], 17)
+  }, [target, map, mapReady])
   return null
 }
 
@@ -219,7 +241,7 @@ function OtherUserMarker({ user, currentSessionId }: { user: UserLocation; curre
   )
 }
 
-export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false }: MapProps) {
+export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, flyToTarget, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false }: MapProps) {
   console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
   console.log('userLocations:', userLocations)
   console.log('currentSessionId:', currentSessionId)
@@ -255,6 +277,7 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
 
       <MapController center={HOTEL_COORDS} zoom={15} />
       <HotelFlyController trigger={hotelFlyTrigger} />
+      <FlyToLocationController target={flyToTarget} />
       <ZoomControl position="bottomright" />
 
       {showUserLocation && <UserLocationMarker isTracking={!!isTracking} userEmoji={currentUserEmoji} />}

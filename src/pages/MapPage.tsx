@@ -1,5 +1,5 @@
-import { useState, useMemo } from 'react'
-import { useLocations } from '../hooks/useLocations'
+import { useState, useMemo, useEffect } from 'react'
+import { useLocations, Location } from '../hooks/useLocations'
 import { useCategories } from '../hooks/useCategories'
 import { UserSession } from '../hooks/useUserSessions'
 import { useUserLocations } from '../hooks/useUserLocations'
@@ -10,11 +10,20 @@ import LocationForm from '../components/LocationForm'
 import CategoryForm from '../components/CategoryForm'
 import FloatingDock from '../components/FloatingDock'
 
-interface MapPageProps {
-  session: UserSession | null
+export interface MapFocusRequest {
+  locationId?: number | null
+  lat?: number | null
+  lng?: number | null
+  token?: number
 }
 
-export default function MapPage({ session }: MapPageProps) {
+interface MapPageProps {
+  session: UserSession | null
+  focusRequest?: MapFocusRequest | null
+  onFocusConsumed?: () => void
+}
+
+export default function MapPage({ session, focusRequest, onFocusConsumed }: MapPageProps) {
   const { locations, loading, createLocation, deleteLocation, refetch: refetchLocations } = useLocations()
   const { categories, createCategory, refetch: refetchCategories } = useCategories()
   const [selectedCategories, setSelectedCategories] = useState<number[]>([])
@@ -25,6 +34,34 @@ export default function MapPage({ session }: MapPageProps) {
   const [showCategoryForm, setShowCategoryForm] = useState(false)
   const [newLocationCoords, setNewLocationCoords] = useState<{ lat: number; lng: number } | undefined>()
   const [hotelFlyTrigger, setHotelFlyTrigger] = useState(0)
+  const [flyTo, setFlyTo] = useState<{ lat: number; lng: number; token: number } | null>(null)
+
+  useEffect(() => {
+    if (!focusRequest) return
+    const token = focusRequest.token ?? Date.now()
+    const match: Location | undefined = focusRequest.locationId != null
+      ? locations.find(l => l.id === focusRequest.locationId)
+      : undefined
+
+    if (match) {
+      setSelectedLocation(match)
+      setFlyTo({ lat: match.lat, lng: match.lng, token })
+      onFocusConsumed?.()
+      return
+    }
+
+    if (focusRequest.lat != null && focusRequest.lng != null) {
+      setFlyTo({ lat: focusRequest.lat, lng: focusRequest.lng, token })
+      // BottomSheet braucht das volle Location-Objekt — wenn locations noch nicht geladen sind,
+      // warten wir auf den nächsten Lauf des Effects, behalten den Request aber drin.
+      if (focusRequest.locationId != null && locations.length === 0) return
+      onFocusConsumed?.()
+      return
+    }
+
+    // Kein lat/lng: nur weiterleben wenn locations noch laden, sonst aufgeben
+    if (locations.length > 0) onFocusConsumed?.()
+  }, [focusRequest, locations, onFocusConsumed])
 
   const { userLocations, toggleGpsMode: toggleLocationSharing, gpsMode: sharedGpsMode } = useUserLocations(
     session?.session_id || null,
@@ -67,28 +104,27 @@ export default function MapPage({ session }: MapPageProps) {
 
   async function handleDeleteLocation(id: number) {
     const location = locations.find(l => l.id === id)
-    
-    let canDelete = false
+
     let password = undefined
-    
+
     if (location) {
-      if (location.session_id === null) {
-        canDelete = true
-      } else if (location.is_active_user === 0) {
-        canDelete = true
-      } else if (session?.session_id === location.session_id) {
-        canDelete = true
+      if (session && location.session_id === session.session_id) {
+        // User can delete their own locations
+      } else if (location.category_id === 6 && (location.session_id === null || location.is_active_user === 0)) {
+        password = prompt("Passwort zum Löschen eingeben (Basti's Geburtsdatum):")
+        if (password !== '24031986') {
+          alert('Falsches Passwort!')
+          return
+        }
+      } else {
+        password = prompt("Passwort zum Löschen eingeben (Basti's Geburtsdatum):")
+        if (password !== '24031986') {
+          alert('Falsches Passwort!')
+          return
+        }
       }
     }
-    
-    if (!canDelete) {
-      password = prompt("Passwort zum Löschen eingeben ( Basti's Geburtstag ):")
-      if (password !== '24031986') {
-        alert('Falsches Passwort!')
-        return
-      }
-    }
-    
+
     try {
       await deleteLocation(id, session?.session_id || null, password)
       await refetchLocations()
@@ -196,6 +232,7 @@ export default function MapPage({ session }: MapPageProps) {
           showUserLocation={sharedGpsMode !== 'off'}
           isTracking={sharedGpsMode === 'tracking'}
           hotelFlyTrigger={hotelFlyTrigger}
+          flyToTarget={flyTo}
           onMapClick={handleMapClick}
           editMode={editMode}
           onDeleteLocation={handleDeleteLocation}
