@@ -521,18 +521,18 @@ input::placeholder, textarea::placeholder {
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-xs);
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
-  padding: var(--spacing-sm);
-  border-radius: 20px;
+  padding: calc(var(--spacing-sm) * 0.7);
+  border-radius: 16px;
   box-shadow: var(--shadow-lg);
   z-index: 1000;
   transition: all 0.3s ease;
 }
 
 .floating-dock.menu-collapsed {
-  width: 52px;
+  width: 40px;
   left: 8px;
   transform: none;
   justify-content: flex-start;
@@ -553,8 +553,8 @@ input::placeholder, textarea::placeholder {
   color: white;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -575,15 +575,15 @@ input::placeholder, textarea::placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  padding: var(--spacing-sm) var(--spacing-md);
+  gap: 1px;
+  padding: calc(var(--spacing-sm) * 0.7) calc(var(--spacing-md) * 0.7);
   background: transparent;
   color: var(--color-text);
-  border-radius: var(--border-radius-md);
-  font-size: 11px;
+  border-radius: var(--border-radius-sm);
+  font-size: 10px;
   font-weight: 500;
   transition: all 0.2s ease;
-  min-width: 52px;
+  min-width: 40px;
 }
 
 .dock-button:hover {

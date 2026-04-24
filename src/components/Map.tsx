@@ -399,7 +399,16 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
         }
 
         .leaflet-bottom {
-          bottom: 85px !important;
+          bottom: 90px !important;
+        }
+
+        .leaflet-bottom.leaflet-right {
+          bottom: 90px !important;
+          right: 10px !important;
+        }
+
+        .leaflet-control-zoom {
+          margin-bottom: 0 !important;
         }
       `}</style>
     </MapContainer>

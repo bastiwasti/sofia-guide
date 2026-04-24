@@ -120,6 +120,7 @@ export default function LocationPanel({
           flex-direction: column;
           overflow: hidden;
           animation: slideInRight 0.3s ease;
+          max-height: calc(100vh - 180px);
         }
 
         .location-panel.closing {
@@ -299,8 +300,8 @@ export default function LocationPanel({
         @media (max-width: 768px) {
           .location-panel {
             position: fixed;
-            top: 80px;
-            bottom: 60px;
+            top: 60px;
+            bottom: 80px;
             right: 0;
             left: auto;
             width: 42%;

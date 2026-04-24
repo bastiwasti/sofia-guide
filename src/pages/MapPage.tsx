@@ -86,8 +86,6 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
       setShowLocationPanel(true)
       setIsPanelClosing(false)
       setShowPanelHeader(true)
-    } else if (selectedCategories.length === 0 && showLocationPanel) {
-      handleLocationPanelClose()
     }
   }, [selectedCategories.length, showLocationPanel])
 
@@ -113,12 +111,12 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
   function handleLocationPanelClick(location: Location) {
     setFlyTo({ lat: location.lat, lng: location.lng, token: Date.now() })
     setSelectedLocation(location)
-    setShowPanelHeader(false)
   }
 
   function handleLocationPanelClose() {
     if (isPanelClosing) return
     setIsPanelClosing(true)
+    setSelectedCategories([])
     setTimeout(() => {
       setShowLocationPanel(false)
       setIsPanelClosing(false)
