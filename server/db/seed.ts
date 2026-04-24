@@ -5,7 +5,7 @@ import { events, SeedEvent } from './events-seed'
 
 function ensureEventVenueExtras(db: Database.Database): void {
   const insertCat = db.prepare(
-    'INSERT OR IGNORE INTO categories (id, name, color, icon) VALUES (?, ?, ?, ?)'
+    'INSERT OR REPLACE INTO categories (id, name, color, icon) VALUES (?, ?, ?, ?)'
   )
   insertCat.run(7, 'Kultur & Bühne', '#6A4C93', 'culture')
   insertCat.run(8, 'Sport & Stadion', '#2E7D32', 'sport')
@@ -14,14 +14,11 @@ function ensureEventVenueExtras(db: Database.Database): void {
     [7, 'Sofia Opera and Ballet', 'Hauptbühne · klassische Oper, Ballett, Wagner-Festival', 42.6983, 23.3294],
     [7, 'Vidas Art Arena', 'Velodrome Serdika · Open-Air-Konzerte im Borisova-Park', 42.6817, 23.3398],
   ]
-  const exists = db.prepare('SELECT 1 FROM locations WHERE name = ?')
   const insertLoc = db.prepare(
-    'INSERT INTO locations (category_id, name, meta, rating, price_range, lat, lng) VALUES (?, ?, ?, NULL, NULL, ?, ?)'
+    'INSERT OR IGNORE INTO locations (category_id, name, meta, rating, price_range, lat, lng) VALUES (?, ?, ?, NULL, NULL, ?, ?)'
   )
   for (const [catId, name, meta, lat, lng] of venueRows) {
-    if (!exists.get(name)) {
-      insertLoc.run(catId, name, meta, lat, lng)
-    }
+    insertLoc.run(catId, name, meta, lat, lng)
   }
 }
 
@@ -35,27 +32,23 @@ export function seedDatabase(force = false): void {
 
     const needsBaseSeed = categoryCount.count === 0 || locationCount.count === 0 || force
 
-    if (!needsBaseSeed && eventCount.count > 0) {
-      console.log('Database already seeded')
-      return
+    if (force) {
+      console.log('Force re-seeding: clearing existing data...')
+      db.prepare('DELETE FROM locations').run()
+      db.prepare('DELETE FROM categories').run()
+      db.prepare('DELETE FROM events').run()
     }
 
-    if (needsBaseSeed) {
-      if (force) {
-        console.log('Force re-seeding: clearing existing data...')
-        db.prepare('DELETE FROM locations').run()
-        db.prepare('DELETE FROM categories').run()
-        db.prepare('DELETE FROM events').run()
-      }
-
+    if (needsBaseSeed || !force) {
+      console.log('Seeding categories...')
       const insertCategory = db.prepare(`
-        INSERT INTO categories (id, name, color, icon)
+        INSERT OR REPLACE INTO categories (id, name, color, icon)
         VALUES (@id, @name, @color, @icon)
       `)
 
       const insertLocation = db.prepare(`
-        INSERT INTO locations (
-          category_id, name, meta, rating, price_range, lat, lng, 
+        INSERT OR IGNORE INTO locations (
+          category_id, name, meta, rating, price_range, lat, lng,
           website_url, address, opening_hours, payment_methods, phone,
           beer_menu, cocktails_menu, food_menu, local_specialties,
           music_type, crowd_type, seating_options, pro_tips, fun_facts,
@@ -123,11 +116,16 @@ export function seedDatabase(force = false): void {
 
     ensureEventVenueExtras(db)
 
-    if (eventCount.count === 0) {
+    if (eventCount.count === 0 || force) {
+      if (force && eventCount.count > 0) {
+        console.log('Clearing events for re-seeding...')
+        db.prepare('DELETE FROM events').run()
+      }
+
       const findLocation = db.prepare('SELECT id FROM locations WHERE name = ?')
 
       const insertEvent = db.prepare(`
-        INSERT INTO events (
+        INSERT OR IGNORE INTO events (
           title, event_type, location_id,
           venue_name, venue_address, venue_lat, venue_lng,
           start_date, end_date, start_time, end_time,
