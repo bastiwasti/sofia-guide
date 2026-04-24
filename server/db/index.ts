@@ -3,6 +3,7 @@ import { readFileSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { seedDatabase } from './seed'
+import { randomUUID } from 'crypto'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -170,6 +171,29 @@ function migrateUserRoleTable(db: Database.Database): void {
   }
 }
 
+function ensureAdminAccount(db: Database.Database): void {
+  const adminEmoji = '🦧'
+
+  const existingAdmin = db.prepare('SELECT * FROM user_sessions WHERE emoji = ?').get(adminEmoji) as any
+
+  if (existingAdmin) {
+    console.log(`✅ Admin account already exists: ${adminEmoji}`)
+    return
+  }
+
+  console.log(`🦧 Creating admin account...`)
+  const adminRecoveryCode = '8688'
+  const adminSessionId = randomUUID()
+
+  const insertStmt = db.prepare(`
+    INSERT INTO user_sessions (session_id, emoji, recovery_code, role)
+    VALUES (?, ?, ?, 'admin')
+  `)
+
+  insertStmt.run(adminSessionId, adminEmoji, adminRecoveryCode)
+  console.log(`✅ Admin account created: ${adminEmoji} (recovery code: ${adminRecoveryCode})`)
+}
+
 export function initializeDatabase(): void {
   const db = getDatabase()
 
@@ -182,6 +206,15 @@ export function initializeDatabase(): void {
     migrateLocationsTable(db)
     migrateEventsTable(db)
     migrateUserRoleTable(db)
+
+    if (process.env.CLEAR_USER_SESSIONS_ON_START === 'true') {
+      console.log('🗑️  CLEAR_USER_SESSIONS_ON_START=true: deleting all user sessions...')
+      const deleteStmt = db.prepare('DELETE FROM user_sessions')
+      const result = deleteStmt.run()
+      console.log(`✅ Deleted ${result.changes} user sessions`)
+    }
+
+    ensureAdminAccount(db)
   } catch (error) {
     console.error('Error initializing database:', error)
     throw error
