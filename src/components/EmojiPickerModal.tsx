@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { X, Lock } from 'lucide-react'
+import { X, Lock, Info } from 'lucide-react'
 import { useUserSessions, UserSession } from '../hooks/useUserSessions'
 import { ALL_EMOJIS } from '../data/emojis'
 
@@ -304,6 +304,10 @@ export default function EmojiPickerModal({ existingSession, onClose, onSave }: E
                   </button>
                   <button className="logout-button" onClick={handleLogout}>
                     Smiley aufgeben
+                  </button>
+                  <button className="info-button" onClick={() => window.dispatchEvent(new CustomEvent('showWelcomeOverlay'))}>
+                    <Info size={18} />
+                    <span>Info</span>
                   </button>
                 </div>
               </div>
