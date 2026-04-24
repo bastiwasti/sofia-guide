@@ -103,7 +103,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
                 e.preventDefault()
                 const element = document.getElementById(item.id)
                 if (element) {
-                  const offset = 60
+                  const offset = 80
                   const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
                   window.scrollTo({
                     top: elementPosition - offset,
@@ -226,6 +226,7 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
           padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
           max-width: 600px;
           margin: 0 auto;
+          background: #ff0000;
         }
 
         .weekend-header {
