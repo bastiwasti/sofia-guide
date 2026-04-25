@@ -22,10 +22,6 @@ export function hasKneipenFields(location: Location): boolean {
   )
 }
 
-export function hasCraftBeerFields(location: Location): boolean {
-  return !!(location.beer_menu || location.music_type || location.crowd_type || location.pro_tips)
-}
-
 export function hasSightFields(location: Location): boolean {
   return !!(
     location.entry_fee || location.visit_duration || location.best_time_to_visit ||

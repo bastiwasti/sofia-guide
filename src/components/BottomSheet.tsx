@@ -6,7 +6,6 @@ import {
   hasBasicInfo,
   hasRestaurantFields,
   hasKneipenFields,
-  hasCraftBeerFields,
   hasSightFields,
   hasNightlifeFields
 } from './bottomSheet/CategoryHelpers'
@@ -15,7 +14,6 @@ import {
   MetaInfoRenderer,
   RestaurantRenderer,
   KneipenRenderer,
-  CraftBeerRenderer,
   SightRenderer,
   NightlifeRenderer
 } from './bottomSheet/CategoryRenderers'
@@ -116,14 +114,6 @@ export default function BottomSheet({ location, onClose, onDelete, currentSessio
               expandedSections={expandedSections}
               onToggleSection={toggleSection}
               distance={distance}
-            />
-          )}
-
-          {location.category_id === 5 && hasCraftBeerFields(location) && (
-            <CraftBeerRenderer
-              location={location}
-              expandedSections={expandedSections}
-              onToggleSection={toggleSection}
             />
           )}
 

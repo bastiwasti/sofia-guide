@@ -213,42 +213,6 @@ export function KneipenRenderer({ location, expandedSections, onToggleSection }:
   )
 }
 
-export function CraftBeerRenderer({ location, expandedSections, onToggleSection }: CategoryRendererProps) {
-  const beerMenu = parseJSON<{name: string; style?: string; price?: string; note?: string}>(location.beer_menu)
-  const seatingOptions = parseJSON<string>(location.seating_options)
-
-  return (
-    <>
-      {beerMenu.length > 0 && (
-        <Section
-          title="🍺 Beer Menu"
-          isExpanded={expandedSections.beerMenu}
-          onToggle={() => onToggleSection('beerMenu')}
-        >
-          <div className="beer-list">
-            {beerMenu.map((beer, index) => (
-              <BeerItem key={index} name={beer.name} style={beer.style} price={beer.price} note={beer.note} />
-            ))}
-          </div>
-        </Section>
-      )}
-
-      {(location.music_type || location.crowd_type || seatingOptions.length > 0 || location.pro_tips) && (
-        <Section
-          title="🎵 Vibe"
-          isExpanded={expandedSections.vibe}
-          onToggle={() => onToggleSection('vibe')}
-        >
-          {location.music_type && <InfoRow label="🎵 Musik:" value={location.music_type} />}
-          {location.crowd_type && <InfoRow label="👥 Crowd:" value={location.crowd_type} />}
-          {seatingOptions.length > 0 && <InfoRow label="🪑 Sitzplätze:" value={seatingOptions.join(', ')} />}
-          {location.pro_tips && <ProTips content={location.pro_tips} />}
-        </Section>
-      )}
-    </>
-  )
-}
-
 export function SightRenderer({ location, expandedSections, onToggleSection, distance }: CategoryRendererProps) {
   const keyFeatures = parseJSON<string>(location.key_features)
   const guidedTours = parseJSON<string>(location.guided_tours)
