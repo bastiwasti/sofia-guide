@@ -3,6 +3,7 @@ import { readFileSync } from 'fs'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { seedDatabase } from './seed'
+import { events as seedEvents } from './events-seed'
 import { randomUUID } from 'crypto'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -194,6 +195,78 @@ function ensureAdminAccount(db: Database.Database): void {
   console.log(`✅ Admin account created: ${adminEmoji} (recovery code: ${adminRecoveryCode})`)
 }
 
+function migrateEventVenueLookups(db: Database.Database): void {
+  try {
+    console.log('Checking event venue lookups...')
+
+    const findLocation = db.prepare('SELECT id, name, lat, lng, category_id FROM locations WHERE name = ?')
+    const updateEvent = db.prepare(`
+      UPDATE events
+      SET location_id = ?,
+          venue_name = COALESCE(?, venue_name),
+          venue_lat = COALESCE(?, venue_lat),
+          venue_lng = COALESCE(?, venue_lng)
+      WHERE id = ?
+    `)
+
+    const events = db.prepare('SELECT id, title, venue_name FROM events WHERE location_id IS NULL').all() as Array<{
+      id: number
+      title: string
+      venue_name: string | null
+    }>
+
+    if (events.length === 0) {
+      console.log('✅ All events already have venue lookups')
+      return
+    }
+
+    console.log(`Found ${events.length} events without venue lookup, attempting to fix...`)
+
+    let fixedCount = 0
+    for (const evt of events) {
+      const seedEvent = seedEvents.find(se => se.title === evt.title)
+
+      if (!seedEvent) {
+        console.log(`  ⚠️  No seed data found for event: "${evt.title}"`)
+        continue
+      }
+
+      const lookupName = seedEvent.venue_lookup_name ?? seedEvent.venue_name ?? null
+
+      if (!lookupName) {
+        console.log(`  ⚠️  No venue lookup name for event: "${evt.title}"`)
+        continue
+      }
+
+      const location = findLocation.get(lookupName) as { id: number; name: string; lat: number; lng: number; category_id: number } | undefined
+
+      if (!location) {
+        console.log(`  ❌ Venue not found in locations table: "${lookupName}" for event "${evt.title}"`)
+        continue
+      }
+
+      updateEvent.run(
+        location.id,
+        location.name,
+        location.lat,
+        location.lng,
+        evt.id
+      )
+
+      console.log(`  ✅ Fixed event "${evt.title}" → venue "${location.name}" (location_id: ${location.id})`)
+      fixedCount++
+    }
+
+    if (fixedCount > 0) {
+      console.log(`✅ Event venue lookup migration completed: ${fixedCount}/${events.length} events fixed`)
+    } else {
+      console.log('⚠️  Event venue lookup migration completed: no events were fixable')
+    }
+  } catch (error) {
+    console.error('❌ Error migrating event venue lookups:', error)
+  }
+}
+
 export function initializeDatabase(): void {
   const db = getDatabase()
 
@@ -206,6 +279,7 @@ export function initializeDatabase(): void {
     migrateLocationsTable(db)
     migrateEventsTable(db)
     migrateUserRoleTable(db)
+    migrateEventVenueLookups(db)
 
     ensureAdminAccount(db)
   } catch (error) {
