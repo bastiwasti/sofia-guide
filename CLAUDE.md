@@ -10,6 +10,14 @@ Mobiler Reiseführer für einen Sofia-Wochenendtrip (8 Freunde, Mai 2026). Inter
 - **Design:** Mobile-first, cream (#faf7f2), Playfair Display (Headlines), DM Sans (Body)
 - **Deploy:** Docker → ghcr.io/bastiwasti/sofia-guide → Watchtower → sofia.eventig.app
 
+**Deployment Pipeline:**
+```
+git push → GitHub Actions (build + push) → ghcr.io → Watchtower (every 5 min) → live
+```
+All migrations in `server/db/index.ts` → `initializeDatabase()` run automatically on every deployment when the container starts.
+
+**Deployment Host:** 192.168.178.160 (docker-host) with Traefik reverse proxy on `traefik-public` network
+
 ## Architecture
 ```
 src/                    ← Vite + React Frontend
@@ -42,6 +50,28 @@ tests/                  ← API + Komponenten-Tests
 Alle 43 Locations (1 Hotel, 12 Sights, 12 Restaurants, 9 Bars, 6 Craft Beer, 3 Nightlife) sind bereits extrahiert in `server/db/seed-data.ts`. Kein Zugriff auf externe Dateien nötig.
 
 Hotel Niky Koordinaten (Karten-Anker): **lat: 42.6953, lng: 23.3219**
+
+## Database Migrations & Event Venue Lookups
+
+**Critical Rule:** Any migration that depends on seed data (like event venue lookups) must run AFTER `seedDatabase()` completes.
+
+**How event venue lookups work:**
+1. Events in `server/db/events-seed.ts` have `venue_lookup_name` that matches a location's `name`
+2. During seeding, events are inserted with `INSERT OR IGNORE` - existing events aren't updated
+3. Migration `migrateEventVenueLookups()` runs after seeding to fix events with `NULL location_id`
+4. It matches events to venues by title from seed data and updates `location_id`, `venue_name`, `lat`, `lng`
+5. Migration is idempotent (only fixes events with `NULL location_id`) and runs automatically on every deployment
+
+**Venue Extras for Events:**
+Some venues (Sofia Opera and Ballet, Vidas Art Arena) are added by `ensureEventVenueExtras()` in `seed.ts` because they don't exist in the base seed-data.ts. These are needed for event venue lookups.
+
+**Why the ordering matters:**
+- Events are seeded with `location_id: NULL` initially
+- Venue extras are inserted by `ensureEventVenueExtras()`
+- Migration then matches events to these venues
+- If migration runs before seedDatabase(), venues don't exist yet → lookup fails
+
+**See:** `server/db/index.ts` → `initializeDatabase()` for the correct execution order.
 
 ## Farbschema (aus Original übernehmen)
 - Sehenswürdigkeiten: `#C2185B`
