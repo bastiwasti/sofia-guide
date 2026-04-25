@@ -5,7 +5,7 @@ import { getLocations, getLocationById, createLocation, deleteLocation } from '.
 import { getCategories, createCategory } from './routes/categories'
 import { getNotes, createNote, deleteNote } from './routes/notes'
 import { getEvents, createEvent, deleteEvent } from './routes/events'
-import { getUserSessions, createUserSession, reclaimUserSession, updateUserSessionEmoji, deleteUserSession, validateSession } from './routes/user-sessions'
+import { getUserSessions, createUserSession, reclaimUserSession, updateUserSessionEmoji, deleteUserSession, validateSession, resetUserSessions } from './routes/user-sessions'
 import { initializeDatabase } from './db'
 import { registerSocketHandlers } from './socket'
 import { join, dirname } from 'path'
@@ -57,6 +57,8 @@ app.put('/api/user-sessions/reclaim', reclaimUserSession)
 app.patch('/api/user-sessions/:sessionId/emoji', updateUserSessionEmoji)
 app.delete('/api/user-sessions/:sessionId', deleteUserSession)
 app.get('/api/user-sessions/:sessionId/validate', validateSession)
+
+app.post('/api/admin/reset-sessions', resetUserSessions)
 
 if (isDev) {
   app.get('/api/health', (_req, res) => {

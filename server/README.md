@@ -1,28 +1,5 @@
 # Server Documentation
 
-## Environment Variables
-
-### CLEAR_USER_SESSIONS_ON_START
-- **Default:** `false`
-- **Values:** `true` or `false`
-- **Purpose:** Controls whether all user sessions are deleted on server startup
-
-**When to use:**
-- Set to `true` during deployments when you want to reset all user sessions
-- After deployment, set back to `false` to preserve user sessions
-- Useful for ensuring only the admin account exists after fresh deployment
-
-**Effect when `true`:**
-- Deletes ALL entries from `user_sessions` table
-- Creates admin account with:
-  - Emoji: 🦧
-  - Recovery Code: 8688
-  - Role: admin
-
-**Effect when `false` (default):**
-- Preserves all existing user sessions
-- Only creates admin account if it doesn't exist yet
-
 ## Database
 
 ### Schema
@@ -52,7 +29,61 @@ The admin account is automatically created with:
 This account can:
 - Delete locations
 - Delete events
+- Reset all user sessions
 - Administer other features (as implemented)
+
+## Admin Operations
+
+### Reset All User Sessions
+
+Reset all user sessions and recreate the admin account with a new session ID.
+
+**Endpoint:** `POST /api/admin/reset-sessions`
+
+**Headers:**
+```
+Content-Type: application/json
+X-Admin-Recovery-Code: 8688
+```
+
+**Example:**
+```bash
+curl -X POST http://localhost:3002/api/admin/reset-sessions \
+  -H "Content-Type: application/json" \
+  -H "X-Admin-Recovery-Code: 8688"
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "deleted": 5,
+  "admin_session": {
+    "session_id": "uuid-v4-here",
+    "emoji": "🦧",
+    "role": "admin",
+    "created_at": "2026-04-24T21:30:00.000Z"
+  },
+  "message": "Deleted 5 sessions and recreated admin account"
+}
+```
+
+**Error Responses:**
+- `400` - Missing X-Admin-Recovery-Code header
+- `401` - Invalid admin recovery code
+- `500` - Server error
+
+**Production Example:**
+```bash
+curl -X POST https://sofia.eventig.app/api/admin/reset-sessions \
+  -H "Content-Type: application/json" \
+  -H "X-Admin-Recovery-Code: 8688"
+```
+
+**Use Cases:**
+- Clear all user sessions after development/testing
+- Start fresh for a new event/trip
+- Reset corrupted session data
 
 ## Scripts
 
@@ -100,6 +131,9 @@ tsx server/db/seed.ts true
 - `DELETE /api/user-sessions/:sessionId` - Delete user session
 - `GET /api/user-sessions/:sessionId/validate` - Validate session
 
+### Admin
+- `POST /api/admin/reset-sessions` - Reset all user sessions (requires admin recovery code in header)
+
 ### Health (dev only)
 - `GET /api/health` - Health check endpoint
 
@@ -119,7 +153,6 @@ docker build -t sofia-guide .
 ### Production Run
 ```bash
 # Set environment variables for deployment
-export CLEAR_USER_SESSIONS_ON_START=true  # Only for fresh deployment
 export NODE_ENV=production
 export PORT=3002
 
@@ -127,29 +160,20 @@ export PORT=3002
 docker run -p 3002:3002 -v sofia-guide-data:/app/data sofia-guide
 ```
 
-### Important: Reset User Sessions on Deployment
-When deploying a fresh version and you want to reset all user sessions:
+### Reset User Sessions on Deployment
+When deploying a fresh version and you want to reset all user sessions, use the admin API:
 
-1. Set `CLEAR_USER_SESSIONS_ON_START=true` in your docker-compose.yml or environment
-2. Deploy the new image
-3. After successful deployment, remove the env var or set to `false`
-4. Deploy again (or restart container) to preserve sessions going forward
-
-**Example docker-compose.yml:**
-```yaml
-services:
-  sofia-guide:
-    image: ghcr.io/bastiwasti/sofia-guide:latest
-    environment:
-      - NODE_ENV=production
-      - PORT=3002
-      - CLEAR_USER_SESSIONS_ON_START=true  # REMOVE after first run!
-    volumes:
-      - sofia-guide-data:/app/data
-    labels:
-      - "traefik.enable=true"
-      # ... traefik labels
+```bash
+curl -X POST https://sofia.eventig.app/api/admin/reset-sessions \
+  -H "Content-Type: application/json" \
+  -H "X-Admin-Recovery-Code: 8688"
 ```
+
+This is the recommended approach as it:
+- Doesn't require manual access to the Docker host
+- Works immediately without container restart
+- Can be triggered at any time after deployment
+- Uses admin authentication for security
 
 ## Troubleshooting
 
@@ -159,12 +183,16 @@ Check server logs for:
 - "Admin account created: 🦧 (recovery code: 8688)" - created successfully
 - Check for any SQL errors
 
-### Old user sessions persisting after deployment
-Ensure:
-1. `CLEAR_USER_SESSIONS_ON_START=true` is set during deployment
-2. Container is actually restarted with the new environment
-3. Check Watchtower logs to confirm image pull and restart
-4. Verify database file location (/app/data/sofia-guide.db) is correct
+### Reset sessions endpoint returns 401
+- Verify the `X-Admin-Recovery-Code` header is set to `8688`
+- Check for typos in the header name (case-sensitive: `X-Admin-Recovery-Code`)
+- Ensure the header is being sent correctly by your curl command
+
+### Old user sessions persisting after reset
+- Verify the reset endpoint returned `success: true`
+- Check the `deleted` count in the response
+- Ensure you're using the correct admin recovery code
+- Check server logs for "Admin reset" message
 
 ### Database locked errors
 - SQLite uses WAL mode for better concurrency

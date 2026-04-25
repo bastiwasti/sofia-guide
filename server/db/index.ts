@@ -207,13 +207,6 @@ export function initializeDatabase(): void {
     migrateEventsTable(db)
     migrateUserRoleTable(db)
 
-    if (process.env.CLEAR_USER_SESSIONS_ON_START === 'true') {
-      console.log('🗑️  CLEAR_USER_SESSIONS_ON_START=true: deleting all user sessions...')
-      const deleteStmt = db.prepare('DELETE FROM user_sessions')
-      const result = deleteStmt.run()
-      console.log(`✅ Deleted ${result.changes} user sessions`)
-    }
-
     ensureAdminAccount(db)
   } catch (error) {
     console.error('Error initializing database:', error)

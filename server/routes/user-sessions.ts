@@ -12,6 +12,60 @@ interface UserSession {
   last_seen: string
 }
 
+export async function resetUserSessions(req: Request, res: Response) {
+  try {
+    const recoveryCode = req.headers['x-admin-recovery-code'] as string
+
+    if (!recoveryCode) {
+      return res.status(400).json({ error: 'X-Admin-Recovery-Code header is required' })
+    }
+
+    if (recoveryCode !== '8688') {
+      return res.status(401).json({ error: 'Invalid admin recovery code' })
+    }
+
+    const db = getDatabase()
+
+    const deleteStmt = db.prepare('DELETE FROM user_sessions')
+    const result = deleteStmt.run()
+
+    const adminSessionId = randomUUID()
+    const adminEmoji = '🦧'
+    const adminRecoveryCode = '8688'
+    const now = new Date().toISOString()
+
+    const insertStmt = db.prepare(`
+      INSERT INTO user_sessions (session_id, emoji, recovery_code, role, created_at, last_seen)
+      VALUES (?, ?, ?, ?, ?, ?)
+    `)
+
+    insertStmt.run(adminSessionId, adminEmoji, adminRecoveryCode, 'admin', now, now)
+
+    const adminSession = db
+      .prepare('SELECT session_id, emoji, role, created_at, last_seen FROM user_sessions WHERE emoji = ?')
+      .get(adminEmoji) as UserSession
+
+    db.close()
+
+    console.log(`🗑️  Admin reset: deleted ${result.changes} sessions and recreated admin account`)
+
+    res.json({
+      success: true,
+      deleted: result.changes,
+      admin_session: {
+        session_id: adminSession.session_id,
+        emoji: adminSession.emoji,
+        role: adminSession.role,
+        created_at: adminSession.created_at
+      },
+      message: `Deleted ${result.changes} sessions and recreated admin account`
+    })
+  } catch (error) {
+    console.error('Error resetting user sessions:', error)
+    res.status(500).json({ error: 'Failed to reset user sessions' })
+  }
+}
+
 export async function getUserSessions(_req: Request, res: Response) {
   try {
     const db = getDatabase()
