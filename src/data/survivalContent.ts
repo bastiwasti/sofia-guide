@@ -6,7 +6,8 @@ export const survivalContent = {
     linkText: '🎴 Schafkopf Tracker öffnen'
   },
   phrases: [
-    { bulgarian: 'Здравейте', phonetic: 'Zdraveyte', german: 'Hallo / Guten Tag' },
+    { bulgarian: 'Добър ден', phonetic: 'Dobar den', german: 'Guten Tag' },
+    { bulgarian: 'Здравейте', phonetic: 'Zdraveyte', german: 'Hallo' },
     { bulgarian: 'Добре дошли', phonetic: 'Dobre doshli', german: 'Willkommen' },
     { bulgarian: 'Благодаря', phonetic: 'Blagodarya', german: 'Danke' },
     { bulgarian: 'Моля', phonetic: 'Molya', german: 'Bitte' },

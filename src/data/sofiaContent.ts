@@ -1,4 +1,75 @@
 export const sofiaContent = {
+  cityFacts: [
+    {
+      title: 'Einwohnerzahl',
+      description: '~1.3 Mio. in der Stadt, ~1.5 Mio. im urbanen Bereich, ~1.6 Mio. in der Metropolregion. Das ist mehr als München, aber weniger als Berlin – perfekt für unser Wochenende!'
+    },
+    {
+      title: 'Stadtgröße',
+      description: '500 km² Fläche. Zum Vergleich: München hat 310 km², Berlin 892 km². Sofia ist also genau richtig – nicht zu klein, nicht zu riesig.'
+    },
+    {
+      title: 'Dichte',
+      description: '~2.600 Einwohner/km². Ein bisschen voller als die bayerische Hauptstadt, aber es fühlt sich irgendwie entspannter an – wahrscheinlich wegen der Rakia.'
+    },
+    {
+      title: 'Höhe',
+      description: 'Durchschnitt 550 Meter (500–699 m). Sofia ist die dritthöchste Hauptstadt der EU nach Madrid und Andorra la Vella. Kein Wunder, dass wir beim Atmen merken, dass wir oben sind!'
+    },
+    {
+      title: 'Rang in der EU',
+      description: '14. größte Stadt der Europäischen Union nach Einwohnern. Vor uns: Warschau, Budapest und Prag. Hinter uns: Helsinki, Riga und Vilnius.'
+    },
+    {
+      title: 'Fläche im Vergleich',
+      description: 'Sofia City Province (Stadt + Umland) ist 1.344 km² groß. Das passt ungefähr dreimal in das Saarland (2.570 km²).'
+    }
+  ],
+  districts: [
+    {
+      name: 'Serdika',
+      description: 'Das historische Zentrum mit Alexander Nevsky Cathedral, Sveta Nedelya Church und dem römischen Amphitheater. Hier wird Geschichte lebendig – und touristisch.'
+    },
+    {
+      name: 'Sredets',
+      description: 'Regierungsbezirk mit Parlament, Präsidentenpalast und Ministerien. Die Macht, nicht die Party – aber gut für Spaziergänge mit historischem Flair.'
+    },
+    {
+      name: 'Oborishte',
+      description: 'Elegant und ruhig mit Ivan Vazov Nationaltheater und vielen Botschaften. Perfekt für einen Spaziergang vor dem Dinner.'
+    },
+    {
+      name: 'Lozenets',
+      description: 'Wohlhabendes Viertel mit vielen Botschaften und teuren Restaurants. Hier trifft sich die bulgarische High Society.'
+    },
+    {
+      name: 'Studentski grad',
+      description: 'Studentenviertel mit günstigen Bars, Clubs und junger Atmosphäre. Wenn ihr Party mit 20-Jährigen wollt, seid ihr hier richtig.'
+    },
+    {
+      name: 'Mladost',
+      description: 'Business District mit vielen Tech-Firmen und modernen Gebäuden. Die bulgarische Silicon Valley-Version – aber mit besserem Essen.'
+    },
+    {
+      name: 'Vitosha',
+      description: 'Stadtteil am gleichnamigen Berg. Ausgangspunkt für Wanderungen und im Winter für das Skigebiet. Metro fährt direkt dorthin.'
+    },
+    {
+      name: 'Lyulin',
+      description: 'Großes Wohnviertel im Westen mit Plattenbauten aus der sozialistischen Ära. Authentisch, günstig und weit weg vom Touristen-Trubel.'
+    }
+  ],
+  mayorInfo: {
+    name: 'Vasil Terziev',
+    since: 'seit 13. November 2023',
+    age: '47 Jahre (geb. 9. Juni 1978)',
+    party: '"Wir setzen die Änderung fort" (PP) + Demokratisches Bulgarien + "Rettet Sofia"',
+    background: 'Co-Gründer von Telerik (2002–2014), einer der erfolgreichsten bulgarischen Software-Firmen. 2014 für 262,5 Mio. $ verkauft.',
+    education: 'American University in Bulgaria (Business Administration)',
+    career: 'CEO von Telerik, gründete Telerik Academy – ein Bildungsprogramm für Software-Entwickler, das die bulgarische Tech-Szene maßgeblich prägte.',
+    family: 'Eltern waren Offiziere im bulgarischen Staatssicherheitsdienst, Großvater war kommunistischer Partisan.',
+    note: 'Der erste Tech-Unternehmer als Bürgermeister von Sofia. Ein Mann, der weiß, wie man Unternehmen aufbaut – jetzt versucht er es mit einer Stadt.'
+  },
   funFacts: [
     {
       title: 'Älteste Hauptstadt Europas',

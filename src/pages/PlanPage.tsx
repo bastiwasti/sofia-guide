@@ -601,6 +601,7 @@ export default function PlanPage({ sessions }: PlanPageProps) {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
           gap: var(--spacing-sm);
+          margin-top: var(--spacing-lg);
         }
 
         .plan-player-card {

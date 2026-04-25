@@ -20,7 +20,8 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
     { id: 'fun-facts', label: 'Fun Facts' },
     { id: 'culture-shocks', label: 'Kulturschocks' },
     { id: 'ordering', label: 'Wie bestelle ich' },
-    { id: 'tourist-traps', label: 'Touristenfallen' }
+    { id: 'tourist-traps', label: 'Touristenfallen' },
+    { id: 'city-facts', label: 'Stadtfakten' }
   ]
 
   const eventsByDay = useMemo(() => {
@@ -143,6 +144,46 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
       </section>
 
       <div className="content-section">
+        <div id="city-facts" className="content-block">
+          <h2>📊 Stadtfakten</h2>
+          <div className="facts-list">
+            {sofiaContent.cityFacts.map((fact, index) => (
+              <div key={index} className="fact-card">
+                <h3>{fact.title}</h3>
+                <p>{fact.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div id="districts" className="content-block">
+          <h2>🏘️ Die 24 Bezirke (Wichtige für uns)</h2>
+          <div className="districts-list">
+            {sofiaContent.districts.map((district, index) => (
+              <div key={index} className="district-card">
+                <h3>{district.name}</h3>
+                <p>{district.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div id="mayor" className="content-block">
+          <h2>👔 Bürgermeister</h2>
+          <div className="mayor-card">
+            <h3>{sofiaContent.mayorInfo.name}</h3>
+            <p className="mayor-meta">{sofiaContent.mayorInfo.since} • {sofiaContent.mayorInfo.age}</p>
+            <div className="mayor-details">
+              <p><strong>Partei:</strong> {sofiaContent.mayorInfo.party}</p>
+              <p><strong>Hintergrund:</strong> {sofiaContent.mayorInfo.background}</p>
+              <p><strong>Ausbildung:</strong> {sofiaContent.mayorInfo.education}</p>
+              <p><strong>Karriere:</strong> {sofiaContent.mayorInfo.career}</p>
+              <p><strong>Familie:</strong> {sofiaContent.mayorInfo.family}</p>
+              <p className="mayor-note"><strong>Note:</strong> {sofiaContent.mayorInfo.note}</p>
+            </div>
+          </div>
+        </div>
+
         <div id="fun-facts" className="content-block">
           <h2>🎉 Fun Facts</h2>
           <div className="facts-list">
@@ -491,8 +532,83 @@ export default function SofiaPage({ onFocusOnMap }: SofiaPageProps = {}) {
         #fun-facts,
         #culture-shocks,
         #ordering,
-        #tourist-traps {
+        #tourist-traps,
+        #city-facts,
+        #districts,
+        #mayor {
           scroll-margin-top: 60px;
+        }
+
+        .districts-list {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-md);
+        }
+
+        .district-card {
+          background: var(--color-white);
+          padding: var(--spacing-md);
+          border-radius: var(--border-radius-md);
+          box-shadow: var(--shadow-sm);
+          border-left: 4px solid var(--color-restaurants);
+        }
+
+        .district-card h3 {
+          font-size: 16px;
+          margin-bottom: var(--spacing-sm);
+          color: var(--color-restaurants);
+        }
+
+        .district-card p {
+          font-size: 14px;
+          line-height: 1.6;
+          margin: 0;
+        }
+
+        .mayor-card {
+          background: var(--color-white);
+          padding: var(--spacing-lg);
+          border-radius: var(--border-radius-md);
+          box-shadow: var(--shadow-sm);
+          border-left: 4px solid #6A4C93;
+        }
+
+        .mayor-card h3 {
+          font-size: 20px;
+          margin-bottom: var(--spacing-xs);
+          color: #6A4C93;
+        }
+
+        .mayor-meta {
+          font-size: 13px;
+          color: var(--color-gray-medium);
+          margin-bottom: var(--spacing-md);
+          font-style: italic;
+        }
+
+        .mayor-details {
+          display: flex;
+          flex-direction: column;
+          gap: var(--spacing-sm);
+        }
+
+        .mayor-details p {
+          font-size: 14px;
+          line-height: 1.6;
+          margin: 0;
+        }
+
+        .mayor-details strong {
+          color: var(--color-text);
+          font-weight: 600;
+        }
+
+        .mayor-note {
+          margin-top: var(--spacing-md) !important;
+          padding: var(--spacing-sm);
+          background: #f3e5f5;
+          border-radius: var(--border-radius-sm);
+          font-style: italic;
         }
       `}</style>
     </div>
