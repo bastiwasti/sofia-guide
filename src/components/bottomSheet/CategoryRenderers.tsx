@@ -7,9 +7,12 @@ interface CategoryRendererProps {
   location: Location
   expandedSections: Record<string, boolean>
   onToggleSection: (section: string) => void
+  distance?: number
 }
 
 export function BasicInfoRenderer({ location, expandedSections, onToggleSection }: CategoryRendererProps) {
+  const paymentMethods = parseJSON<string>(location.payment_methods)
+  
   return (
     <Section
       title="📍 Basic Info"
@@ -20,6 +23,7 @@ export function BasicInfoRenderer({ location, expandedSections, onToggleSection 
       {location.opening_hours && <InfoRow label="🕐 Öffnungszeiten:" value={location.opening_hours || null} />}
       {location.website_url && <InfoRow label="🔗 Website:" value={location.website_url || null} link />}
       {location.phone && <InfoRow label="📞 Telefon:" value={location.phone || null} />}
+      {paymentMethods.length > 0 && <InfoRow label="💳 Zahlung:" value={paymentMethods.join(', ')} />}
     </Section>
   )
 }
@@ -37,7 +41,7 @@ export function MetaInfoRenderer({ location }: { location: Location }) {
 
 export function RestaurantRenderer({ location, expandedSections, onToggleSection }: CategoryRendererProps) {
   const foodMenu = parseJSON<{name: string; price?: string; description?: string}>(location.food_menu)
-  const beerMenu = parseJSON<{name: string; price?: string; brewery?: string; style?: string}>(location.beer_menu)
+  const beerMenu = parseJSON<{name: string; style?: string; price?: string; note?: string}>(location.beer_menu)
   const cocktailsMenu = parseJSON<{name: string; price?: string; ingredients?: string}>(location.cocktails_menu)
   const specialties = parseJSON<{name: string; description: string; price?: string}>(location.local_specialties)
   const seatingOptions = parseJSON<string>(location.seating_options)
@@ -86,7 +90,7 @@ export function RestaurantRenderer({ location, expandedSections, onToggleSection
         >
           <div className="beer-list">
             {beerMenu.map((beer, index) => (
-              <BeerItem key={index} name={beer.name} brewery={beer.brewery} style={beer.style} price={beer.price} />
+              <BeerItem key={index} name={beer.name} style={beer.style} price={beer.price} note={beer.note} />
             ))}
           </div>
         </Section>
@@ -123,9 +127,10 @@ export function RestaurantRenderer({ location, expandedSections, onToggleSection
 }
 
 export function KneipenRenderer({ location, expandedSections, onToggleSection }: CategoryRendererProps) {
-  const beerMenu = parseJSON<{name: string; price?: string; brewery?: string; style?: string}>(location.beer_menu)
+  const beerMenu = parseJSON<{name: string; style?: string; price?: string; note?: string}>(location.beer_menu)
   const cocktailsMenu = parseJSON<{name: string; price?: string; ingredients?: string}>(location.cocktails_menu)
   const foodMenu = parseJSON<{name: string; price?: string; description?: string}>(location.food_menu)
+  const localSpecialties = parseJSON<{name: string; description?: string}>(location.local_specialties)
   const seatingOptions = parseJSON<string>(location.seating_options)
 
   return (
@@ -137,21 +142,16 @@ export function KneipenRenderer({ location, expandedSections, onToggleSection }:
           onToggle={() => onToggleSection('beerMenu')}
         >
           <div className="beer-list">
-            {beerMenu.slice(0, 3).map((beer, index) => (
-              <BeerItem key={index} name={beer.name} brewery={beer.brewery} style={beer.style} price={beer.price} />
+            {beerMenu.map((beer, index) => (
+              <BeerItem key={index} name={beer.name} style={beer.style} price={beer.price} note={beer.note} />
             ))}
           </div>
-          {beerMenu.length > 3 && (
-            <button className="expand-button">
-              Alle {beerMenu.length} Biere ansehen
-            </button>
-          )}
         </Section>
       )}
 
       {cocktailsMenu.length > 0 && (
         <Section
-          title="🍸 Cocktails"
+          title="🥃 Drinks"
           isExpanded={expandedSections.cocktailsMenu}
           onToggle={() => onToggleSection('cocktailsMenu')}
         >
@@ -165,13 +165,32 @@ export function KneipenRenderer({ location, expandedSections, onToggleSection }:
 
       {foodMenu.length > 0 && (
         <Section
-          title="🍽️ Essen"
+          title="🍽️ Food"
           isExpanded={expandedSections.foodMenu}
           onToggle={() => onToggleSection('foodMenu')}
         >
           <div className="food-list">
             {foodMenu.map((food, index) => (
               <FoodItem key={index} name={food.name} price={food.price} description={food.description} />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {localSpecialties.length > 0 && (
+        <Section
+          title="🌟 Lokale Spezialitäten"
+          isExpanded={expandedSections.localSpecialties}
+          onToggle={() => onToggleSection('localSpecialties')}
+        >
+          <div className="specialties-list">
+            {localSpecialties.map((specialty, index) => (
+              <div key={index} className="specialty-item">
+                <div className="specialty-info">
+                  <span className="specialty-name">{specialty.name}</span>
+                </div>
+                {specialty.description && <p className="specialty-description">{specialty.description}</p>}
+              </div>
             ))}
           </div>
         </Section>
@@ -195,7 +214,7 @@ export function KneipenRenderer({ location, expandedSections, onToggleSection }:
 }
 
 export function CraftBeerRenderer({ location, expandedSections, onToggleSection }: CategoryRendererProps) {
-  const beerMenu = parseJSON<{name: string; price?: string; brewery?: string; style?: string}>(location.beer_menu)
+  const beerMenu = parseJSON<{name: string; style?: string; price?: string; note?: string}>(location.beer_menu)
   const seatingOptions = parseJSON<string>(location.seating_options)
 
   return (
@@ -208,7 +227,7 @@ export function CraftBeerRenderer({ location, expandedSections, onToggleSection 
         >
           <div className="beer-list">
             {beerMenu.map((beer, index) => (
-              <BeerItem key={index} name={beer.name} brewery={beer.brewery} style={beer.style} price={beer.price} />
+              <BeerItem key={index} name={beer.name} style={beer.style} price={beer.price} note={beer.note} />
             ))}
           </div>
         </Section>
@@ -230,53 +249,70 @@ export function CraftBeerRenderer({ location, expandedSections, onToggleSection 
   )
 }
 
-export function SightRenderer({ location, expandedSections, onToggleSection }: CategoryRendererProps) {
+export function SightRenderer({ location, expandedSections, onToggleSection, distance }: CategoryRendererProps) {
   const keyFeatures = parseJSON<string>(location.key_features)
   const guidedTours = parseJSON<string>(location.guided_tours)
 
   return (
     <>
-      {(location.entry_fee || location.visit_duration || location.best_time_to_visit || location.photo_allowed || guidedTours.length > 0) && (
-        <Section
-          title="🏛️ Infos"
-          isExpanded={expandedSections.sightInfo}
-          onToggle={() => onToggleSection('sightInfo')}
-        >
-          {location.entry_fee && <InfoRow label="💰 Eintritt:" value={location.entry_fee} />}
-          {location.visit_duration && <InfoRow label="⏱️ Dauer:" value={location.visit_duration} />}
-          {location.best_time_to_visit && <InfoRow label="🕐 Beste Zeit:" value={location.best_time_to_visit} />}
-          {location.photo_allowed && <InfoRow label="📸 Fotos:" value={location.photo_allowed} />}
-          {guidedTours.length > 0 && <InfoRow label="🎯 Führungen:" value={guidedTours.join(', ')} />}
-        </Section>
-      )}
+      <div className="quick-facts-row">
+        {location.entry_fee && (
+          <div className="quick-fact-item">
+            <span className="quick-fact-icon">💰</span>
+            <div className="quick-fact-content">
+              <span className="quick-fact-label">Eintritt</span>
+              <span className="quick-fact-value">{location.entry_fee}</span>
+            </div>
+          </div>
+        )}
+        {location.visit_duration && (
+          <div className="quick-fact-item">
+            <span className="quick-fact-icon">⏱️</span>
+            <div className="quick-fact-content">
+              <span className="quick-fact-label">Dauer</span>
+              <span className="quick-fact-value">{location.visit_duration}</span>
+            </div>
+          </div>
+        )}
+        {distance !== undefined && (
+          <div className="quick-fact-item">
+            <span className="quick-fact-icon">📍</span>
+            <div className="quick-fact-content">
+              <span className="quick-fact-label">Entfernung</span>
+              <span className="quick-fact-value">{Math.round(distance)}m vom Hotel</span>
+            </div>
+          </div>
+        )}
+      </div>
 
-      {(keyFeatures.length > 0 || location.fun_facts) && (
+      {keyFeatures.length > 0 && (
         <Section
-          title="📜 Highlights"
+          title="🏛️ Highlights"
           isExpanded={expandedSections.sightHighlights}
           onToggle={() => onToggleSection('sightHighlights')}
         >
-          {keyFeatures.length > 0 && (
-            <div className="key-features-list">
-              {keyFeatures.map((feature, index) => (
-                <div key={index} className="key-feature-item">
-                  <span className="key-feature-bullet">•</span>
-                  <span className="key-feature-text">{feature}</span>
-                </div>
-              ))}
-            </div>
-          )}
-          {location.fun_facts && <FunFacts content={location.fun_facts} />}
+          <div className="key-features-list">
+            {keyFeatures.map((feature, index) => (
+              <div key={index} className="key-feature-item">
+                <span className="key-feature-bullet">•</span>
+                <span className="key-feature-text">{feature}</span>
+              </div>
+            ))}
+          </div>
         </Section>
       )}
 
-      {location.pro_tips && (
+      {(location.best_time_to_visit || location.photo_allowed || location.dress_code || location.service_times || guidedTours.length > 0) && (
         <Section
-          title="💡 Pro Tipps"
-          isExpanded={expandedSections.sightTips}
-          onToggle={() => onToggleSection('sightTips')}
+          title="📋 Praktische Infos"
+          isExpanded={expandedSections.sightPraktische}
+          onToggle={() => onToggleSection('sightPraktische')}
         >
-          <ProTips content={location.pro_tips} />
+          {location.best_time_to_visit && <InfoRow label="🕐 Beste Zeit:" value={location.best_time_to_visit} />}
+          {location.photo_allowed && <InfoRow label="📸 Fotos:" value={location.photo_allowed} />}
+          {location.dress_code && <InfoRow label="👔 Dress Code:" value={location.dress_code} />}
+          {location.service_times && <InfoRow label="🕐 Öffnungszeiten:" value={location.service_times} />}
+          {guidedTours.length > 0 && <InfoRow label="🎯 Führungen:" value={guidedTours.join(', ')} />}
         </Section>
       )}
     </>

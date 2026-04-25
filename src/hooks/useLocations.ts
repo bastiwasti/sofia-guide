@@ -47,7 +47,8 @@ export interface Location {
   backup_emoji: string | null
   author_emoji: string | null
   is_active_user: number
-  
+
+  description?: string | null
   website_url?: string | null
   address?: string | null
   opening_hours?: string | null

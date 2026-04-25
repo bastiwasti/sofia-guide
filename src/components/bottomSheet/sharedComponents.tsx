@@ -40,15 +40,17 @@ export function InfoRow({ label, value, link }: InfoRowProps) {
   )
 }
 
-export function BeerItem({ name, brewery, style, price }: { name: string; brewery?: string; style?: string; price?: string }) {
+export function BeerItem({ name, style, price, note }: { name: string; style?: string; price?: string; note?: string }) {
+  const isInfoNote = !price
+  
   return (
-    <div className="beer-item">
+    <div className={isInfoNote ? "beer-item beer-note" : "beer-item"}>
       <div className="beer-info">
         <span className="beer-name">{name}</span>
-        {brewery && <span className="beer-brewery">{brewery}</span>}
         {style && <span className="beer-style">({style})</span>}
+        {note && <span className="beer-note-text">ℹ️ {note}</span>}
       </div>
-      <span className="beer-price">{price}</span>
+      {price && <span className="beer-price">{price}</span>}
     </div>
   )
 }

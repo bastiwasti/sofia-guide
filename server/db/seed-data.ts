@@ -37,6 +37,12 @@ export const categories = [
     "name": "Neu",
     "color": "#6B7280",
     "icon": "star"
+  },
+  {
+    "id": 9,
+    "name": "Toiletten",
+    "color": "#1976D2",
+    "icon": "wc"
   }
 ]
 
@@ -752,7 +758,7 @@ export const locations = [
     "opening_hours": "Mo-Mi 11:30-22:00, Do-So 11:30-23:30",
     "payment_methods": "[\"cash\", \"card\"]",
     "phone": "+359 700 11313",
-    "beer_menu": "[{\"name\": \"Kuratierte Craft-Beer-Auswahl\", \"note\": \"wechselt, passt zu den Burgern\"}]",
+    "beer_menu": "[{\"name\": \"No Use For A Cooler Name\", \"style\": \"Haus-Pale Ale (Skapto Eigenbrau)\", \"price\": \"7 BGN / 0.33L\", \"note\": \"Das Signature — unbedingt probieren!\"}, {\"name\": \"Craft Biere (rotierend)\", \"price\": \"7–9 BGN / 0.33L\", \"note\": \"Kleine Auswahl passend zu den Burgern — nach Tagesempfehlung fragen\"}]",
     "cocktails_menu": null,
     "food_menu": "[{\"name\": \"Handgemachte Beef-Burger\", \"note\": \"Signature\"}, {\"name\": \"Vegetarische Burger-Varianten\"}, {\"name\": \"Hand-cut Fries\"}, {\"name\": \"Saisonale Specials\"}]",
     "local_specialties": null,
@@ -935,8 +941,8 @@ export const locations = [
     "opening_hours": "Mon-Sun 12:00-00:00",
     "payment_methods": "[\"cash\", \"card\"]",
     "phone": "+359 88 498 2098",
-    "beer_menu": "[{\"name\": \"Craft Beer Selection\", \"price\": \"varies\", \"note\": \"~10 craft beers available\"}]",
-    "cocktails_menu": "[{\"name\": \"Old Fashioned\", \"price\": \"7€\"}, {\"name\": \"Whisky Sour\", \"price\": \"7€\"}, {\"name\": \"House Specialties\", \"price\": \"7-8€\"}]",
+    "beer_menu": "[{\"name\": \"Heineken\", \"style\": \"Lager vom Fass\", \"price\": \"6 BGN / 250ml · 6.50 BGN / 400ml\"}, {\"name\": \"Zagorka\", \"style\": \"Lager vom Fass\", \"price\": \"5.30 BGN / 330ml · 5.90 BGN / 500ml\"}, {\"name\": \"Heineken Silver\", \"style\": \"Lager Flasche\", \"price\": \"6.25 BGN / 330ml\"}, {\"name\": \"Stolichno Weiss\", \"style\": \"Weizenbier Flasche\", \"price\": \"6.45 BGN / 330ml\"}, {\"name\": \"Kein Craft-Fokus\", \"note\": \"Primär Cocktail Bar — Cocktails sind hier das Ziel\"}]",
+    "cocktails_menu": "[{\"name\": \"Old Fashioned\", \"price\": \"18–20 BGN\"}, {\"name\": \"Whisky Sour\", \"price\": \"18–20 BGN\"}, {\"name\": \"Signature Cocktails\", \"price\": \"18–25 BGN\", \"note\": \"Saisonal wechselnd, hausgemachte Zutaten\"}]",
     "food_menu": "[{\"name\": \"Finger Food\", \"price\": \"varies\"}, {\"name\": \"Sandwiches\", \"price\": \"varies\"}, {\"name\": \"Salads\", \"price\": \"varies\"}, {\"name\": \"Sweets & Cakes\", \"price\": \"varies\"}]",
     "music_type": "Groovy, Retro, Live DJ",
     "crowd_type": "Trendy, Cocktail enthusiasts",
@@ -957,7 +963,7 @@ export const locations = [
     "opening_hours": "Mon-Sun 10:00-02:00 (Fri-Sat: 04:00)",
     "payment_methods": "[\"cash\", \"card\"]",
     "phone": "+359 88 792 7788",
-    "beer_menu": "[{\"name\": \"Guinness on Tap\", \"price\": \"5€\"}, {\"name\": \"Imported Draught Beers\", \"price\": \"5-7€\"}, {\"name\": \"Boutique Whisky Selection\", \"price\": \"varies\"}, {\"name\": \"Craft Beers (~10)\", \"price\": \"varies\"}]",
+    "beer_menu": "[{\"name\": \"Guinness\", \"style\": \"Irish Stout vom Fass\", \"price\": \"10 BGN / 0.5L\"}, {\"name\": \"Stella Artois\", \"style\": \"Lager vom Fass\", \"price\": \"8 BGN / 0.5L\"}, {\"name\": \"Burgasko Svetlo\", \"style\": \"Bulgarisches Lager vom Fass\", \"price\": \"6 BGN / 0.5L\"}, {\"name\": \"Craft Biere (rotierend)\", \"style\": \"ca. 10 Sorten\", \"price\": \"8–12 BGN\", \"note\": \"Bier ist stark — aber Whisky & Cocktails sind die echten Stars\"}]",
     "cocktails_menu": null,
     "food_menu": null,
     "music_type": "Live football & music all week round",
@@ -1514,5 +1520,405 @@ export const locations = [
     "price_range": null,
     "lat": 42.697664,
     "lng": 23.328275
+  },
+  {
+    "category_id": 9,
+    "name": "WC Vitosha / Zentrum",
+    "meta": "Kostenlos · Fußgängerzone",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6959,
+    "lng": 23.3256
+  },
+  {
+    "category_id": 9,
+    "name": "WC Angel Kanchev (unterirdisch)",
+    "meta": "Kostenlos · Level -1",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6923,
+    "lng": 23.3223
+  },
+  {
+    "category_id": 9,
+    "name": "WC NDK Süd",
+    "meta": "1 BGN · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6886,
+    "lng": 23.3202
+  },
+  {
+    "category_id": 9,
+    "name": "WC Pirotska",
+    "meta": "Kostenlos · nahe Zentralmarkt",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7002,
+    "lng": 23.3192
+  },
+  {
+    "category_id": 9,
+    "name": "WC Stadtgarten",
+    "meta": "Gebühr · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6944,
+    "lng": 23.3302
+  },
+  {
+    "category_id": 9,
+    "name": "WC Stadtgarten Ost",
+    "meta": "Kostenlos",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6898,
+    "lng": 23.3344
+  },
+  {
+    "category_id": 9,
+    "name": "WC Borisova Gradina",
+    "meta": "Kostenlos · Parkeingang",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6866,
+    "lng": 23.3391
+  },
+  {
+    "category_id": 9,
+    "name": "WC Sándor-Petőfi-Str.",
+    "meta": "Kostenlos · südlich NDK",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6875,
+    "lng": 23.3136
+  },
+  {
+    "category_id": 9,
+    "name": "WC Stambolov Blvd",
+    "meta": "Gebühr · Mo–Sa 9–18, So 9–17 Uhr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7030,
+    "lng": 23.3198,
+    "opening_hours": "Mo–Sa 09:00–18:00, So 09:00–17:00"
+  },
+  {
+    "category_id": 9,
+    "name": "WC Pencho-Slaveykov-Blvd",
+    "meta": "Gebühr · südlich Hotel",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6830,
+    "lng": 23.3180
+  },
+  {
+    "category_id": 9,
+    "name": "WC Dimitar Petkov",
+    "meta": "Centrum",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7005,
+    "lng": 23.3005
+  },
+  {
+    "category_id": 9,
+    "name": "WC Hashove",
+    "meta": "Razasadnik Konjovitsa",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6963,
+    "lng": 23.2934
+  },
+  {
+    "category_id": 9,
+    "name": "WC Hadzhi Dimitar",
+    "meta": "Doncho Vatah",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7069,
+    "lng": 23.3513
+  },
+  {
+    "category_id": 9,
+    "name": "WC Poduene",
+    "meta": "Han Omurtag",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6914,
+    "lng": 23.3443
+  },
+  {
+    "category_id": 9,
+    "name": "WC Maria Luisa Blvd Nord",
+    "meta": "Kostenlos · Mo–So 6:30–18 Uhr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7114,
+    "lng": 23.3201,
+    "opening_hours": "Mo–So 06:30–18:00"
+  },
+  {
+    "category_id": 9,
+    "name": "WC Zona B-18",
+    "meta": "Dimitar Petkov",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7041,
+    "lng": 23.3015
+  },
+  {
+    "category_id": 9,
+    "name": "WC Maria Luisa Blvd (unterirdisch)",
+    "meta": "Gebühr · Level -1 · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7121,
+    "lng": 23.3213
+  },
+  {
+    "category_id": 9,
+    "name": "WC Zona B-5",
+    "meta": "1 BGN · Mo–So 6–23 Uhr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6947,
+    "lng": 23.3069,
+    "opening_hours": "Mo–So 06:00–23:00"
+  },
+  {
+    "category_id": 9,
+    "name": "WC Stara Stena (Lozenets)",
+    "meta": "Gebühr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6838,
+    "lng": 23.3298
+  },
+  {
+    "category_id": 9,
+    "name": "WC Krakra",
+    "meta": "Kostenlos · mobil",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6945,
+    "lng": 23.3376
+  },
+  {
+    "category_id": 9,
+    "name": "WC Skopie (Banishora)",
+    "meta": "Kostenlos",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7112,
+    "lng": 23.3022
+  },
+  {
+    "category_id": 9,
+    "name": "WC Republika (Lev Tolstoi)",
+    "meta": "Kostenlos · Mo–So 8–22 Uhr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7241,
+    "lng": 23.3061,
+    "opening_hours": "Mo–So 08:00–22:00"
+  },
+  {
+    "category_id": 9,
+    "name": "WC Gen. Danail Nikolaev",
+    "meta": "Gebühr · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7099,
+    "lng": 23.3237
+  },
+  {
+    "category_id": 9,
+    "name": "WC Gen. Danail Nikolaev (2)",
+    "meta": "Gebühr · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7104,
+    "lng": 23.3230
+  },
+  {
+    "category_id": 9,
+    "name": "WC Slivnitsa Blvd",
+    "meta": "Gebühr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7044,
+    "lng": 23.3309
+  },
+  {
+    "category_id": 9,
+    "name": "WC Zaharna Fabrika",
+    "meta": "Nordwest Sofia",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7138,
+    "lng": 23.2847
+  },
+  {
+    "category_id": 9,
+    "name": "WC Sredets (mobil)",
+    "meta": "Kostenlos · mobil",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6879,
+    "lng": 23.3370
+  },
+  {
+    "category_id": 9,
+    "name": "WC Ralitsa (Lozenets)",
+    "meta": "Kostenlos · mobil",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6828,
+    "lng": 23.3238
+  },
+  {
+    "category_id": 9,
+    "name": "WC Rusalski Lak",
+    "meta": "Suhata Reka",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7034,
+    "lng": 23.3602
+  },
+  {
+    "category_id": 9,
+    "name": "WC Belogradchik",
+    "meta": "TEC Sofia",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7111,
+    "lng": 23.3226
+  },
+  {
+    "category_id": 9,
+    "name": "WC Nishava (Strelbishte)",
+    "meta": "Kostenlos · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6720,
+    "lng": 23.2998
+  },
+  {
+    "category_id": 9,
+    "name": "WC Hubcha (Krasno Selo)",
+    "meta": "Südwest Sofia",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6775,
+    "lng": 23.2860
+  },
+  {
+    "category_id": 9,
+    "name": "WC Balsha (Ivan Vazov)",
+    "meta": "Gebühr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6771,
+    "lng": 23.3039
+  },
+  {
+    "category_id": 9,
+    "name": "WC Voenna Rampa",
+    "meta": "Kostenlos · Nordbezirk",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7267,
+    "lng": 23.3165
+  },
+  {
+    "category_id": 9,
+    "name": "WC Slivnitsa Blvd (2)",
+    "meta": "Centrum Nord",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7062,
+    "lng": 23.3051
+  },
+  {
+    "category_id": 9,
+    "name": "WC BAN / Kaishev-Str.",
+    "meta": "Ostrand Sofia",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6756,
+    "lng": 23.3659
+  },
+  {
+    "category_id": 9,
+    "name": "WC Hristo Smirnenski",
+    "meta": "Kostenlos · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6795,
+    "lng": 23.3674
+  },
+  {
+    "category_id": 9,
+    "name": "WC Stambolov Blvd (2)",
+    "meta": "Gebühr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7040,
+    "lng": 23.3215
+  },
+  {
+    "category_id": 9,
+    "name": "WC Gen. Totleben Blvd",
+    "meta": "Kostenlos · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6896,
+    "lng": 23.3021
+  },
+  {
+    "category_id": 9,
+    "name": "WC Maria Luisa Blvd",
+    "meta": "Gebühr",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.7124,
+    "lng": 23.3200
+  },
+  {
+    "category_id": 9,
+    "name": "WC Yuzhen Park",
+    "meta": "Kostenlos",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6716,
+    "lng": 23.3111
+  },
+  {
+    "category_id": 9,
+    "name": "WC Arsenalski Blvd (Lozenets)",
+    "meta": "Kostenlos · Rollstuhlgerecht",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6788,
+    "lng": 23.3204
+  },
+  {
+    "category_id": 9,
+    "name": "WC Hipodruma",
+    "meta": "Vruh Tumba",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6829,
+    "lng": 23.2966
+  },
+  {
+    "category_id": 9,
+    "name": "WC Arsenalski Blvd Süd",
+    "meta": "Kostenlos",
+    "rating": null,
+    "price_range": null,
+    "lat": 42.6785,
+    "lng": 23.3200
   }
 ]

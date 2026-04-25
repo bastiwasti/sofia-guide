@@ -108,6 +108,63 @@ export const bottomSheetStyles = `
     font-size: 24px;
   }
 
+  /* Location Description */
+  .location-description {
+    color: var(--color-text);
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* Quick Facts Row */
+  .quick-facts-row {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  .quick-fact-item {
+    flex: 1;
+    min-width: 0;
+    background: var(--color-gray-light);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .quick-fact-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .quick-fact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .quick-fact-label {
+    font-size: 11px;
+    color: var(--color-gray-medium);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .quick-fact-value {
+    font-size: 13px;
+    color: var(--color-text);
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   /* Section Styles */
   .section {
     margin-bottom: var(--spacing-sm);
@@ -170,11 +227,6 @@ export const bottomSheetStyles = `
     color: var(--color-text);
   }
 
-  .beer-brewery {
-    font-size: 12px;
-    color: var(--color-gray-medium);
-  }
-
   .beer-style {
     font-size: 11px;
     color: var(--color-gray-medium);
@@ -185,24 +237,6 @@ export const bottomSheetStyles = `
     font-weight: 600;
     font-size: 14px;
     color: var(--color-text);
-  }
-
-  .expand-button {
-    width: 100%;
-    padding: 8px;
-    margin-top: var(--spacing-sm);
-    background: var(--color-kneipen);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius-sm);
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .expand-button:active {
-    background: var(--color-craft);
   }
 
   /* Cocktails */

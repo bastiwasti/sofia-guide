@@ -39,9 +39,8 @@ export default function BottomSheet({ location, onClose, onDelete, currentSessio
     foodMenu: false,
     localSpecialties: false,
     vibe: false,
-    sightInfo: false,
+    sightPraktische: false,
     sightHighlights: false,
-    sightTips: false,
     nightlifeVibe: false
   })
 
@@ -75,6 +74,10 @@ export default function BottomSheet({ location, onClose, onDelete, currentSessio
 
           {location.meta && <MetaInfoRenderer location={location} />}
 
+          {location.description && (
+            <p className="location-description">{location.description}</p>
+          )}
+
           {hasBasicInfo(location) && (
             <BasicInfoRenderer 
               location={location} 
@@ -83,8 +86,8 @@ export default function BottomSheet({ location, onClose, onDelete, currentSessio
             />
           )}
 
-          {location.category_id === 1 && hasSightFields(location) && (
-            <SightRenderer
+          {location.category_id === 1 && hasKneipenFields(location) && (
+            <KneipenRenderer
               location={location}
               expandedSections={expandedSections}
               onToggleSection={toggleSection}
@@ -99,23 +102,7 @@ export default function BottomSheet({ location, onClose, onDelete, currentSessio
             />
           )}
 
-          {location.category_id === 3 && hasKneipenFields(location) && (
-            <KneipenRenderer
-              location={location}
-              expandedSections={expandedSections}
-              onToggleSection={toggleSection}
-            />
-          )}
-
-          {location.category_id === 4 && hasCraftBeerFields(location) && (
-            <CraftBeerRenderer
-              location={location}
-              expandedSections={expandedSections}
-              onToggleSection={toggleSection}
-            />
-          )}
-
-          {location.category_id === 5 && hasNightlifeFields(location) && (
+          {location.category_id === 3 && hasNightlifeFields(location) && (
             <NightlifeRenderer
               location={location}
               expandedSections={expandedSections}
@@ -123,9 +110,30 @@ export default function BottomSheet({ location, onClose, onDelete, currentSessio
             />
           )}
 
-          <InfoRow label="Entfernung:" value={formatDistance(distance) + ' vom Hotel'} />
-          {location.rating && <InfoRow label="Bewertung:" value={'⭐ ' + location.rating} />}
-          {location.price_range && <InfoRow label="Preis:" value={location.price_range} />}
+          {location.category_id === 4 && hasSightFields(location) && (
+            <SightRenderer
+              location={location}
+              expandedSections={expandedSections}
+              onToggleSection={toggleSection}
+              distance={distance}
+            />
+          )}
+
+          {location.category_id === 5 && hasCraftBeerFields(location) && (
+            <CraftBeerRenderer
+              location={location}
+              expandedSections={expandedSections}
+              onToggleSection={toggleSection}
+            />
+          )}
+
+          {location.category_id !== 4 && (
+            <>
+              <InfoRow label="Entfernung:" value={formatDistance(distance) + ' vom Hotel'} />
+              {location.rating && <InfoRow label="Bewertung:" value={'⭐ ' + location.rating} />}
+              {location.price_range && <InfoRow label="Preis:" value={location.price_range} />}
+            </>
+          )}
 
           {onDelete && canDelete && (
             <button className="delete-button" onClick={onDelete}>

@@ -1,7 +1,13 @@
 import { Location } from '../../hooks/useLocations'
 
 export function hasBasicInfo(location: Location): boolean {
-  return !!(location.address || location.opening_hours || location.website_url || location.phone)
+  return !!(
+    location.address || 
+    location.opening_hours || 
+    location.website_url || 
+    location.phone ||
+    location.payment_methods
+  )
 }
 
 export function hasRestaurantFields(location: Location): boolean {
@@ -24,7 +30,7 @@ export function hasSightFields(location: Location): boolean {
   return !!(
     location.entry_fee || location.visit_duration || location.best_time_to_visit ||
     location.photo_allowed || location.guided_tours || location.key_features ||
-    location.fun_facts || location.pro_tips
+    location.dress_code || location.service_times || location.description
   )
 }
 
