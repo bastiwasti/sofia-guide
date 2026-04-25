@@ -10,125 +10,51 @@ Mobiler Reiseführer für einen Sofia-Wochenendtrip (8 Freunde, Mai 2026). Inter
 
 | Tab | Inhalt |
 |---|---|
-| **Karte** | Leaflet-Karte mit 70+ Locations, Farbkodierung nach Kategorie, Kategorie-Filter, Tap → Bottom-Sheet, Entfernungsringe vom Hotel, GPS / Live-Tracking |
+| **Karte** | Leaflet-Karte mit 70+ Locations, Farbkodierung nach Kategorie, GPS / Live-Tracking |
 | **Hotel** | Hotel Niky: Adresse, Anreise vom Flughafen, Check-in/out, Tipps |
-| **Survival** | Bulgarische Phrasen, Kulturschocks (Kopf = Ja!), Preistabelle, Transport, Notrufnummern |
-| **Sofia** | Fun Facts, Kulturschocks, Bestelltipps, Touristenfallen |
+| **Survival** | Bulgarische Phrasen, Kulturschocks (Kopf = Ja!), Preise, Transport, Notruf |
+| **Sofia** | Fun Facts, Kulturschocks, Events, Bestelltipps |
 | **Notizen** | Offenes kollaboratives Board, kein Login, auto-refresh alle 30 Sek |
 
-**GPS-Button (Karte):** 1× klick → Position einmalig anzeigen · 2× klick → Live-Follow · 3× klick → aus
+**GPS-Button:** 1× klick → Position einmalig anzeigen · 2× klick → Live-Follow · 3× klick → aus
 
-**Edit-Modus (Neu-Button):** Karten-Klick → neue Location per Formular hinzufügen (Nominatim-Geocoding). Löschen erfordert Passwort.
+**Edit-Modus:** Karten-Klick → neue Location per Formular hinzufügen (Nominatim-Geocoding)
 
 ---
 
-## Stack
+## Tech Stack
 
-- **Frontend:** Vite + React 18 + TypeScript, Leaflet.js / react-leaflet, PWA via vite-plugin-pwa
+- **Frontend:** Vite + React 18 + TypeScript, Leaflet.js, PWA
 - **Backend:** Node.js 22 + Express 5 + TypeScript
 - **DB:** SQLite (better-sqlite3)
-- **Icons:** lucide-react
-- **Fonts:** Playfair Display (Headlines) + DM Sans (Body)
-- **Deploy:** Docker → ghcr.io → Watchtower → sofia.eventig.app
+- **Deploy:** Docker → ghcr.io → Watchtower
 
 ---
 
-## Lokales Setup
-
-### Voraussetzungen
-
-- Node.js 22+
-- npm
-
-### Installation
+## Quick Start
 
 ```bash
+# Installation
 npm install
-```
 
-### Datenbank initialisieren
+# DB initialisieren
+npm run db:migrate
+npx tsx server/db/seed.ts
 
-```bash
-npm run db:migrate       # Schema anlegen
-npx tsx server/db/seed.ts  # 70+ Locations einspielen
-```
-
-### Entwicklung
-
-Zwei Prozesse parallel starten:
-
-```bash
-# Terminal 1 – Backend (Port 3002)
-npm run server:dev
-
-# Terminal 2 – Frontend (Port 3000, HTTPS)
-npm run dev
-```
-
-Vite proxied `/api/*` automatisch auf den Backend-Port.
-
-**HTTPS für GPS:** Der Dev-Server läuft mit selbst-signiertem Zertifikat. Beim ersten Aufruf im Browser die Sicherheitswarnung manuell bestätigen. Für LAN-Zugriff (z.B. Handy) muss das Zertifikat die LAN-IP als SAN enthalten:
-
-```bash
-openssl req -x509 -newkey rsa:2048 -nodes \
-  -keyout /tmp/key.pem -out /tmp/cert.pem -days 365 \
-  -subj "/CN=192.168.178.192" \
-  -addext "subjectAltName=IP:192.168.178.192,IP:127.0.0.1,DNS:localhost"
-```
-
-### Build
-
-```bash
-npm run build
+# Entwicklung (2 Terminals)
+npm run server:dev  # Terminal 1 - Backend (Port 3002)
+npm run dev         # Terminal 2 - Frontend (Port 3000, HTTPS)
 ```
 
 ---
 
-## Projektstruktur
+## Dokumentation
 
-```
-src/
-  components/
-    Map.tsx             ← Leaflet-Karte, Pins, Ringe, GPS-Marker
-    BottomSheet.tsx     ← Tap-to-Detail Overlay (mobil)
-    FilterBar.tsx       ← Kategorie-Toggle-Buttons
-    LocationForm.tsx    ← Neue Location hinzufügen (Edit-Modus)
-    CategoryForm.tsx    ← Neue Kategorie anlegen
-    TabNavigation.tsx   ← Bottom-Tab-Bar (5 Tabs)
-  pages/
-    MapPage.tsx         ← Hauptseite mit Karte + GPS + Edit-Modus
-    HotelPage.tsx       ← Hotel Niky Content
-    SurvivalPage.tsx    ← Phrasen, Preise, Transport, Notruf
-    SofiaPage.tsx       ← Fun Facts & Kulturschocks
-    NotesPage.tsx       ← Kollaboratives Notiz-Board
-  hooks/
-    useLocations.ts     ← GET/POST /api/locations
-    useCategories.ts    ← GET/POST /api/categories
-    useNotes.ts         ← GET/POST /api/notes + auto-refresh
-  lib/
-    api.ts              ← fetch-Wrapper für alle API-Calls
-    leaflet.ts          ← Custom Icons, Koordinaten-Helpers
-    geocoding.ts        ← Nominatim-Adresssuche (OSM, kein API-Key)
-
-server/
-  index.ts              ← Express-Server (Port 3002)
-  routes/
-    locations.ts        ← GET /api/locations, POST /api/locations/:id
-    categories.ts       ← GET /api/categories, POST /api/categories
-    notes.ts            ← GET /api/notes, POST /api/notes, DELETE /api/notes/:id
-  db/
-    index.ts            ← SQLite-Verbindung (better-sqlite3)
-    schema.sql          ← Tabellen: categories, locations, notes
-    migrate.ts          ← Schema anwenden
-    seed-data.ts        ← Alle 70+ Locations als TypeScript-Objekte
-    seed.ts             ← Seed-Script
-
-public/
-  icons/                ← PWA Icons (192×192, 512×512)
-  images/               ← Hero-Bilder
-
-tests/                  ← API + Komponenten-Tests (Vitest)
-```
+- **[Development Guide](docs/development.md)** - Lokales Setup, Dev-Server, Tests
+- **[Deployment Guide](docs/deployment.md)** - Docker, CI/CD, Prod-Deploy
+- **[Architecture](docs/architecture.md)** - Tech Stack, Projektstruktur, API
+- **[Testing](TESTING.md)** - Test-Suite, Verifikation
+- **[Emoji System](EMOJI_SYSTEM.md)** - Emoji-basierte Identifikation
 
 ---
 
@@ -147,30 +73,16 @@ tests/                  ← API + Komponenten-Tests (Vitest)
 
 ---
 
-## Deployment
+## Historische Dokumentation
 
-Läuft über die standard Homelab-Pipeline:
-
-```
-git push → GitHub Actions (build + push) → ghcr.io/bastiwasti/sofia-guide → Watchtower → live
-```
-
-Manuell deployen:
-
-```bash
-ssh sebastian@192.168.178.160 "cd /opt/apps/sofia-guide && docker compose pull && docker compose up -d --force-recreate"
-```
-
-Logs checken:
-
-```bash
-ssh sebastian@192.168.178.160 "docker logs sofia-guide --tail 50"
-```
+Alte Recherchen, Pläne und Forschungsergebnisse sind archiviert in `docs/research-archive/`:
+- Bar-Recherche (RESEARCH_*.md)
+- OSM-Adressen (OSM_*.md)
+- Restaurant-Recherche (restaurant-*.md)
+- Events (events/)
 
 ---
 
-## Daten
+## License
 
-Alle Locations sind in `server/db/seed-data.ts` gepflegt — kein Scraping, kein externes API. Karten-Anker ist **Hotel Niky** (lat: 42.6953, lng: 23.3219). Die Entfernungsringe zeigen 300m / 600m / 900m / 1,2km / 1,5km vom Hotel.
-
-Geocoding (Adresssuche im Edit-Modus) läuft über [Nominatim](https://nominatim.openstreetmap.org) — kostenlos, kein API-Key nötig.
+Privat — für den Sofia-Wochenendtrip Mai 2026.

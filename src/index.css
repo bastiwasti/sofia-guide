@@ -567,15 +567,25 @@ input::placeholder, textarea::placeholder {
   box-shadow: none;
   backdrop-filter: none;
   padding: var(--spacing-xs);
+  bottom: 60px;
 }
 
-.floating-dock.menu-collapsed .dock-button:not(.dock-toggle):not(.zoom-button) {
+.floating-dock.menu-collapsed .dock-button:not(.dock-toggle):not([aria-label*="GPS"]) {
   opacity: 0;
   pointer-events: none;
   transform: translateX(-10px);
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.floating-dock.menu-collapsed .dock-button[aria-label*="GPS"] {
+  opacity: 0.7;
+  pointer-events: auto;
+  transform: translateX(0);
+  position: relative;
+  top: auto;
+  left: auto;
 }
 
 .dock-toggle {
