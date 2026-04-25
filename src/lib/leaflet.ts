@@ -97,7 +97,8 @@ export function createCategoryIcon(categoryId: number, color: string): L.DivIcon
     6: '🌟',
     7: '🎨',
     8: '⚽',
-    9: '🚽'
+    9: '🚽',
+    10: '🛒'
   }
 
   const shapes: Record<number, string> = {
@@ -109,7 +110,8 @@ export function createCategoryIcon(categoryId: number, color: string): L.DivIcon
     6: '5px',
     7: '5px 10px',
     8: '5px 10px',
-    9: '5px'
+    9: '5px',
+    10: '5px'
   }
 
   const emoji = icons[categoryId] || ''
@@ -132,7 +134,6 @@ export function createCategoryIcon(categoryId: number, color: string): L.DivIcon
       ">
         <span style="
           font-size: 12px;
-          color: white;
           font-weight: 600;
           user-select: none;
           line-height: 1;
