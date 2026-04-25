@@ -87,6 +87,68 @@ export function calculateDistance(
   return R * c
 }
 
+export function createCategoryIcon(categoryId: number, color: string): L.DivIcon {
+  const icons: Record<number, string> = {
+    1: '🍺',
+    2: '🍕',
+    3: '💃',
+    4: '📷',
+    5: '🏨',
+    6: '🌟',
+    7: '🎨',
+    8: '⚽',
+    9: '🚽'
+  }
+
+  const shapes: Record<number, string> = {
+    1: '50%',
+    2: '50%',
+    3: '50%',
+    4: '5px 10px',
+    5: '5px',
+    6: '5px',
+    7: '5px 10px',
+    8: '5px 10px',
+    9: '5px'
+  }
+
+  const emoji = icons[categoryId] || ''
+  const borderRadius = shapes[categoryId] || '5px'
+
+  return L.divIcon({
+    className: `category-marker-${categoryId}`,
+    html: `
+      <div style="
+        position: relative;
+        width: 20px;
+        height: 20px;
+        background-color: ${color};
+        border: 2px solid white;
+        border-radius: ${borderRadius};
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      ">
+        <span style="
+          font-size: 12px;
+          color: white;
+          font-weight: 600;
+          user-select: none;
+          line-height: 1;
+        ">${emoji}</span>
+      </div>
+    `,
+    iconSize: [20, 20],
+    iconAnchor: [10, 20],
+    popupAnchor: [0, -20]
+  })
+}
+
+export function createWCIcon(): L.DivIcon {
+  return createCategoryIcon(9, '#1976D2')
+}
+
 export function formatDistance(km: number): string {
   if (km < 1) {
     return `${Math.round(km * 1000)}m`

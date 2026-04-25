@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { X, ArrowRight, ArrowLeft } from 'lucide-react'
+import { X, ArrowRight, ArrowLeft, ChevronDown } from 'lucide-react'
 import { welcomeContent } from '../data/welcomeContent'
 
 interface WelcomeOverlayProps {
@@ -10,6 +10,7 @@ interface WelcomeOverlayProps {
 export default function WelcomeOverlay({ onClose, onDontShowAgain }: WelcomeOverlayProps) {
   const [currentPage, setCurrentPage] = useState<1 | 2>(1)
   const [dontShowAgain, setDontShowAgain] = useState(false)
+  const [openTabIndex, setOpenTabIndex] = useState<number>(0)
 
   useEffect(() => {
     function handleEscape(e: KeyboardEvent) {
@@ -47,6 +48,10 @@ export default function WelcomeOverlay({ onClose, onDontShowAgain }: WelcomeOver
     }
   }
 
+  function toggleTab(index: number) {
+    setOpenTabIndex(openTabIndex === index ? -1 : index)
+  }
+
   return (
     <div className="welcome-overlay" onClick={handleOverlayClick}>
       <div className="welcome-overlay-card">
@@ -60,9 +65,18 @@ export default function WelcomeOverlay({ onClose, onDontShowAgain }: WelcomeOver
             <p className="welcome-intro">{welcomeContent.page1.intro}</p>
 
             <div className="welcome-section">
-              <h3 className="welcome-section-title">{welcomeContent.page1.emojiSection.title}</h3>
+              <h3 className="welcome-section-title">⚡ {welcomeContent.page1.setupSection.title}</h3>
               <ol className="welcome-steps">
-                {welcomeContent.page1.emojiSection.steps.map((step, index) => (
+                {welcomeContent.page1.setupSection.steps.map((step, index) => (
+                  <li key={index} className="welcome-step">{step}</li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="welcome-section">
+              <h3 className="welcome-section-title">🔄 {welcomeContent.page1.roundSection.title}</h3>
+              <ol className="welcome-steps">
+                {welcomeContent.page1.roundSection.steps.map((step, index) => (
                   <li key={index} className="welcome-step">{step}</li>
                 ))}
               </ol>
@@ -85,15 +99,28 @@ export default function WelcomeOverlay({ onClose, onDontShowAgain }: WelcomeOver
             <h2 className="welcome-title">{welcomeContent.page2.title}</h2>
 
             <div className="welcome-tabs-list">
-              {welcomeContent.page2.tabs.map((tab, index) => (
-                <div key={index} className="welcome-tab-item">
-                  <span className="welcome-tab-emoji">{tab.emoji}</span>
-                  <div className="welcome-tab-content">
-                    <span className="welcome-tab-label">{tab.label}</span>
-                    <span className="welcome-tab-description">{tab.description}</span>
+              {welcomeContent.page2.tabs.map((tab, index) => {
+                const isOpen = openTabIndex === index
+                return (
+                  <div key={index} className={`welcome-tab-item ${isOpen ? 'open' : ''}`}>
+                    <button
+                      className="welcome-tab-header"
+                      onClick={() => toggleTab(index)}
+                      aria-expanded={isOpen}
+                    >
+                      <span className="welcome-tab-emoji">{tab.emoji}</span>
+                      <span className="welcome-tab-label">{tab.label}</span>
+                      <ChevronDown
+                        size={18}
+                        className={`welcome-tab-chevron ${isOpen ? 'rotated' : ''}`}
+                      />
+                    </button>
+                    <div className={`welcome-tab-body ${isOpen ? 'open' : ''}`}>
+                      <p className="welcome-tab-description">{tab.description}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
 
             <label className="welcome-checkbox-label">
@@ -211,6 +238,8 @@ export default function WelcomeOverlay({ onClose, onDontShowAgain }: WelcomeOver
           color: var(--color-text);
           text-align: center;
           margin: 0;
+          white-space: pre-line;
+          line-height: 1.5;
         }
 
         .welcome-section {
@@ -222,10 +251,12 @@ export default function WelcomeOverlay({ onClose, onDontShowAgain }: WelcomeOver
 
         .welcome-section-title {
           font-family: var(--font-body);
-          font-size: 14px;
-          font-weight: 600;
-          color: var(--color-text);
-          margin: 0 0 12px 0;
+          font-size: 13px;
+          font-weight: 700;
+          color: var(--color-plan);
+          margin: 0 0 10px 0;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .welcome-steps {
@@ -254,36 +285,49 @@ export default function WelcomeOverlay({ onClose, onDontShowAgain }: WelcomeOver
           line-height: 1.5;
         }
 
+        /* Accordion */
         .welcome-tabs-list {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 6px;
         }
 
         .welcome-tab-item {
-          display: flex;
-          align-items: flex-start;
-          gap: 12px;
-          padding: 12px;
-          background: rgba(0, 150, 136, 0.05);
-          border-radius: 8px;
-          transition: all 0.2s ease;
+          border: 1.5px solid rgba(0, 150, 136, 0.15);
+          border-radius: 10px;
+          overflow: hidden;
+          transition: border-color 0.2s ease;
         }
 
-        .welcome-tab-item:hover {
-          background: rgba(0, 150, 136, 0.1);
+        .welcome-tab-item.open {
+          border-color: rgba(0, 150, 136, 0.4);
+        }
+
+        .welcome-tab-header {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 14px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          text-align: left;
+          transition: background 0.2s ease;
+        }
+
+        .welcome-tab-header:hover {
+          background: rgba(0, 150, 136, 0.05);
+        }
+
+        .welcome-tab-item.open .welcome-tab-header {
+          background: rgba(0, 150, 136, 0.06);
         }
 
         .welcome-tab-emoji {
-          font-size: 24px;
+          font-size: 22px;
           line-height: 1;
           flex-shrink: 0;
-        }
-
-        .welcome-tab-content {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
         }
 
         .welcome-tab-label {
@@ -291,13 +335,37 @@ export default function WelcomeOverlay({ onClose, onDontShowAgain }: WelcomeOver
           font-size: 15px;
           font-weight: 600;
           color: var(--color-text);
+          flex: 1;
+        }
+
+        .welcome-tab-chevron {
+          color: var(--color-gray-dark);
+          flex-shrink: 0;
+          transition: transform 0.25s ease;
+        }
+
+        .welcome-tab-chevron.rotated {
+          transform: rotate(180deg);
+        }
+
+        .welcome-tab-body {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+
+        .welcome-tab-body.open {
+          max-height: 400px;
         }
 
         .welcome-tab-description {
           font-family: var(--font-body);
           font-size: 13px;
           color: var(--color-gray-dark);
-          line-height: 1.4;
+          line-height: 1.6;
+          margin: 0;
+          padding: 0 14px 14px 48px;
+          white-space: pre-line;
         }
 
         .welcome-checkbox-label {

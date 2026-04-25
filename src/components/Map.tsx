@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, Circle, useMap, useMapEvents } from 'react-leaflet'
-import { createCustomIcon, HOTEL_COORDS, calculateDistance, formatDistance } from '../lib/leaflet'
+import { createCustomIcon, createCategoryIcon, HOTEL_COORDS, calculateDistance, formatDistance } from '../lib/leaflet'
 import { Location } from '../hooks/useLocations'
 import { UserLocation } from '../hooks/useUserLocations'
 import L from 'leaflet'
@@ -307,12 +307,14 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
         <Marker
           key={location.id}
           position={[location.lat, location.lng]}
-          icon={createCustomIcon(
-            location.category_color,
-            location.author_emoji || location.backup_emoji || null,
-            location.is_active_user === 1,
-            location.backup_emoji || null
-          )}
+          icon={location.category_id >= 1 && location.category_id <= 10
+            ? createCategoryIcon(location.category_id, location.category_color)
+            : createCustomIcon(
+                location.category_color,
+                location.author_emoji || location.backup_emoji || null,
+                location.is_active_user === 1,
+                location.backup_emoji || null
+              )}
           eventHandlers={{
             click: () => onLocationSelect(location)
           }}

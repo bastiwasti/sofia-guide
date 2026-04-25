@@ -93,7 +93,7 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
   const filteredLocations = useMemo(() => {
     if (selectedCategories.length === 0) return locations
     return locations.filter(loc =>
-      selectedCategories.includes(loc.category_id) || loc.category_id === 5 || loc.category_id === 6 || loc.category_id === 9
+      selectedCategories.includes(loc.category_id) || loc.category_id === 5 || loc.category_id === 6 || loc.category_id === 9 || loc.category_id === 10
     )
   }, [locations, selectedCategories])
 
