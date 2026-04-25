@@ -284,7 +284,6 @@ export function initializeDatabase(): void {
     migrateLocationsTable(db)
     migrateEventsTable(db)
     migrateUserRoleTable(db)
-    migrateEventVenueLookups(db)
 
     ensureAdminAccount(db)
   } catch (error) {
@@ -295,4 +294,11 @@ export function initializeDatabase(): void {
   }
 
   seedDatabase()
+
+  const migrateDb = getDatabase()
+  try {
+    migrateEventVenueLookups(migrateDb)
+  } finally {
+    migrateDb.close()
+  }
 }
