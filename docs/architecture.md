@@ -55,6 +55,7 @@ tests/                  ← API + Komponenten-Tests (Vitest)
 - `GET/POST /api/user-sessions` - Emoji-Login
 - `PATCH /api/user-sessions/:id/emoji` - Emoji wechseln
 - `DELETE /api/user-sessions/:id` - Logout
+- `POST /api/admin/reset-sessions` - Alle Sessions löschen, Admin neu erstellen (requires: `X-Admin-Recovery-Code: 8688`)
 
 ## PWA
 

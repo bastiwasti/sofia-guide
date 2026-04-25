@@ -67,3 +67,19 @@ Falls die Datenbank neu eingespielt werden muss:
 ssh sebastian@192.168.178.160 "docker exec -it sofia-guide sqlite3 /app/data/sofia-guide.db 'DELETE FROM events;'"
 ssh sebastian@192.168.178.160 "docker restart sofia-guide"
 ```
+
+## User Sessions Reset
+
+Um alle User-Sessions zu löschen und den Admin-Account neu zu erstellen:
+
+```bash
+curl -X POST https://sofia.eventig.app/api/admin/reset-sessions \
+  -H "Content-Type: application/json" \
+  -H "X-Admin-Recovery-Code: 8688"
+```
+
+**Admin-Details:**
+- Emoji: 🦧
+- Recovery Code: 8688
+
+Siehe auch `server/README.md` für weitere Admin-Operations.

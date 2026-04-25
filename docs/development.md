@@ -60,6 +60,31 @@ npx vitest         # Watch-Mode
 printf '#!/bin/sh\nnpm test\n' > .git/hooks/pre-push && chmod +x .git/hooks/pre-push
 ```
 
+## Admin Testing
+
+### User Sessions Reset
+
+Lokal testen:
+
+```bash
+# Alle User-Sessions löschen und Admin neu erstellen
+curl -X POST http://localhost:3002/api/admin/reset-sessions \
+  -H "Content-Type: application/json" \
+  -H "X-Admin-Recovery-Code: 8688"
+```
+
+**Admin-Details:**
+- Emoji: 🦧
+- Recovery Code: 8688
+
+### Prüfen aller Sessions
+
+```bash
+curl http://localhost:3002/api/user-sessions
+```
+
+Siehe auch `server/README.md` für vollständige API-Dokumentation.
+
 ## Lint & Typecheck
 
 ```bash
