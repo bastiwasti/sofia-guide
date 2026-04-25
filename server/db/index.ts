@@ -222,40 +222,45 @@ function migrateEventVenueLookups(db: Database.Database): void {
 
     console.log(`Found ${events.length} events without venue lookup, attempting to fix...`)
 
-    let fixedCount = 0
-    for (const evt of events) {
-      const seedEvent = seedEvents.find(se => se.title === evt.title)
+    const migrate = db.transaction((eventsToFix: typeof events) => {
+      let fixedCount = 0
+      for (const evt of eventsToFix) {
+        const seedEvent = seedEvents.find(se => se.title === evt.title)
 
-      if (!seedEvent) {
-        console.log(`  ⚠️  No seed data found for event: "${evt.title}"`)
-        continue
+        if (!seedEvent) {
+          console.log(`  ⚠️  No seed data found for event: "${evt.title}"`)
+          continue
+        }
+
+        const lookupName = seedEvent.venue_lookup_name ?? seedEvent.venue_name ?? null
+
+        if (!lookupName) {
+          console.log(`  ⚠️  No venue lookup name for event: "${evt.title}"`)
+          continue
+        }
+
+        const location = findLocation.get(lookupName) as { id: number; name: string; lat: number; lng: number; category_id: number } | undefined
+
+        if (!location) {
+          console.log(`  ❌ Venue not found in locations table: "${lookupName}" for event "${evt.title}"`)
+          continue
+        }
+
+        updateEvent.run(
+          location.id,
+          location.name,
+          location.lat,
+          location.lng,
+          evt.id
+        )
+
+        console.log(`  ✅ Fixed event "${evt.title}" → venue "${location.name}" (location_id: ${location.id})`)
+        fixedCount++
       }
+      return fixedCount
+    })
 
-      const lookupName = seedEvent.venue_lookup_name ?? seedEvent.venue_name ?? null
-
-      if (!lookupName) {
-        console.log(`  ⚠️  No venue lookup name for event: "${evt.title}"`)
-        continue
-      }
-
-      const location = findLocation.get(lookupName) as { id: number; name: string; lat: number; lng: number; category_id: number } | undefined
-
-      if (!location) {
-        console.log(`  ❌ Venue not found in locations table: "${lookupName}" for event "${evt.title}"`)
-        continue
-      }
-
-      updateEvent.run(
-        location.id,
-        location.name,
-        location.lat,
-        location.lng,
-        evt.id
-      )
-
-      console.log(`  ✅ Fixed event "${evt.title}" → venue "${location.name}" (location_id: ${location.id})`)
-      fixedCount++
-    }
+    const fixedCount = migrate(events)
 
     if (fixedCount > 0) {
       console.log(`✅ Event venue lookup migration completed: ${fixedCount}/${events.length} events fixed`)
