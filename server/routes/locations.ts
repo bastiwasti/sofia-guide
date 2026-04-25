@@ -95,7 +95,7 @@ export function getLocationById(req: Request, res: Response): void {
         dress_code,
         service_times
       } = req.body
-      
+
       if (!category_id || !name || !lat || !lng) {
         res.status(400).json({ error: 'Missing required fields' })
         return
@@ -119,7 +119,7 @@ export function getLocationById(req: Request, res: Response): void {
           music_type, crowd_type, pro_tips, fun_facts, seating_options,
           entry_fee, visit_duration, best_time_to_visit, photo_allowed, guided_tours, key_features, dress_code, service_times
         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `).run(
         category_id,
         name,
@@ -174,7 +174,7 @@ export function getLocationById(req: Request, res: Response): void {
 
       res.status(201).json(location)
     } catch (error) {
-      console.error('Error creating location:', error)
+      console.error('Error creating location:', error instanceof Error ? error.message : 'Unknown error')
       res.status(500).json({ error: 'Failed to create location' })
     }
   }
