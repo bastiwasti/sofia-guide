@@ -8,18 +8,21 @@ Schreib mir einfach: **"Lass uns den Sofia-Events-Recrawl machen"** — dann arb
 
 ---
 
-## Aktuell geseedete Events (Stand: 2026-04-24)
+## Aktuell geseedete Events (Stand: 2026-04-28)
 
 Quelle: [docs/events-research-2026-05-15.md](docs/events-research-2026-05-15.md), Code: [server/db/events-seed.ts](server/db/events-seed.ts)
 
 | Tag | Zeit | Event | Venue |
 |---|---|---|---|
 | Fr 15.05. | 19:00 | Tinariwen — Hoggar Tour | NDK Hall 3 |
-| Fr 15.05. | 19:00 | Sean Paul — Rise Jamaica | Vidas Art Arena |
+| Fr 15.05. | 18:00 | Sean Paul — Rise Jamaica | Vidas Art Arena |
 | Sa 16.05. | 09:00 (weekly) | Farmers Market am Roman Wall | St. Sofia Church Park |
 | Sa 16.05. | 16:00 | Levski vs CSKA — Ewiges Derby | Vasil Levski Stadium |
 | Sa 16.05. | 19:00 | Queen of the Opera (Maria Guleghina) | Sofia Opera |
+| Sa 16.05. | 19:30 | Convenience Store Woman | Ivan Vazov National Theatre |
+| Sa 16.05. | — | Antistatic Festival (bis Di 19.05.) | TBA |
 | So 17.05. | 16:00 | La Cenerentola (Rossini) | Sofia Opera |
+| So 17.05. | 19:30 | Loot (Komödie, Joe Orton) | Ivan Vazov National Theatre |
 
 ## Quellen (parallel abfragen via WebSearch/WebFetch)
 

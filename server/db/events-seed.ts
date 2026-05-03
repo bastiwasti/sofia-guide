@@ -47,7 +47,7 @@ export const events: SeedEvent[] = [
     venue_name: 'Vidas Art Arena (Velodrome Serdika)',
     venue_address: 'Borisova Gradina Park',
     start_date: '2026-05-15',
-    start_time: '19:00',
+    start_time: '18:00',
     end_time: '22:00',
     price: 'ab 50 €',
     external_url: 'https://ticketstation.bg/en/p5673-sean-paul-2026',
@@ -95,6 +95,46 @@ export const events: SeedEvent[] = [
     external_url: 'https://www.operasofia.bg/en/calendar/2026-05',
     description: 'Rossinis Aschenputtel auf italienisch — sprachübergreifend. Sonntag-Matinée vor Abflug.',
     emoji: '🎭',
+  },
+
+  // ── Ivan Vazov Nationaltheater ───────────────────────────────────────────
+  {
+    title: 'Convenience Store Woman',
+    event_type: 'theater',
+    venue_lookup_name: 'Ivan Vazov Nationaltheater',
+    venue_name: 'Ivan Vazov National Theatre',
+    start_date: '2026-05-16',
+    start_time: '19:30',
+    price: '10-30 lv',
+    external_url: 'https://nationaltheatre.bg/en/programme?day=&month=05&year=2026',
+    description: 'Nach dem gleichnamigen Japan-Roman von Sayaka Murata. Auf Bulgarisch — als Theaterabend im historischen Jugendstilbau trotzdem ein Erlebnis.',
+    emoji: '🎭',
+  },
+  {
+    title: 'Loot',
+    event_type: 'theater',
+    venue_lookup_name: 'Ivan Vazov Nationaltheater',
+    venue_name: 'Ivan Vazov National Theatre',
+    start_date: '2026-05-17',
+    start_time: '19:30',
+    price: '10-30 lv',
+    external_url: 'https://nationaltheatre.bg/en/programme?day=&month=05&year=2026',
+    description: 'Schwarze Komödie von Joe Orton. Auf Bulgarisch — aber auch ohne Sprachkenntnisse als Kulturabend im prächtigen Nationaltheater empfehlenswert.',
+    emoji: '🎭',
+  },
+
+  // ── Antistatic Festival ──────────────────────────────────────────────────
+  {
+    title: 'Antistatic Festival — Bulgarian Dance Platform #5',
+    event_type: 'festival',
+    venue_name: 'TBA (Venue wird Mitte März bekannt)',
+    start_date: '2026-05-16',
+    end_date: '2026-05-19',
+    start_time: null,
+    price: '50 EUR Vollakkreditierung oder Einzeltickets',
+    external_url: 'https://dancingopportunities.com/bulgarian-dance-platform-5/',
+    description: 'Internationales Zeitgenössischer-Tanz-Festival, Teil des 19. Antistatic-Festivals. 13+ Aufführungen Sa–Di. Venue wird noch bekannt gegeben.',
+    emoji: '💃',
   },
 
   // ── Wöchentlich (fällt aufs Wochenende) ─────────────────────────────────

@@ -2,8 +2,8 @@ export const survivalContent = {
   schafkopfTracker: {
     title: '🃏 Kartenspielen in Sofia',
     description: 'Wenn wir die Nächte durchzocken, alles tracken! Unsere Schafkopf-Statistiken, Ranglisten und epische Spiele gibt\'s hier:',
-    link: 'https://schafkopf.eventig.app',
-    linkText: '🎴 Schafkopf Tracker öffnen'
+    link: 'https://karten.eventig.app',
+    linkText: '🎴 Karten Tracker öffnen'
   },
   phrases: [
     { bulgarian: 'Добър ден', phonetic: 'Dobar den', german: 'Guten Tag' },
