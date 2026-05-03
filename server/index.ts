@@ -60,11 +60,9 @@ app.get('/api/user-sessions/:sessionId/validate', validateSession)
 
 app.post('/api/admin/reset-sessions', resetUserSessions)
 
-if (isDev) {
-  app.get('/api/health', (_req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() })
-  })
-}
+app.get('/api/health', (_req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString(), version: process.env.npm_package_version ?? 'unknown' })
+})
 
 if (!isDev) {
   const distPath = join(__dirname, '../dist')
