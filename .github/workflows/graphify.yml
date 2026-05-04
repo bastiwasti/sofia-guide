@@ -3,28 +3,28 @@ name: Graphify
 on:
   push:
     branches: [main, master]
-  schedule:
-    - cron: '0 3 * * *'
+    paths:
+      - 'src/**'
+      - 'package.json'
+      - '.graphifyignore'
+  workflow_dispatch:
 
 jobs:
-  graphify:
+  update-graph:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-
-      - name: Install graphify
-        run: pip install graphifyy
-
+      - run: pip install graphifyy
       - name: Build knowledge graph
         run: |
-          python -c "
+          mkdir -p graphify-out
+          python3 -c "
           import json
-          from pathlib import Path
           from graphify.detect import detect
           from graphify.extract import collect_files, extract
           from graphify.build import build_from_json
@@ -32,55 +32,48 @@ jobs:
           from graphify.analyze import god_nodes, surprising_connections, suggest_questions
           from graphify.report import generate
           from graphify.export import to_json, to_html
+          from pathlib import Path
 
-          root = Path('.')
-          detect_result = detect(root)
-          files = collect_files(root)
-          ast_data = extract(files)
-          G = build_from_json(ast_data)
-          partition = cluster(G)
-          cohesion = score_all(G, partition)
-          god = god_nodes(G)
-          surprising = surprising_connections(G, partition)
+          det = detect(Path('.'))
+          code_files = []
+          for f in det['files']['code']:
+              p = Path(f)
+              code_files.extend(collect_files(p) if p.is_dir() else [p])
 
-          labels = {}
-          for comm_id, node_ids in partition.items():
-              prefix_counts = {}
-              for nid in node_ids:
-                  parts = nid.rsplit('_', 1)
-                  if len(parts) >= 2:
-                      top = parts[0].split('_')[0]
-                      prefix_counts[top] = prefix_counts.get(top, 0) + 1
-              if prefix_counts:
-                  sorted_p = sorted(prefix_counts, key=prefix_counts.get, reverse=True)
-                  label = sorted_p[0].replace('_', ' ').title()
-                  if len(sorted_p) > 1 and sorted_p[1] != sorted_p[0]:
-                      label += ' & ' + sorted_p[1].replace('_', ' ').title()
-                  labels[comm_id] = label + f' ({len(node_ids)})'
-              else:
-                  labels[comm_id] = f'Community {comm_id} ({len(node_ids)})'
+          if not code_files:
+              print('No code files found')
+              raise SystemExit(0)
 
-          questions = suggest_questions(G, partition, labels)
-          out = Path('graphify-out')
-          out.mkdir(exist_ok=True)
+          extraction = extract(code_files)
+          G = build_from_json(extraction)
+          communities = cluster(G)
+          cohesion = score_all(G, communities)
+          gods = god_nodes(G)
+          surprises = surprising_connections(G, communities)
+          labels = {cid: 'Community ' + str(cid) for cid in communities}
+          questions = suggest_questions(G, communities, labels)
 
-          report = generate(G, partition, cohesion_scores=cohesion,
-                           community_labels=labels, god_node_list=god,
-                           surprise_list=surprising, detection_result=detect_result,
-                           token_cost={'input': 0, 'output': 0},
-                           root=str(root), suggested_questions=questions)
-          (out / 'GRAPH_REPORT.md').write_text(report)
-          to_json(G, partition, str(out / 'graph.json'), force=True)
-          member_counts = {cid: len(nids) for cid, nids in partition.items()}
-          to_html(G, partition, str(out / 'graph.html'),
-                  community_labels=labels, member_counts=member_counts)
-          print(f'Graph: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges, {len(partition)} communities')
+          detection = {'total_files': det['total_files'], 'total_words': det['total_words'],
+                       'needs_graph': False, 'warning': None,
+                       'files': {'code': [], 'document': [], 'paper': []}}
+          tokens = {'input': 0, 'output': 0}
+
+          report = generate(G, communities, cohesion, labels, gods, surprises,
+                          detection, tokens, '.', suggested_questions=questions)
+          Path('graphify-out/GRAPH_REPORT.md').write_text(report)
+          to_json(G, communities, 'graphify-out/graph.json')
+          to_html(G, communities, 'graphify-out/graph.html')
+
+          print(f'Graph: {G.number_of_nodes()} nodes, {G.number_of_edges()} edges, {len(communities)} communities')
           "
-
-      - name: Commit graph outputs
+      - name: Commit updated graph
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add graphify-out/GRAPH_REPORT.md graphify-out/graph.json graphify-out/graph.html
-          git diff --cached --quiet || git commit -m "chore: update graphify knowledge graph"
-          git push
+          if git diff --cached --quiet; then
+            echo "No changes to graph"
+          else
+            git commit -m "chore: update graphify knowledge graph"
+            git push
+          fi
