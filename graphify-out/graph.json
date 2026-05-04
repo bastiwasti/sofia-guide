@@ -1,0 +1,4938 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "label": "create-icons.js",
+      "file_type": "code",
+      "source_file": "scripts/create-icons.js",
+      "source_location": "L1",
+      "id": "scripts_create_icons_js",
+      "community": 16,
+      "norm_label": "create-icons.js"
+    },
+    {
+      "label": "createIcon()",
+      "file_type": "code",
+      "source_file": "scripts/create-icons.js",
+      "source_location": "L7",
+      "id": "scripts_create_icons_createicon",
+      "community": 16,
+      "norm_label": "createicon()"
+    },
+    {
+      "label": "geocode-all-locations.ts",
+      "file_type": "code",
+      "source_file": "scripts/geocode-all-locations.ts",
+      "source_location": "L1",
+      "id": "scripts_geocode_all_locations_ts",
+      "community": 12,
+      "norm_label": "geocode-all-locations.ts"
+    },
+    {
+      "label": "geocodeWithRetry()",
+      "file_type": "code",
+      "source_file": "scripts/geocode-all-locations.ts",
+      "source_location": "L4",
+      "id": "scripts_geocode_all_locations_geocodewithretry",
+      "community": 12,
+      "norm_label": "geocodewithretry()"
+    },
+    {
+      "label": "updateAllLocations()",
+      "file_type": "code",
+      "source_file": "scripts/geocode-all-locations.ts",
+      "source_location": "L49",
+      "id": "scripts_geocode_all_locations_updatealllocations",
+      "community": 12,
+      "norm_label": "updatealllocations()"
+    },
+    {
+      "label": "geocode-locations.ts",
+      "file_type": "code",
+      "source_file": "scripts/geocode-locations.ts",
+      "source_location": "L1",
+      "id": "scripts_geocode_locations_ts",
+      "community": 13,
+      "norm_label": "geocode-locations.ts"
+    },
+    {
+      "label": "geocodeLocation()",
+      "file_type": "code",
+      "source_file": "scripts/geocode-locations.ts",
+      "source_location": "L14",
+      "id": "scripts_geocode_locations_geocodelocation",
+      "community": 13,
+      "norm_label": "geocodelocation()"
+    },
+    {
+      "label": "updateAllLocations()",
+      "file_type": "code",
+      "source_file": "scripts/geocode-locations.ts",
+      "source_location": "L50",
+      "id": "scripts_geocode_locations_updatealllocations",
+      "community": 13,
+      "norm_label": "updatealllocations()"
+    },
+    {
+      "label": "check-location-data.ts",
+      "file_type": "code",
+      "source_file": "server/db/check-location-data.ts",
+      "source_location": "L1",
+      "id": "server_db_check_location_data_ts",
+      "community": 21,
+      "norm_label": "check-location-data.ts"
+    },
+    {
+      "label": "check-meta.ts",
+      "file_type": "code",
+      "source_file": "server/db/check-meta.ts",
+      "source_location": "L1",
+      "id": "server_db_check_meta_ts",
+      "community": 22,
+      "norm_label": "check-meta.ts"
+    },
+    {
+      "label": "check-sessions.ts",
+      "file_type": "code",
+      "source_file": "server/db/check-sessions.ts",
+      "source_location": "L1",
+      "id": "server_db_check_sessions_ts",
+      "community": 23,
+      "norm_label": "check-sessions.ts"
+    },
+    {
+      "label": "ensure-admin.ts",
+      "file_type": "code",
+      "source_file": "server/db/ensure-admin.ts",
+      "source_location": "L1",
+      "id": "server_db_ensure_admin_ts",
+      "community": 24,
+      "norm_label": "ensure-admin.ts"
+    },
+    {
+      "label": "events-seed.ts",
+      "file_type": "code",
+      "source_file": "server/db/events-seed.ts",
+      "source_location": "L1",
+      "id": "server_db_events_seed_ts",
+      "community": 25,
+      "norm_label": "events-seed.ts"
+    },
+    {
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L1",
+      "id": "server_db_index_ts",
+      "community": 5,
+      "norm_label": "index.ts"
+    },
+    {
+      "label": "resolveDbPath()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L14",
+      "id": "db_index_resolvedbpath",
+      "community": 5,
+      "norm_label": "resolvedbpath()"
+    },
+    {
+      "label": "getDatabase()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L18",
+      "id": "db_index_getdatabase",
+      "community": 0,
+      "norm_label": "getdatabase()"
+    },
+    {
+      "label": "migrateNotesTable()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L24",
+      "id": "db_index_migratenotestable",
+      "community": 5,
+      "norm_label": "migratenotestable()"
+    },
+    {
+      "label": "migrateLocationsTable()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L50",
+      "id": "db_index_migratelocationstable",
+      "community": 5,
+      "norm_label": "migratelocationstable()"
+    },
+    {
+      "label": "migrateEventsTable()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L118",
+      "id": "db_index_migrateeventstable",
+      "community": 5,
+      "norm_label": "migrateeventstable()"
+    },
+    {
+      "label": "migrateUserRoleTable()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L158",
+      "id": "db_index_migrateuserroletable",
+      "community": 5,
+      "norm_label": "migrateuserroletable()"
+    },
+    {
+      "label": "ensureAdminAccount()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L175",
+      "id": "db_index_ensureadminaccount",
+      "community": 5,
+      "norm_label": "ensureadminaccount()"
+    },
+    {
+      "label": "migrateEventVenueLookups()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L198",
+      "id": "db_index_migrateeventvenuelookups",
+      "community": 5,
+      "norm_label": "migrateeventvenuelookups()"
+    },
+    {
+      "label": "initializeDatabase()",
+      "file_type": "code",
+      "source_file": "server/db/index.ts",
+      "source_location": "L275",
+      "id": "db_index_initializedatabase",
+      "community": 5,
+      "norm_label": "initializedatabase()"
+    },
+    {
+      "label": "init-admin.ts",
+      "file_type": "code",
+      "source_file": "server/db/init-admin.ts",
+      "source_location": "L1",
+      "id": "server_db_init_admin_ts",
+      "community": 26,
+      "norm_label": "init-admin.ts"
+    },
+    {
+      "label": "migrate-new-columns.ts",
+      "file_type": "code",
+      "source_file": "server/db/migrate-new-columns.ts",
+      "source_location": "L1",
+      "id": "server_db_migrate_new_columns_ts",
+      "community": 27,
+      "norm_label": "migrate-new-columns.ts"
+    },
+    {
+      "label": "migrate.ts",
+      "file_type": "code",
+      "source_file": "server/db/migrate.ts",
+      "source_location": "L1",
+      "id": "server_db_migrate_ts",
+      "community": 5,
+      "norm_label": "migrate.ts"
+    },
+    {
+      "label": "reseed.ts",
+      "file_type": "code",
+      "source_file": "server/db/reseed.ts",
+      "source_location": "L1",
+      "id": "server_db_reseed_ts",
+      "community": 5,
+      "norm_label": "reseed.ts"
+    },
+    {
+      "label": "seed-data.ts",
+      "file_type": "code",
+      "source_file": "server/db/seed-data.ts",
+      "source_location": "L1",
+      "id": "server_db_seed_data_ts",
+      "community": 28,
+      "norm_label": "seed-data.ts"
+    },
+    {
+      "label": "seed.ts",
+      "file_type": "code",
+      "source_file": "server/db/seed.ts",
+      "source_location": "L1",
+      "id": "server_db_seed_ts",
+      "community": 5,
+      "norm_label": "seed.ts"
+    },
+    {
+      "label": "ensureEventVenueExtras()",
+      "file_type": "code",
+      "source_file": "server/db/seed.ts",
+      "source_location": "L6",
+      "id": "db_seed_ensureeventvenueextras",
+      "community": 5,
+      "norm_label": "ensureeventvenueextras()"
+    },
+    {
+      "label": "seedDatabase()",
+      "file_type": "code",
+      "source_file": "server/db/seed.ts",
+      "source_location": "L19",
+      "id": "db_seed_seeddatabase",
+      "community": 5,
+      "norm_label": "seeddatabase()"
+    },
+    {
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "server/index.ts",
+      "source_location": "L1",
+      "id": "server_index_ts",
+      "community": 0,
+      "norm_label": "index.ts"
+    },
+    {
+      "label": "event-recurrence.ts",
+      "file_type": "code",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L1",
+      "id": "server_lib_event_recurrence_ts",
+      "community": 7,
+      "norm_label": "event-recurrence.ts"
+    },
+    {
+      "label": "parseIsoDate()",
+      "file_type": "code",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L27",
+      "id": "lib_event_recurrence_parseisodate",
+      "community": 7,
+      "norm_label": "parseisodate()"
+    },
+    {
+      "label": "formatIsoDate()",
+      "file_type": "code",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L41",
+      "id": "lib_event_recurrence_formatisodate",
+      "community": 7,
+      "norm_label": "formatisodate()"
+    },
+    {
+      "label": "isoWeekday()",
+      "file_type": "code",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L48",
+      "id": "lib_event_recurrence_isoweekday",
+      "community": 7,
+      "norm_label": "isoweekday()"
+    },
+    {
+      "label": "addDays()",
+      "file_type": "code",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L54",
+      "id": "lib_event_recurrence_adddays",
+      "community": 7,
+      "norm_label": "adddays()"
+    },
+    {
+      "label": "parseWeeklyRecurrence()",
+      "file_type": "code",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L58",
+      "id": "lib_event_recurrence_parseweeklyrecurrence",
+      "community": 7,
+      "norm_label": "parseweeklyrecurrence()"
+    },
+    {
+      "label": "expandRecurrence()",
+      "file_type": "code",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L64",
+      "id": "lib_event_recurrence_expandrecurrence",
+      "community": 7,
+      "norm_label": "expandrecurrence()"
+    },
+    {
+      "label": "expandMany()",
+      "file_type": "code",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L121",
+      "id": "lib_event_recurrence_expandmany",
+      "community": 7,
+      "norm_label": "expandmany()"
+    },
+    {
+      "label": "categories.ts",
+      "file_type": "code",
+      "source_file": "server/routes/categories.ts",
+      "source_location": "L1",
+      "id": "server_routes_categories_ts",
+      "community": 0,
+      "norm_label": "categories.ts"
+    },
+    {
+      "label": "getCategories()",
+      "file_type": "code",
+      "source_file": "server/routes/categories.ts",
+      "source_location": "L5",
+      "id": "routes_categories_getcategories",
+      "community": 0,
+      "norm_label": "getcategories()"
+    },
+    {
+      "label": "createCategory()",
+      "file_type": "code",
+      "source_file": "server/routes/categories.ts",
+      "source_location": "L18",
+      "id": "routes_categories_createcategory",
+      "community": 0,
+      "norm_label": "createcategory()"
+    },
+    {
+      "label": "events.ts",
+      "file_type": "code",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L1",
+      "id": "server_routes_events_ts",
+      "community": 0,
+      "norm_label": "events.ts"
+    },
+    {
+      "label": "isValidIsoDate()",
+      "file_type": "code",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L15",
+      "id": "routes_events_isvalidisodate",
+      "community": 0,
+      "norm_label": "isvalidisodate()"
+    },
+    {
+      "label": "getEvents()",
+      "file_type": "code",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L19",
+      "id": "routes_events_getevents",
+      "community": 0,
+      "norm_label": "getevents()"
+    },
+    {
+      "label": "createEvent()",
+      "file_type": "code",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L76",
+      "id": "routes_events_createevent",
+      "community": 0,
+      "norm_label": "createevent()"
+    },
+    {
+      "label": "deleteEvent()",
+      "file_type": "code",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L156",
+      "id": "routes_events_deleteevent",
+      "community": 0,
+      "norm_label": "deleteevent()"
+    },
+    {
+      "label": "locations.ts",
+      "file_type": "code",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L1",
+      "id": "server_routes_locations_ts",
+      "community": 0,
+      "norm_label": "locations.ts"
+    },
+    {
+      "label": "getLocations()",
+      "file_type": "code",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L5",
+      "id": "routes_locations_getlocations",
+      "community": 0,
+      "norm_label": "getlocations()"
+    },
+    {
+      "label": "getLocationById()",
+      "file_type": "code",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L31",
+      "id": "routes_locations_getlocationbyid",
+      "community": 0,
+      "norm_label": "getlocationbyid()"
+    },
+    {
+      "label": "createLocation()",
+      "file_type": "code",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L63",
+      "id": "routes_locations_createlocation",
+      "community": 0,
+      "norm_label": "createlocation()"
+    },
+    {
+      "label": "deleteLocation()",
+      "file_type": "code",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L183",
+      "id": "routes_locations_deletelocation",
+      "community": 0,
+      "norm_label": "deletelocation()"
+    },
+    {
+      "label": "notes.ts",
+      "file_type": "code",
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L1",
+      "id": "server_routes_notes_ts",
+      "community": 0,
+      "norm_label": "notes.ts"
+    },
+    {
+      "label": "getNotes()",
+      "file_type": "code",
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L4",
+      "id": "routes_notes_getnotes",
+      "community": 0,
+      "norm_label": "getnotes()"
+    },
+    {
+      "label": "createNote()",
+      "file_type": "code",
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L30",
+      "id": "routes_notes_createnote",
+      "community": 0,
+      "norm_label": "createnote()"
+    },
+    {
+      "label": "deleteNote()",
+      "file_type": "code",
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L83",
+      "id": "routes_notes_deletenote",
+      "community": 0,
+      "norm_label": "deletenote()"
+    },
+    {
+      "label": "user-sessions.ts",
+      "file_type": "code",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L1",
+      "id": "server_routes_user_sessions_ts",
+      "community": 0,
+      "norm_label": "user-sessions.ts"
+    },
+    {
+      "label": "resetUserSessions()",
+      "file_type": "code",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L15",
+      "id": "routes_user_sessions_resetusersessions",
+      "community": 0,
+      "norm_label": "resetusersessions()"
+    },
+    {
+      "label": "getUserSessions()",
+      "file_type": "code",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L69",
+      "id": "routes_user_sessions_getusersessions",
+      "community": 0,
+      "norm_label": "getusersessions()"
+    },
+    {
+      "label": "createUserSession()",
+      "file_type": "code",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L85",
+      "id": "routes_user_sessions_createusersession",
+      "community": 0,
+      "norm_label": "createusersession()"
+    },
+    {
+      "label": "reclaimUserSession()",
+      "file_type": "code",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L131",
+      "id": "routes_user_sessions_reclaimusersession",
+      "community": 0,
+      "norm_label": "reclaimusersession()"
+    },
+    {
+      "label": "updateUserSessionEmoji()",
+      "file_type": "code",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L170",
+      "id": "routes_user_sessions_updateusersessionemoji",
+      "community": 0,
+      "norm_label": "updateusersessionemoji()"
+    },
+    {
+      "label": "deleteUserSession()",
+      "file_type": "code",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L225",
+      "id": "routes_user_sessions_deleteusersession",
+      "community": 0,
+      "norm_label": "deleteusersession()"
+    },
+    {
+      "label": "validateSession()",
+      "file_type": "code",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L251",
+      "id": "routes_user_sessions_validatesession",
+      "community": 0,
+      "norm_label": "validatesession()"
+    },
+    {
+      "label": "socket.ts",
+      "file_type": "code",
+      "source_file": "server/socket.ts",
+      "source_location": "L1",
+      "id": "server_socket_ts",
+      "community": 1,
+      "norm_label": "socket.ts"
+    },
+    {
+      "label": "registerSocketHandlers()",
+      "file_type": "code",
+      "source_file": "server/socket.ts",
+      "source_location": "L4",
+      "id": "server_socket_registersockethandlers",
+      "community": 1,
+      "norm_label": "registersockethandlers()"
+    },
+    {
+      "label": "App.tsx",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L1",
+      "id": "src_app_tsx",
+      "community": 8,
+      "norm_label": "app.tsx"
+    },
+    {
+      "label": "handleShowWelcome()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L28",
+      "id": "src_app_handleshowwelcome",
+      "community": 8,
+      "norm_label": "handleshowwelcome()"
+    },
+    {
+      "label": "focusOnMap()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L35",
+      "id": "src_app_focusonmap",
+      "community": 8,
+      "norm_label": "focusonmap()"
+    },
+    {
+      "label": "handleDontShowAgain()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L42",
+      "id": "src_app_handledontshowagain",
+      "community": 8,
+      "norm_label": "handledontshowagain()"
+    },
+    {
+      "label": "renderPage()",
+      "file_type": "code",
+      "source_file": "src/App.tsx",
+      "source_location": "L47",
+      "id": "src_app_renderpage",
+      "community": 8,
+      "norm_label": "renderpage()"
+    },
+    {
+      "label": "BottomSheet.tsx",
+      "file_type": "code",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L1",
+      "id": "src_components_bottomsheet_tsx",
+      "community": 4,
+      "norm_label": "bottomsheet.tsx"
+    },
+    {
+      "label": "toggleSection()",
+      "file_type": "code",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L45",
+      "id": "components_bottomsheet_togglesection",
+      "community": 4,
+      "norm_label": "togglesection()"
+    },
+    {
+      "label": "CategoryForm.tsx",
+      "file_type": "code",
+      "source_file": "src/components/CategoryForm.tsx",
+      "source_location": "L1",
+      "id": "src_components_categoryform_tsx",
+      "community": 17,
+      "norm_label": "categoryform.tsx"
+    },
+    {
+      "label": "CategoryForm()",
+      "file_type": "code",
+      "source_file": "src/components/CategoryForm.tsx",
+      "source_location": "L16",
+      "id": "components_categoryform_categoryform",
+      "community": 17,
+      "norm_label": "categoryform()"
+    },
+    {
+      "label": "EmojiPickerModal.tsx",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L1",
+      "id": "src_components_emojipickermodal_tsx",
+      "community": 2,
+      "norm_label": "emojipickermodal.tsx"
+    },
+    {
+      "label": "resetFormState()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L27",
+      "id": "components_emojipickermodal_resetformstate",
+      "community": 2,
+      "norm_label": "resetformstate()"
+    },
+    {
+      "label": "handleLogout()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L48",
+      "id": "components_emojipickermodal_handlelogout",
+      "community": 2,
+      "norm_label": "handlelogout()"
+    },
+    {
+      "label": "handleSwitch()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L76",
+      "id": "components_emojipickermodal_handleswitch",
+      "community": 2,
+      "norm_label": "handleswitch()"
+    },
+    {
+      "label": "handleEmojiSelect()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L118",
+      "id": "components_emojipickermodal_handleemojiselect",
+      "community": 2,
+      "norm_label": "handleemojiselect()"
+    },
+    {
+      "label": "validateCode()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L124",
+      "id": "components_emojipickermodal_validatecode",
+      "community": 2,
+      "norm_label": "validatecode()"
+    },
+    {
+      "label": "handleCreateNew()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L128",
+      "id": "components_emojipickermodal_handlecreatenew",
+      "community": 2,
+      "norm_label": "handlecreatenew()"
+    },
+    {
+      "label": "handleRecover()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L154",
+      "id": "components_emojipickermodal_handlerecover",
+      "community": 2,
+      "norm_label": "handlerecover()"
+    },
+    {
+      "label": "canSave()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L179",
+      "id": "components_emojipickermodal_cansave",
+      "community": 2,
+      "norm_label": "cansave()"
+    },
+    {
+      "label": "disabledReason()",
+      "file_type": "code",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L191",
+      "id": "components_emojipickermodal_disabledreason",
+      "community": 2,
+      "norm_label": "disabledreason()"
+    },
+    {
+      "label": "EventCard.tsx",
+      "file_type": "code",
+      "source_file": "src/components/EventCard.tsx",
+      "source_location": "L1",
+      "id": "src_components_eventcard_tsx",
+      "community": 18,
+      "norm_label": "eventcard.tsx"
+    },
+    {
+      "label": "EventCard()",
+      "file_type": "code",
+      "source_file": "src/components/EventCard.tsx",
+      "source_location": "L10",
+      "id": "components_eventcard_eventcard",
+      "community": 18,
+      "norm_label": "eventcard()"
+    },
+    {
+      "label": "FilterBar.tsx",
+      "file_type": "code",
+      "source_file": "src/components/FilterBar.tsx",
+      "source_location": "L1",
+      "id": "src_components_filterbar_tsx",
+      "community": 29,
+      "norm_label": "filterbar.tsx"
+    },
+    {
+      "label": "FloatingDock.tsx",
+      "file_type": "code",
+      "source_file": "src/components/FloatingDock.tsx",
+      "source_location": "L1",
+      "id": "src_components_floatingdock_tsx",
+      "community": 30,
+      "norm_label": "floatingdock.tsx"
+    },
+    {
+      "label": "LocationForm.tsx",
+      "file_type": "code",
+      "source_file": "src/components/LocationForm.tsx",
+      "source_location": "L1",
+      "id": "src_components_locationform_tsx",
+      "community": 19,
+      "norm_label": "locationform.tsx"
+    },
+    {
+      "label": "LocationForm()",
+      "file_type": "code",
+      "source_file": "src/components/LocationForm.tsx",
+      "source_location": "L18",
+      "id": "components_locationform_locationform",
+      "community": 19,
+      "norm_label": "locationform()"
+    },
+    {
+      "label": "LocationPanel.tsx",
+      "file_type": "code",
+      "source_file": "src/components/LocationPanel.tsx",
+      "source_location": "L1",
+      "id": "src_components_locationpanel_tsx",
+      "community": 3,
+      "norm_label": "locationpanel.tsx"
+    },
+    {
+      "label": "Map.tsx",
+      "file_type": "code",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L1",
+      "id": "src_components_map_tsx",
+      "community": 3,
+      "norm_label": "map.tsx"
+    },
+    {
+      "label": "MapController()",
+      "file_type": "code",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L28",
+      "id": "components_map_mapcontroller",
+      "community": 3,
+      "norm_label": "mapcontroller()"
+    },
+    {
+      "label": "HotelFlyController()",
+      "file_type": "code",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L39",
+      "id": "components_map_hotelflycontroller",
+      "community": 3,
+      "norm_label": "hotelflycontroller()"
+    },
+    {
+      "label": "FlyToLocationController()",
+      "file_type": "code",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L51",
+      "id": "components_map_flytolocationcontroller",
+      "community": 3,
+      "norm_label": "flytolocationcontroller()"
+    },
+    {
+      "label": "MapClickHandler()",
+      "file_type": "code",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L72",
+      "id": "components_map_mapclickhandler",
+      "community": 3,
+      "norm_label": "mapclickhandler()"
+    },
+    {
+      "label": "getCurrentPosition()",
+      "file_type": "code",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L112",
+      "id": "components_map_getcurrentposition",
+      "community": 3,
+      "norm_label": "getcurrentposition()"
+    },
+    {
+      "label": "startWatching()",
+      "file_type": "code",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L137",
+      "id": "components_map_startwatching",
+      "community": 3,
+      "norm_label": "startwatching()"
+    },
+    {
+      "label": "handleEmojiChange()",
+      "file_type": "code",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L258",
+      "id": "components_map_handleemojichange",
+      "community": 3,
+      "norm_label": "handleemojichange()"
+    },
+    {
+      "label": "TabNavigation.tsx",
+      "file_type": "code",
+      "source_file": "src/components/TabNavigation.tsx",
+      "source_location": "L1",
+      "id": "src_components_tabnavigation_tsx",
+      "community": 20,
+      "norm_label": "tabnavigation.tsx"
+    },
+    {
+      "label": "TabNavigation()",
+      "file_type": "code",
+      "source_file": "src/components/TabNavigation.tsx",
+      "source_location": "L15",
+      "id": "components_tabnavigation_tabnavigation",
+      "community": 20,
+      "norm_label": "tabnavigation()"
+    },
+    {
+      "label": "WelcomeOverlay.tsx",
+      "file_type": "code",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L1",
+      "id": "src_components_welcomeoverlay_tsx",
+      "community": 9,
+      "norm_label": "welcomeoverlay.tsx"
+    },
+    {
+      "label": "handleEscape()",
+      "file_type": "code",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L16",
+      "id": "components_welcomeoverlay_handleescape",
+      "community": 9,
+      "norm_label": "handleescape()"
+    },
+    {
+      "label": "handleClose()",
+      "file_type": "code",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L25",
+      "id": "components_welcomeoverlay_handleclose",
+      "community": 9,
+      "norm_label": "handleclose()"
+    },
+    {
+      "label": "handleNextPage()",
+      "file_type": "code",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L32",
+      "id": "components_welcomeoverlay_handlenextpage",
+      "community": 9,
+      "norm_label": "handlenextpage()"
+    },
+    {
+      "label": "handlePreviousPage()",
+      "file_type": "code",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L36",
+      "id": "components_welcomeoverlay_handlepreviouspage",
+      "community": 9,
+      "norm_label": "handlepreviouspage()"
+    },
+    {
+      "label": "handleGetStarted()",
+      "file_type": "code",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L40",
+      "id": "components_welcomeoverlay_handlegetstarted",
+      "community": 9,
+      "norm_label": "handlegetstarted()"
+    },
+    {
+      "label": "handleOverlayClick()",
+      "file_type": "code",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L45",
+      "id": "components_welcomeoverlay_handleoverlayclick",
+      "community": 9,
+      "norm_label": "handleoverlayclick()"
+    },
+    {
+      "label": "toggleTab()",
+      "file_type": "code",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L51",
+      "id": "components_welcomeoverlay_toggletab",
+      "community": 9,
+      "norm_label": "toggletab()"
+    },
+    {
+      "label": "CategoryHelpers.ts",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L1",
+      "id": "src_components_bottomsheet_categoryhelpers_ts",
+      "community": 4,
+      "norm_label": "categoryhelpers.ts"
+    },
+    {
+      "label": "hasBasicInfo()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L3",
+      "id": "bottomsheet_categoryhelpers_hasbasicinfo",
+      "community": 4,
+      "norm_label": "hasbasicinfo()"
+    },
+    {
+      "label": "hasRestaurantFields()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L13",
+      "id": "bottomsheet_categoryhelpers_hasrestaurantfields",
+      "community": 4,
+      "norm_label": "hasrestaurantfields()"
+    },
+    {
+      "label": "hasKneipenFields()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L17",
+      "id": "bottomsheet_categoryhelpers_haskneipenfields",
+      "community": 4,
+      "norm_label": "haskneipenfields()"
+    },
+    {
+      "label": "hasSightFields()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L25",
+      "id": "bottomsheet_categoryhelpers_hassightfields",
+      "community": 4,
+      "norm_label": "hassightfields()"
+    },
+    {
+      "label": "hasNightlifeFields()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L33",
+      "id": "bottomsheet_categoryhelpers_hasnightlifefields",
+      "community": 4,
+      "norm_label": "hasnightlifefields()"
+    },
+    {
+      "label": "hasAnyDetails()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L40",
+      "id": "bottomsheet_categoryhelpers_hasanydetails",
+      "community": 4,
+      "norm_label": "hasanydetails()"
+    },
+    {
+      "label": "parseJSON()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L53",
+      "id": "bottomsheet_categoryhelpers_parsejson",
+      "community": 4,
+      "norm_label": "parsejson()"
+    },
+    {
+      "label": "CategoryRenderers.tsx",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryRenderers.tsx",
+      "source_location": "L1",
+      "id": "src_components_bottomsheet_categoryrenderers_tsx",
+      "community": 4,
+      "norm_label": "categoryrenderers.tsx"
+    },
+    {
+      "label": "BasicInfoRenderer()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryRenderers.tsx",
+      "source_location": "L13",
+      "id": "bottomsheet_categoryrenderers_basicinforenderer",
+      "community": 4,
+      "norm_label": "basicinforenderer()"
+    },
+    {
+      "label": "MetaInfoRenderer()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/CategoryRenderers.tsx",
+      "source_location": "L31",
+      "id": "bottomsheet_categoryrenderers_metainforenderer",
+      "community": 4,
+      "norm_label": "metainforenderer()"
+    },
+    {
+      "label": "sharedComponents.tsx",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/sharedComponents.tsx",
+      "source_location": "L1",
+      "id": "src_components_bottomsheet_sharedcomponents_tsx",
+      "community": 4,
+      "norm_label": "sharedcomponents.tsx"
+    },
+    {
+      "label": "Section()",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/sharedComponents.tsx",
+      "source_location": "L10",
+      "id": "bottomsheet_sharedcomponents_section",
+      "community": 4,
+      "norm_label": "section()"
+    },
+    {
+      "label": "styles.ts",
+      "file_type": "code",
+      "source_file": "src/components/bottomSheet/styles.ts",
+      "source_location": "L1",
+      "id": "src_components_bottomsheet_styles_ts",
+      "community": 31,
+      "norm_label": "styles.ts"
+    },
+    {
+      "label": "useCategories.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useCategories.ts",
+      "source_location": "L1",
+      "id": "src_hooks_usecategories_ts",
+      "community": 6,
+      "norm_label": "usecategories.ts"
+    },
+    {
+      "label": "useCategories()",
+      "file_type": "code",
+      "source_file": "src/hooks/useCategories.ts",
+      "source_location": "L13",
+      "id": "hooks_usecategories_usecategories",
+      "community": 6,
+      "norm_label": "usecategories()"
+    },
+    {
+      "label": "useEvents.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useEvents.ts",
+      "source_location": "L1",
+      "id": "src_hooks_useevents_ts",
+      "community": 6,
+      "norm_label": "useevents.ts"
+    },
+    {
+      "label": "useEvents()",
+      "file_type": "code",
+      "source_file": "src/hooks/useEvents.ts",
+      "source_location": "L34",
+      "id": "hooks_useevents_useevents",
+      "community": 6,
+      "norm_label": "useevents()"
+    },
+    {
+      "label": "useLocations.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useLocations.ts",
+      "source_location": "L1",
+      "id": "src_hooks_uselocations_ts",
+      "community": 6,
+      "norm_label": "uselocations.ts"
+    },
+    {
+      "label": "useLocations()",
+      "file_type": "code",
+      "source_file": "src/hooks/useLocations.ts",
+      "source_location": "L76",
+      "id": "hooks_uselocations_uselocations",
+      "community": 6,
+      "norm_label": "uselocations()"
+    },
+    {
+      "label": "useNotes.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useNotes.ts",
+      "source_location": "L1",
+      "id": "src_hooks_usenotes_ts",
+      "community": 10,
+      "norm_label": "usenotes.ts"
+    },
+    {
+      "label": "useNotes()",
+      "file_type": "code",
+      "source_file": "src/hooks/useNotes.ts",
+      "source_location": "L14",
+      "id": "hooks_usenotes_usenotes",
+      "community": 10,
+      "norm_label": "usenotes()"
+    },
+    {
+      "label": "useSession.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useSession.ts",
+      "source_location": "L1",
+      "id": "src_hooks_usesession_ts",
+      "community": 8,
+      "norm_label": "usesession.ts"
+    },
+    {
+      "label": "useSession()",
+      "file_type": "code",
+      "source_file": "src/hooks/useSession.ts",
+      "source_location": "L4",
+      "id": "hooks_usesession_usesession",
+      "community": 8,
+      "norm_label": "usesession()"
+    },
+    {
+      "label": "useSocket.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useSocket.ts",
+      "source_location": "L1",
+      "id": "src_hooks_usesocket_ts",
+      "community": 8,
+      "norm_label": "usesocket.ts"
+    },
+    {
+      "label": "useSocket()",
+      "file_type": "code",
+      "source_file": "src/hooks/useSocket.ts",
+      "source_location": "L8",
+      "id": "hooks_usesocket_usesocket",
+      "community": 8,
+      "norm_label": "usesocket()"
+    },
+    {
+      "label": "getSocket()",
+      "file_type": "code",
+      "source_file": "src/hooks/useSocket.ts",
+      "source_location": "L45",
+      "id": "hooks_usesocket_getsocket",
+      "community": 6,
+      "norm_label": "getsocket()"
+    },
+    {
+      "label": "useUserLocations.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useUserLocations.ts",
+      "source_location": "L1",
+      "id": "src_hooks_useuserlocations_ts",
+      "community": 6,
+      "norm_label": "useuserlocations.ts"
+    },
+    {
+      "label": "useUserLocations()",
+      "file_type": "code",
+      "source_file": "src/hooks/useUserLocations.ts",
+      "source_location": "L14",
+      "id": "hooks_useuserlocations_useuserlocations",
+      "community": 6,
+      "norm_label": "useuserlocations()"
+    },
+    {
+      "label": "useUserSessions.ts",
+      "file_type": "code",
+      "source_file": "src/hooks/useUserSessions.ts",
+      "source_location": "L1",
+      "id": "src_hooks_useusersessions_ts",
+      "community": 2,
+      "norm_label": "useusersessions.ts"
+    },
+    {
+      "label": "useUserSessions()",
+      "file_type": "code",
+      "source_file": "src/hooks/useUserSessions.ts",
+      "source_location": "L14",
+      "id": "hooks_useusersessions_useusersessions",
+      "community": 2,
+      "norm_label": "useusersessions()"
+    },
+    {
+      "label": "api.ts",
+      "file_type": "code",
+      "source_file": "src/lib/api.ts",
+      "source_location": "L1",
+      "id": "src_lib_api_ts",
+      "community": 2,
+      "norm_label": "api.ts"
+    },
+    {
+      "label": "ApiError",
+      "file_type": "code",
+      "source_file": "src/lib/api.ts",
+      "source_location": "L3",
+      "id": "lib_api_apierror",
+      "community": 2,
+      "norm_label": "apierror"
+    },
+    {
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "src/lib/api.ts",
+      "source_location": "L4",
+      "id": "lib_api_apierror_constructor",
+      "community": 2,
+      "norm_label": ".constructor()"
+    },
+    {
+      "label": "apiRequest()",
+      "file_type": "code",
+      "source_file": "src/lib/api.ts",
+      "source_location": "L14",
+      "id": "lib_api_apirequest",
+      "community": 2,
+      "norm_label": "apirequest()"
+    },
+    {
+      "label": "geocoding.ts",
+      "file_type": "code",
+      "source_file": "src/lib/geocoding.ts",
+      "source_location": "L1",
+      "id": "src_lib_geocoding_ts",
+      "community": 14,
+      "norm_label": "geocoding.ts"
+    },
+    {
+      "label": "geocodeAddress()",
+      "file_type": "code",
+      "source_file": "src/lib/geocoding.ts",
+      "source_location": "L1",
+      "id": "lib_geocoding_geocodeaddress",
+      "community": 14,
+      "norm_label": "geocodeaddress()"
+    },
+    {
+      "label": "reverseGeocode()",
+      "file_type": "code",
+      "source_file": "src/lib/geocoding.ts",
+      "source_location": "L32",
+      "id": "lib_geocoding_reversegeocode",
+      "community": 14,
+      "norm_label": "reversegeocode()"
+    },
+    {
+      "label": "leaflet.ts",
+      "file_type": "code",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L1",
+      "id": "src_lib_leaflet_ts",
+      "community": 3,
+      "norm_label": "leaflet.ts"
+    },
+    {
+      "label": "createCustomIcon()",
+      "file_type": "code",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L7",
+      "id": "lib_leaflet_createcustomicon",
+      "community": 3,
+      "norm_label": "createcustomicon()"
+    },
+    {
+      "label": "calculateDistance()",
+      "file_type": "code",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L73",
+      "id": "lib_leaflet_calculatedistance",
+      "community": 3,
+      "norm_label": "calculatedistance()"
+    },
+    {
+      "label": "createCategoryIcon()",
+      "file_type": "code",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L90",
+      "id": "lib_leaflet_createcategoryicon",
+      "community": 3,
+      "norm_label": "createcategoryicon()"
+    },
+    {
+      "label": "createWCIcon()",
+      "file_type": "code",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L149",
+      "id": "lib_leaflet_createwcicon",
+      "community": 3,
+      "norm_label": "createwcicon()"
+    },
+    {
+      "label": "formatDistance()",
+      "file_type": "code",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L153",
+      "id": "lib_leaflet_formatdistance",
+      "community": 3,
+      "norm_label": "formatdistance()"
+    },
+    {
+      "label": "weekend.ts",
+      "file_type": "code",
+      "source_file": "src/lib/weekend.ts",
+      "source_location": "L1",
+      "id": "src_lib_weekend_ts",
+      "community": 32,
+      "norm_label": "weekend.ts"
+    },
+    {
+      "label": "main.tsx",
+      "file_type": "code",
+      "source_file": "src/main.tsx",
+      "source_location": "L1",
+      "id": "src_main_tsx",
+      "community": 8,
+      "norm_label": "main.tsx"
+    },
+    {
+      "label": "HotelPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/HotelPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_hotelpage_tsx",
+      "community": 33,
+      "norm_label": "hotelpage.tsx"
+    },
+    {
+      "label": "MapPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_mappage_tsx",
+      "community": 6,
+      "norm_label": "mappage.tsx"
+    },
+    {
+      "label": "MapPage()",
+      "file_type": "code",
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L28",
+      "id": "pages_mappage_mappage",
+      "community": 6,
+      "norm_label": "mappage()"
+    },
+    {
+      "label": "NotesPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_notespage_tsx",
+      "community": 10,
+      "norm_label": "notespage.tsx"
+    },
+    {
+      "label": "handleEmojiChange()",
+      "file_type": "code",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L42",
+      "id": "pages_notespage_handleemojichange",
+      "community": 10,
+      "norm_label": "handleemojichange()"
+    },
+    {
+      "label": "handleSubmit()",
+      "file_type": "code",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L51",
+      "id": "pages_notespage_handlesubmit",
+      "community": 10,
+      "norm_label": "handlesubmit()"
+    },
+    {
+      "label": "handleDelete()",
+      "file_type": "code",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L67",
+      "id": "pages_notespage_handledelete",
+      "community": 10,
+      "norm_label": "handledelete()"
+    },
+    {
+      "label": "formatDate()",
+      "file_type": "code",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L81",
+      "id": "pages_notespage_formatdate",
+      "community": 10,
+      "norm_label": "formatdate()"
+    },
+    {
+      "label": "PlanPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_planpage_tsx",
+      "community": 11,
+      "norm_label": "planpage.tsx"
+    },
+    {
+      "label": "toggleRules()",
+      "file_type": "code",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L60",
+      "id": "pages_planpage_togglerules",
+      "community": 11,
+      "norm_label": "togglerules()"
+    },
+    {
+      "label": "chooseRandomPlayer()",
+      "file_type": "code",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L94",
+      "id": "pages_planpage_chooserandomplayer",
+      "community": 11,
+      "norm_label": "chooserandomplayer()"
+    },
+    {
+      "label": "advanceToNext()",
+      "file_type": "code",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L123",
+      "id": "pages_planpage_advancetonext",
+      "community": 11,
+      "norm_label": "advancetonext()"
+    },
+    {
+      "label": "resetRound()",
+      "file_type": "code",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L159",
+      "id": "pages_planpage_resetround",
+      "community": 11,
+      "norm_label": "resetround()"
+    },
+    {
+      "label": "resetGame()",
+      "file_type": "code",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L169",
+      "id": "pages_planpage_resetgame",
+      "community": 11,
+      "norm_label": "resetgame()"
+    },
+    {
+      "label": "SofiaPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/SofiaPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_sofiapage_tsx",
+      "community": 6,
+      "norm_label": "sofiapage.tsx"
+    },
+    {
+      "label": "handleVenueTap()",
+      "file_type": "code",
+      "source_file": "src/pages/SofiaPage.tsx",
+      "source_location": "L36",
+      "id": "pages_sofiapage_handlevenuetap",
+      "community": 6,
+      "norm_label": "handlevenuetap()"
+    },
+    {
+      "label": "speakText()",
+      "file_type": "code",
+      "source_file": "src/pages/SofiaPage.tsx",
+      "source_location": "L45",
+      "id": "pages_sofiapage_speaktext",
+      "community": 6,
+      "norm_label": "speaktext()"
+    },
+    {
+      "label": "SurvivalPage.tsx",
+      "file_type": "code",
+      "source_file": "src/pages/SurvivalPage.tsx",
+      "source_location": "L1",
+      "id": "src_pages_survivalpage_tsx",
+      "community": 15,
+      "norm_label": "survivalpage.tsx"
+    },
+    {
+      "label": "speakText()",
+      "file_type": "code",
+      "source_file": "src/pages/SurvivalPage.tsx",
+      "source_location": "L10",
+      "id": "pages_survivalpage_speaktext",
+      "community": 15,
+      "norm_label": "speaktext()"
+    },
+    {
+      "label": "extractBulgarianWord()",
+      "file_type": "code",
+      "source_file": "src/pages/SurvivalPage.tsx",
+      "source_location": "L46",
+      "id": "pages_survivalpage_extractbulgarianword",
+      "community": 15,
+      "norm_label": "extractbulgarianword()"
+    },
+    {
+      "label": "gpsServer.ts",
+      "file_type": "code",
+      "source_file": "tests/helpers/gpsServer.ts",
+      "source_location": "L1",
+      "id": "tests_helpers_gpsserver_ts",
+      "community": 1,
+      "norm_label": "gpsserver.ts"
+    },
+    {
+      "label": "startGpsServer()",
+      "file_type": "code",
+      "source_file": "tests/helpers/gpsServer.ts",
+      "source_location": "L11",
+      "id": "helpers_gpsserver_startgpsserver",
+      "community": 1,
+      "norm_label": "startgpsserver()"
+    },
+    {
+      "label": "sessions.ts",
+      "file_type": "code",
+      "source_file": "tests/helpers/sessions.ts",
+      "source_location": "L1",
+      "id": "tests_helpers_sessions_ts",
+      "community": 1,
+      "norm_label": "sessions.ts"
+    },
+    {
+      "label": "createSessionViaApi()",
+      "file_type": "code",
+      "source_file": "tests/helpers/sessions.ts",
+      "source_location": "L13",
+      "id": "helpers_sessions_createsessionviaapi",
+      "community": 1,
+      "norm_label": "createsessionviaapi()"
+    },
+    {
+      "label": "createCategoryViaApi()",
+      "file_type": "code",
+      "source_file": "tests/helpers/sessions.ts",
+      "source_location": "L27",
+      "id": "helpers_sessions_createcategoryviaapi",
+      "community": 1,
+      "norm_label": "createcategoryviaapi()"
+    },
+    {
+      "label": "testApp.ts",
+      "file_type": "code",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L1",
+      "id": "tests_helpers_testapp_ts",
+      "community": 0,
+      "norm_label": "testapp.ts"
+    },
+    {
+      "label": "buildStubIo()",
+      "file_type": "code",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L16",
+      "id": "helpers_testapp_buildstubio",
+      "community": 0,
+      "norm_label": "buildstubio()"
+    },
+    {
+      "label": "buildRestApp()",
+      "file_type": "code",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L21",
+      "id": "helpers_testapp_buildrestapp",
+      "community": 1,
+      "norm_label": "buildrestapp()"
+    },
+    {
+      "label": "testDb.ts",
+      "file_type": "code",
+      "source_file": "tests/helpers/testDb.ts",
+      "source_location": "L1",
+      "id": "tests_helpers_testdb_ts",
+      "community": 1,
+      "norm_label": "testdb.ts"
+    },
+    {
+      "label": "createTestDbEnv()",
+      "file_type": "code",
+      "source_file": "tests/helpers/testDb.ts",
+      "source_location": "L12",
+      "id": "helpers_testdb_createtestdbenv",
+      "community": 1,
+      "norm_label": "createtestdbenv()"
+    },
+    {
+      "label": "openTestDb()",
+      "file_type": "code",
+      "source_file": "tests/helpers/testDb.ts",
+      "source_location": "L26",
+      "id": "helpers_testdb_opentestdb",
+      "community": 1,
+      "norm_label": "opentestdb()"
+    },
+    {
+      "label": "categories.test.ts",
+      "file_type": "code",
+      "source_file": "tests/server/categories.test.ts",
+      "source_location": "L1",
+      "id": "tests_server_categories_test_ts",
+      "community": 1,
+      "norm_label": "categories.test.ts"
+    },
+    {
+      "label": "emoji-identity.test.ts",
+      "file_type": "code",
+      "source_file": "tests/server/emoji-identity.test.ts",
+      "source_location": "L1",
+      "id": "tests_server_emoji_identity_test_ts",
+      "community": 1,
+      "norm_label": "emoji-identity.test.ts"
+    },
+    {
+      "label": "event-recurrence.test.ts",
+      "file_type": "code",
+      "source_file": "tests/server/event-recurrence.test.ts",
+      "source_location": "L1",
+      "id": "tests_server_event_recurrence_test_ts",
+      "community": 7,
+      "norm_label": "event-recurrence.test.ts"
+    },
+    {
+      "label": "makeEvent()",
+      "file_type": "code",
+      "source_file": "tests/server/event-recurrence.test.ts",
+      "source_location": "L4",
+      "id": "server_event_recurrence_test_makeevent",
+      "community": 7,
+      "norm_label": "makeevent()"
+    },
+    {
+      "label": "events-api.test.ts",
+      "file_type": "code",
+      "source_file": "tests/server/events-api.test.ts",
+      "source_location": "L1",
+      "id": "tests_server_events_api_test_ts",
+      "community": 1,
+      "norm_label": "events-api.test.ts"
+    },
+    {
+      "label": "gps-socket.test.ts",
+      "file_type": "code",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L1",
+      "id": "tests_server_gps_socket_test_ts",
+      "community": 1,
+      "norm_label": "gps-socket.test.ts"
+    },
+    {
+      "label": "connect()",
+      "file_type": "code",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L9",
+      "id": "server_gps_socket_test_connect",
+      "community": 1,
+      "norm_label": "connect()"
+    },
+    {
+      "label": "joinRoom()",
+      "file_type": "code",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L17",
+      "id": "server_gps_socket_test_joinroom",
+      "community": 1,
+      "norm_label": "joinroom()"
+    },
+    {
+      "label": "locations.test.ts",
+      "file_type": "code",
+      "source_file": "tests/server/locations.test.ts",
+      "source_location": "L1",
+      "id": "tests_server_locations_test_ts",
+      "community": 1,
+      "norm_label": "locations.test.ts"
+    },
+    {
+      "label": "notes.test.ts",
+      "file_type": "code",
+      "source_file": "tests/server/notes.test.ts",
+      "source_location": "L1",
+      "id": "tests_server_notes_test_ts",
+      "community": 1,
+      "norm_label": "notes.test.ts"
+    },
+    {
+      "label": "vite.config.ts",
+      "file_type": "code",
+      "source_file": "vite.config.ts",
+      "source_location": "L1",
+      "id": "vite_config_ts",
+      "community": 34,
+      "norm_label": "vite.config.ts"
+    },
+    {
+      "label": "vitest.config.ts",
+      "file_type": "code",
+      "source_file": "vitest.config.ts",
+      "source_location": "L1",
+      "id": "vitest_config_ts",
+      "community": 35,
+      "norm_label": "vitest.config.ts"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/create-icons.js",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "scripts_create_icons_js",
+      "target": "scripts_create_icons_createicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/geocode-all-locations.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "scripts_geocode_all_locations_ts",
+      "target": "scripts_geocode_all_locations_geocodewithretry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/geocode-all-locations.ts",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "scripts_geocode_all_locations_ts",
+      "target": "scripts_geocode_all_locations_updatealllocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/geocode-all-locations.ts",
+      "source_location": "L59",
+      "weight": 1.0,
+      "source": "scripts_geocode_all_locations_updatealllocations",
+      "target": "scripts_geocode_all_locations_geocodewithretry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/geocode-locations.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "scripts_geocode_locations_ts",
+      "target": "scripts_geocode_locations_geocodelocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/geocode-locations.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "scripts_geocode_locations_ts",
+      "target": "scripts_geocode_locations_updatealllocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "scripts/geocode-locations.ts",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "scripts_geocode_locations_updatealllocations",
+      "target": "scripts_geocode_locations_geocodelocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_seed_seeddatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_resolvedbpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_getdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_migratenotestable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_migratelocationstable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_migrateeventstable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L158",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_migrateuserroletable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L175",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_ensureadminaccount",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L198",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_migrateeventvenuelookups",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L275",
+      "weight": 1.0,
+      "source": "server_db_index_ts",
+      "target": "db_index_initializedatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "db_index_getdatabase",
+      "target": "db_index_resolvedbpath",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L276",
+      "weight": 1.0,
+      "source": "db_index_initializedatabase",
+      "target": "db_index_getdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/seed.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "server_db_seed_ts",
+      "target": "db_index_getdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/categories.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "server_routes_categories_ts",
+      "target": "db_index_getdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "server_routes_events_ts",
+      "target": "db_index_getdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "server_routes_locations_ts",
+      "target": "db_index_getdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "server_routes_notes_ts",
+      "target": "db_index_getdatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/db/seed.ts",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "db_seed_seeddatabase",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/categories.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "routes_categories_getcategories",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/categories.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "routes_categories_createcategory",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/events.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "routes_events_getevents",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/events.ts",
+      "source_location": "L114",
+      "weight": 1.0,
+      "source": "routes_events_createevent",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/events.ts",
+      "source_location": "L160",
+      "weight": 1.0,
+      "source": "routes_events_deleteevent",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "routes_locations_getlocations",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "routes_locations_getlocationbyid",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L104",
+      "weight": 1.0,
+      "source": "routes_locations_createlocation",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "routes_locations_deletelocation",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "routes_notes_getnotes",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L44",
+      "weight": 1.0,
+      "source": "routes_notes_createnote",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L93",
+      "weight": 1.0,
+      "source": "routes_notes_deletenote",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "routes_user_sessions_resetusersessions",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L71",
+      "weight": 1.0,
+      "source": "routes_user_sessions_getusersessions",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L101",
+      "weight": 1.0,
+      "source": "routes_user_sessions_createusersession",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L139",
+      "weight": 1.0,
+      "source": "routes_user_sessions_reclaimusersession",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L183",
+      "weight": 1.0,
+      "source": "routes_user_sessions_updateusersessionemoji",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L234",
+      "weight": 1.0,
+      "source": "routes_user_sessions_deleteusersession",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L260",
+      "weight": 1.0,
+      "source": "routes_user_sessions_validatesession",
+      "target": "db_index_getdatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L283",
+      "weight": 1.0,
+      "source": "db_index_initializedatabase",
+      "target": "db_index_migratenotestable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L284",
+      "weight": 1.0,
+      "source": "db_index_initializedatabase",
+      "target": "db_index_migratelocationstable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L285",
+      "weight": 1.0,
+      "source": "db_index_initializedatabase",
+      "target": "db_index_migrateeventstable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L286",
+      "weight": 1.0,
+      "source": "db_index_initializedatabase",
+      "target": "db_index_migrateuserroletable",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L288",
+      "weight": 1.0,
+      "source": "db_index_initializedatabase",
+      "target": "db_index_ensureadminaccount",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/index.ts",
+      "source_location": "L300",
+      "weight": 1.0,
+      "source": "db_index_initializedatabase",
+      "target": "db_index_migrateeventvenuelookups",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/migrate.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "server_db_migrate_ts",
+      "target": "db_index_initializedatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/reseed.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "server_db_reseed_ts",
+      "target": "db_index_initializedatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testDb.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_helpers_testdb_ts",
+      "target": "db_index_initializedatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/db/index.ts",
+      "source_location": "L296",
+      "weight": 1.0,
+      "source": "db_index_initializedatabase",
+      "target": "db_seed_seeddatabase"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/helpers/testDb.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "helpers_testdb_createtestdbenv",
+      "target": "db_index_initializedatabase"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/migrate.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "server_db_migrate_ts",
+      "target": "db_seed_seeddatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/reseed.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "server_db_reseed_ts",
+      "target": "db_seed_seeddatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/seed.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "server_db_seed_ts",
+      "target": "db_seed_ensureeventvenueextras",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/seed.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "server_db_seed_ts",
+      "target": "db_seed_seeddatabase",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/db/seed.ts",
+      "source_location": "L114",
+      "weight": 1.0,
+      "source": "db_seed_seeddatabase",
+      "target": "db_seed_ensureeventvenueextras",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_locations_getlocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_locations_getlocationbyid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_locations_createlocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_locations_deletelocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_categories_getcategories",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_categories_createcategory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_notes_getnotes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_notes_createnote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_notes_deletenote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_events_getevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_events_createevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_events_deleteevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_user_sessions_getusersessions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_user_sessions_createusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_user_sessions_reclaimusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_user_sessions_updateusersessionemoji",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_user_sessions_deleteusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_user_sessions_validatesession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "routes_user_sessions_resetusersessions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/index.ts",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "server_index_ts",
+      "target": "server_socket_registersockethandlers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "server_lib_event_recurrence_ts",
+      "target": "lib_event_recurrence_parseisodate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "server_lib_event_recurrence_ts",
+      "target": "lib_event_recurrence_formatisodate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "server_lib_event_recurrence_ts",
+      "target": "lib_event_recurrence_isoweekday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "server_lib_event_recurrence_ts",
+      "target": "lib_event_recurrence_adddays",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "server_lib_event_recurrence_ts",
+      "target": "lib_event_recurrence_parseweeklyrecurrence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L64",
+      "weight": 1.0,
+      "source": "server_lib_event_recurrence_ts",
+      "target": "lib_event_recurrence_expandrecurrence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L121",
+      "weight": 1.0,
+      "source": "server_lib_event_recurrence_ts",
+      "target": "lib_event_recurrence_expandmany",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "lib_event_recurrence_expandrecurrence",
+      "target": "lib_event_recurrence_parseisodate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L90",
+      "weight": 1.0,
+      "source": "lib_event_recurrence_expandrecurrence",
+      "target": "lib_event_recurrence_formatisodate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "lib_event_recurrence_expandrecurrence",
+      "target": "lib_event_recurrence_isoweekday",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L88",
+      "weight": 1.0,
+      "source": "lib_event_recurrence_expandrecurrence",
+      "target": "lib_event_recurrence_adddays",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L97",
+      "weight": 1.0,
+      "source": "lib_event_recurrence_expandrecurrence",
+      "target": "lib_event_recurrence_parseweeklyrecurrence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/lib/event-recurrence.ts",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "lib_event_recurrence_expandmany",
+      "target": "lib_event_recurrence_expandrecurrence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/event-recurrence.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "tests_server_event_recurrence_test_ts",
+      "target": "lib_event_recurrence_expandrecurrence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_routes_events_ts",
+      "target": "lib_event_recurrence_expandmany",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/event-recurrence.test.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "tests_server_event_recurrence_test_ts",
+      "target": "lib_event_recurrence_expandmany",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "server/routes/events.ts",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "routes_events_getevents",
+      "target": "lib_event_recurrence_expandmany"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/categories.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "server_routes_categories_ts",
+      "target": "routes_categories_getcategories",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/categories.ts",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "server_routes_categories_ts",
+      "target": "routes_categories_createcategory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_categories_getcategories",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_categories_createcategory",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "helpers_testapp_buildrestapp",
+      "target": "routes_categories_createcategory"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "server_routes_events_ts",
+      "target": "routes_events_isvalidisodate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "server_routes_events_ts",
+      "target": "routes_events_getevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "server_routes_events_ts",
+      "target": "routes_events_createevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L156",
+      "weight": 1.0,
+      "source": "server_routes_events_ts",
+      "target": "routes_events_deleteevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/events.ts",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "routes_events_getevents",
+      "target": "routes_events_isvalidisodate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_events_getevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_events_createevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "helpers_testapp_buildrestapp",
+      "target": "routes_events_createevent"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_events_deleteevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "helpers_testapp_buildrestapp",
+      "target": "routes_events_deleteevent"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "server_routes_locations_ts",
+      "target": "routes_locations_getlocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "server_routes_locations_ts",
+      "target": "routes_locations_getlocationbyid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "server_routes_locations_ts",
+      "target": "routes_locations_createlocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/locations.ts",
+      "source_location": "L183",
+      "weight": 1.0,
+      "source": "server_routes_locations_ts",
+      "target": "routes_locations_deletelocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_locations_getlocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_locations_getlocationbyid",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_locations_createlocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "helpers_testapp_buildrestapp",
+      "target": "routes_locations_createlocation"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_locations_deletelocation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "helpers_testapp_buildrestapp",
+      "target": "routes_locations_deletelocation"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_routes_notes_ts",
+      "target": "routes_notes_getnotes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "server_routes_notes_ts",
+      "target": "routes_notes_createnote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/notes.ts",
+      "source_location": "L83",
+      "weight": 1.0,
+      "source": "server_routes_notes_ts",
+      "target": "routes_notes_deletenote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_notes_getnotes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_notes_createnote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "pages_notespage_handlesubmit",
+      "target": "routes_notes_createnote"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_notes_deletenote",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "pages_notespage_handledelete",
+      "target": "routes_notes_deletenote"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "server_routes_user_sessions_ts",
+      "target": "routes_user_sessions_resetusersessions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "server_routes_user_sessions_ts",
+      "target": "routes_user_sessions_getusersessions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "server_routes_user_sessions_ts",
+      "target": "routes_user_sessions_createusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "server_routes_user_sessions_ts",
+      "target": "routes_user_sessions_reclaimusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L170",
+      "weight": 1.0,
+      "source": "server_routes_user_sessions_ts",
+      "target": "routes_user_sessions_updateusersessionemoji",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L225",
+      "weight": 1.0,
+      "source": "server_routes_user_sessions_ts",
+      "target": "routes_user_sessions_deleteusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/routes/user-sessions.ts",
+      "source_location": "L251",
+      "weight": 1.0,
+      "source": "server_routes_user_sessions_ts",
+      "target": "routes_user_sessions_validatesession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_user_sessions_getusersessions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_user_sessions_createusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_user_sessions_reclaimusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_user_sessions_updateusersessionemoji",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_user_sessions_deleteusersession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "routes_user_sessions_validatesession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "server/socket.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "server_socket_ts",
+      "target": "server_socket_registersockethandlers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/gpsServer.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_helpers_gpsserver_ts",
+      "target": "server_socket_registersockethandlers",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_app_tsx",
+      "target": "hooks_usesession_usesession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_app_tsx",
+      "target": "hooks_usesocket_usesocket",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_app_tsx",
+      "target": "hooks_useusersessions_useusersessions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_app_handleshowwelcome",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_app_focusonmap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_app_handledontshowagain",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.tsx",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "src_app_tsx",
+      "target": "src_app_renderpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/main.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_main_tsx",
+      "target": "src_app_tsx",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "lib_leaflet_calculatedistance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "lib_leaflet_formatdistance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "bottomsheet_categoryhelpers_hasbasicinfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "bottomsheet_categoryhelpers_hasrestaurantfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "bottomsheet_categoryhelpers_haskneipenfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "bottomsheet_categoryhelpers_hassightfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "bottomsheet_categoryhelpers_hasnightlifefields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "bottomsheet_categoryrenderers_basicinforenderer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "bottomsheet_categoryrenderers_metainforenderer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/BottomSheet.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_tsx",
+      "target": "components_bottomsheet_togglesection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/CategoryForm.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "src_components_categoryform_tsx",
+      "target": "components_categoryform_categoryform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "hooks_useusersessions_useusersessions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_resetformstate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L48",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_handlelogout",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_handleswitch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_handleemojiselect",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_validatecode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_handlecreatenew",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L154",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_handlerecover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L179",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_cansave",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L191",
+      "weight": 1.0,
+      "source": "src_components_emojipickermodal_tsx",
+      "target": "components_emojipickermodal_disabledreason",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L129",
+      "weight": 1.0,
+      "source": "components_emojipickermodal_handlecreatenew",
+      "target": "components_emojipickermodal_validatecode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "components_emojipickermodal_handlerecover",
+      "target": "components_emojipickermodal_validatecode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L182",
+      "weight": 1.0,
+      "source": "components_emojipickermodal_cansave",
+      "target": "components_emojipickermodal_validatecode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EmojiPickerModal.tsx",
+      "source_location": "L195",
+      "weight": 1.0,
+      "source": "components_emojipickermodal_disabledreason",
+      "target": "components_emojipickermodal_validatecode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/EventCard.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_components_eventcard_tsx",
+      "target": "components_eventcard_eventcard",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/LocationForm.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "src_components_locationform_tsx",
+      "target": "components_locationform_locationform",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/LocationPanel.tsx",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "src_components_locationpanel_tsx",
+      "target": "lib_leaflet_calculatedistance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "lib_leaflet_createcustomicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "lib_leaflet_createcategoryicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "lib_leaflet_calculatedistance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "lib_leaflet_formatdistance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "components_map_mapcontroller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "components_map_hotelflycontroller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "components_map_flytolocationcontroller",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L72",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "components_map_mapclickhandler",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L112",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "components_map_getcurrentposition",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L137",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "components_map_startwatching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/Map.tsx",
+      "source_location": "L258",
+      "weight": 1.0,
+      "source": "src_components_map_tsx",
+      "target": "components_map_handleemojichange",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TabNavigation.tsx",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "src_components_tabnavigation_tsx",
+      "target": "components_tabnavigation_tabnavigation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "src_components_welcomeoverlay_tsx",
+      "target": "components_welcomeoverlay_handleescape",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "src_components_welcomeoverlay_tsx",
+      "target": "components_welcomeoverlay_handleclose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "src_components_welcomeoverlay_tsx",
+      "target": "components_welcomeoverlay_handlenextpage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "src_components_welcomeoverlay_tsx",
+      "target": "components_welcomeoverlay_handlepreviouspage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "src_components_welcomeoverlay_tsx",
+      "target": "components_welcomeoverlay_handlegetstarted",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "src_components_welcomeoverlay_tsx",
+      "target": "components_welcomeoverlay_handleoverlayclick",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "src_components_welcomeoverlay_tsx",
+      "target": "components_welcomeoverlay_toggletab",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "components_welcomeoverlay_handleescape",
+      "target": "components_welcomeoverlay_handleclose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "components_welcomeoverlay_handlegetstarted",
+      "target": "components_welcomeoverlay_handleclose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/WelcomeOverlay.tsx",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "components_welcomeoverlay_handleoverlayclick",
+      "target": "components_welcomeoverlay_handleclose",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryhelpers_ts",
+      "target": "bottomsheet_categoryhelpers_hasbasicinfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryhelpers_ts",
+      "target": "bottomsheet_categoryhelpers_hasrestaurantfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryhelpers_ts",
+      "target": "bottomsheet_categoryhelpers_haskneipenfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryhelpers_ts",
+      "target": "bottomsheet_categoryhelpers_hassightfields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryhelpers_ts",
+      "target": "bottomsheet_categoryhelpers_hasnightlifefields",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryhelpers_ts",
+      "target": "bottomsheet_categoryhelpers_hasanydetails",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryhelpers_ts",
+      "target": "bottomsheet_categoryhelpers_parsejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryHelpers.ts",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "bottomsheet_categoryhelpers_hasanydetails",
+      "target": "bottomsheet_categoryhelpers_hasbasicinfo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryRenderers.tsx",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryrenderers_tsx",
+      "target": "bottomsheet_categoryhelpers_parsejson",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/components/bottomSheet/CategoryRenderers.tsx",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "bottomsheet_categoryrenderers_basicinforenderer",
+      "target": "bottomsheet_categoryhelpers_parsejson"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryRenderers.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryrenderers_tsx",
+      "target": "bottomsheet_sharedcomponents_section",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryRenderers.tsx",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryrenderers_tsx",
+      "target": "bottomsheet_categoryrenderers_basicinforenderer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/CategoryRenderers.tsx",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_categoryrenderers_tsx",
+      "target": "bottomsheet_categoryrenderers_metainforenderer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/bottomSheet/sharedComponents.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_components_bottomsheet_sharedcomponents_tsx",
+      "target": "bottomsheet_sharedcomponents_section",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useCategories.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_hooks_usecategories_ts",
+      "target": "hooks_usesocket_getsocket",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useCategories.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "src_hooks_usecategories_ts",
+      "target": "hooks_usecategories_usecategories",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_pages_mappage_tsx",
+      "target": "hooks_usecategories_usecategories",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "pages_mappage_mappage",
+      "target": "hooks_usecategories_usecategories"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useEvents.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_hooks_useevents_ts",
+      "target": "hooks_usesocket_getsocket",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useEvents.ts",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "src_hooks_useevents_ts",
+      "target": "hooks_useevents_useevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SofiaPage.tsx",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_pages_sofiapage_tsx",
+      "target": "hooks_useevents_useevents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useLocations.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_hooks_uselocations_ts",
+      "target": "hooks_usesocket_getsocket",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useLocations.ts",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "src_hooks_uselocations_ts",
+      "target": "hooks_uselocations_uselocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_pages_mappage_tsx",
+      "target": "hooks_uselocations_uselocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "pages_mappage_mappage",
+      "target": "hooks_uselocations_uselocations"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useNotes.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_hooks_usenotes_ts",
+      "target": "hooks_usenotes_usenotes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_pages_notespage_tsx",
+      "target": "hooks_usenotes_usenotes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useSession.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "src_hooks_usesession_ts",
+      "target": "hooks_usesession_usesession",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useSocket.ts",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "src_hooks_usesocket_ts",
+      "target": "hooks_usesocket_usesocket",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useSocket.ts",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "src_hooks_usesocket_ts",
+      "target": "hooks_usesocket_getsocket",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useUserLocations.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_hooks_useuserlocations_ts",
+      "target": "hooks_useuserlocations_useuserlocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "src_pages_mappage_tsx",
+      "target": "hooks_useuserlocations_useuserlocations",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "pages_mappage_mappage",
+      "target": "hooks_useuserlocations_useuserlocations"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useUserSessions.ts",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "src_hooks_useusersessions_ts",
+      "target": "lib_api_apierror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/hooks/useUserSessions.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_hooks_useusersessions_ts",
+      "target": "hooks_useusersessions_useusersessions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api.ts",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "src_lib_api_ts",
+      "target": "lib_api_apierror",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api.ts",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "src_lib_api_ts",
+      "target": "lib_api_apirequest",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/api.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "lib_api_apierror",
+      "target": "lib_api_apierror_constructor",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/geocoding.ts",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "src_lib_geocoding_ts",
+      "target": "lib_geocoding_geocodeaddress",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/geocoding.ts",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "src_lib_geocoding_ts",
+      "target": "lib_geocoding_reversegeocode",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "src_lib_leaflet_ts",
+      "target": "lib_leaflet_createcustomicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L73",
+      "weight": 1.0,
+      "source": "src_lib_leaflet_ts",
+      "target": "lib_leaflet_calculatedistance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L90",
+      "weight": 1.0,
+      "source": "src_lib_leaflet_ts",
+      "target": "lib_leaflet_createcategoryicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L149",
+      "weight": 1.0,
+      "source": "src_lib_leaflet_ts",
+      "target": "lib_leaflet_createwcicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "src_lib_leaflet_ts",
+      "target": "lib_leaflet_formatdistance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/lib/leaflet.ts",
+      "source_location": "L150",
+      "weight": 1.0,
+      "source": "lib_leaflet_createwcicon",
+      "target": "lib_leaflet_createcategoryicon",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/MapPage.tsx",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "src_pages_mappage_tsx",
+      "target": "pages_mappage_mappage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "src_pages_notespage_tsx",
+      "target": "pages_notespage_handleemojichange",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "src_pages_notespage_tsx",
+      "target": "pages_notespage_handlesubmit",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "src_pages_notespage_tsx",
+      "target": "pages_notespage_handledelete",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/NotesPage.tsx",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "src_pages_notespage_tsx",
+      "target": "pages_notespage_formatdate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "src_pages_planpage_tsx",
+      "target": "pages_planpage_togglerules",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "src_pages_planpage_tsx",
+      "target": "pages_planpage_chooserandomplayer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "src_pages_planpage_tsx",
+      "target": "pages_planpage_advancetonext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "src_pages_planpage_tsx",
+      "target": "pages_planpage_resetround",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L169",
+      "weight": 1.0,
+      "source": "src_pages_planpage_tsx",
+      "target": "pages_planpage_resetgame",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/PlanPage.tsx",
+      "source_location": "L134",
+      "weight": 1.0,
+      "source": "pages_planpage_advancetonext",
+      "target": "pages_planpage_resetround",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SofiaPage.tsx",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "src_pages_sofiapage_tsx",
+      "target": "pages_sofiapage_handlevenuetap",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SofiaPage.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "source": "src_pages_sofiapage_tsx",
+      "target": "pages_sofiapage_speaktext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SurvivalPage.tsx",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "src_pages_survivalpage_tsx",
+      "target": "pages_survivalpage_speaktext",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/pages/SurvivalPage.tsx",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "src_pages_survivalpage_tsx",
+      "target": "pages_survivalpage_extractbulgarianword",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/gpsServer.ts",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "tests_helpers_gpsserver_ts",
+      "target": "helpers_gpsserver_startgpsserver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_server_gps_socket_test_ts",
+      "target": "helpers_gpsserver_startgpsserver",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/sessions.ts",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "tests_helpers_sessions_ts",
+      "target": "helpers_sessions_createsessionviaapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/sessions.ts",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "tests_helpers_sessions_ts",
+      "target": "helpers_sessions_createcategoryviaapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/emoji-identity.test.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_server_emoji_identity_test_ts",
+      "target": "helpers_sessions_createsessionviaapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "tests_server_gps_socket_test_ts",
+      "target": "helpers_sessions_createsessionviaapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/locations.test.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_server_locations_test_ts",
+      "target": "helpers_sessions_createsessionviaapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/notes.test.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_server_notes_test_ts",
+      "target": "helpers_sessions_createsessionviaapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/locations.test.ts",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "tests_server_locations_test_ts",
+      "target": "helpers_sessions_createcategoryviaapi",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "helpers_testapp_buildstubio",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testApp.ts",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "tests_helpers_testapp_ts",
+      "target": "helpers_testapp_buildrestapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/categories.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_server_categories_test_ts",
+      "target": "helpers_testapp_buildrestapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/emoji-identity.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_server_emoji_identity_test_ts",
+      "target": "helpers_testapp_buildrestapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/events-api.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_server_events_api_test_ts",
+      "target": "helpers_testapp_buildrestapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_server_gps_socket_test_ts",
+      "target": "helpers_testapp_buildrestapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/locations.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_server_locations_test_ts",
+      "target": "helpers_testapp_buildrestapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/notes.test.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "tests_server_notes_test_ts",
+      "target": "helpers_testapp_buildrestapp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testDb.ts",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "tests_helpers_testdb_ts",
+      "target": "helpers_testdb_createtestdbenv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/helpers/testDb.ts",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "tests_helpers_testdb_ts",
+      "target": "helpers_testdb_opentestdb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/categories.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_categories_test_ts",
+      "target": "helpers_testdb_createtestdbenv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/emoji-identity.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_emoji_identity_test_ts",
+      "target": "helpers_testdb_createtestdbenv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/events-api.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_events_api_test_ts",
+      "target": "helpers_testdb_createtestdbenv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_gps_socket_test_ts",
+      "target": "helpers_testdb_createtestdbenv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/locations.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_locations_test_ts",
+      "target": "helpers_testdb_createtestdbenv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/notes.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_notes_test_ts",
+      "target": "helpers_testdb_createtestdbenv",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/emoji-identity.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_emoji_identity_test_ts",
+      "target": "helpers_testdb_opentestdb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_gps_socket_test_ts",
+      "target": "helpers_testdb_opentestdb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/locations.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_locations_test_ts",
+      "target": "helpers_testdb_opentestdb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/notes.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_notes_test_ts",
+      "target": "helpers_testdb_opentestdb",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/event-recurrence.test.ts",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "tests_server_event_recurrence_test_ts",
+      "target": "server_event_recurrence_test_makeevent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "tests_server_gps_socket_test_ts",
+      "target": "server_gps_socket_test_connect",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/server/gps-socket.test.ts",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "tests_server_gps_socket_test_ts",
+      "target": "server_gps_socket_test_joinroom",
+      "confidence_score": 1.0
+    }
+  ],
+  "hyperedges": [],
+  "built_at_commit": "5b870b1"
+}
