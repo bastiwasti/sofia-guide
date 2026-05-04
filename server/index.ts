@@ -6,7 +6,7 @@ import { getCategories, createCategory } from './routes/categories'
 import { getNotes, createNote, deleteNote } from './routes/notes'
 import { getEvents, createEvent, deleteEvent } from './routes/events'
 import { getUserSessions, createUserSession, reclaimUserSession, updateUserSessionEmoji, deleteUserSession, validateSession, resetUserSessions } from './routes/user-sessions'
-import { initializeDatabase } from './db'
+import { initializeDatabase, getDatabase } from './db'
 import { registerSocketHandlers } from './socket'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -62,6 +62,29 @@ app.post('/api/admin/reset-sessions', resetUserSessions)
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString(), version: process.env.npm_package_version ?? 'unknown' })
+})
+
+app.get('/api/stats', (_req, res) => {
+  try {
+    const db = getDatabase()
+    const users = db.prepare('SELECT COUNT(*) as total FROM user_sessions').get() as { total: number }
+    const activeTracking = db.prepare('SELECT COUNT(*) as total FROM user_locations WHERE is_tracking = 1').get() as { total: number }
+    const locations = db.prepare('SELECT COUNT(*) as total FROM locations').get() as { total: number }
+    const notes = db.prepare('SELECT COUNT(*) as total FROM notes').get() as { total: number }
+    const events = db.prepare('SELECT COUNT(*) as total FROM events').get() as { total: number }
+    db.close()
+
+    res.json({
+      timestamp: new Date().toISOString(),
+      users: { total: users.total, active_tracking: activeTracking.total },
+      locations: { total: locations.total },
+      notes: { total: notes.total },
+      events: { total: events.total },
+    })
+  } catch (error) {
+    console.error('Error fetching stats:', error)
+    res.status(500).json({ error: 'Failed to fetch stats' })
+  }
 })
 
 if (!isDev) {
