@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import { ArrowUp, ArrowDown } from 'lucide-react'
 import { useLocations, Location } from '../hooks/useLocations'
 import { useCategories } from '../hooks/useCategories'
@@ -136,9 +136,9 @@ export default function MapPage({ session, focusRequest, onFocusConsumed }: MapP
     }
   }
 
-  function handleMapReady(map: any) {
+  const handleMapReady = useCallback((map: any) => {
     mapRef.current = map
-  }
+  }, [])
 
   async function handleCreateLocation(location: any) {
     try {

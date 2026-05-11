@@ -27,9 +27,13 @@ interface MapProps {
 
 function MapController({ center, zoom, onMapReady }: { center: [number, number]; zoom: number; onMapReady?: (map: L.Map) => void }) {
   const map = useMap()
+  const initialized = useRef(false)
 
   useEffect(() => {
-    map.setView(center, zoom)
+    if (!initialized.current) {
+      map.setView(center, zoom)
+      initialized.current = true
+    }
     onMapReady?.(map)
   }, [center, zoom, map, onMapReady])
 

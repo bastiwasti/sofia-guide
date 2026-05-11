@@ -90,7 +90,18 @@ export function useUserLocations(sessionId: string | null, userEmoji: string | n
   }, [sessionId])
 
   const startSharing = (mode: 'static' | 'tracking') => {
-    if (!socketRef.current || !sessionId || !userEmoji || !navigator.geolocation) return
+    if (!navigator.geolocation) {
+      alert('Dein Browser unterstützt GPS nicht')
+      return
+    }
+    if (!sessionId || !userEmoji) {
+      alert('Bitte logge dich zuerst ein, um GPS zu nutzen')
+      return
+    }
+    if (!socketRef.current) {
+      console.error('Socket not connected yet, cannot start GPS sharing')
+      return
+    }
 
     console.log('startSharing called with mode:', mode, 'userEmoji:', userEmoji, 'sessionId:', sessionId)
 
