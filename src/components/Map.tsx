@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { MapContainer, TileLayer, Marker, Popup, Circle, useMap, useMapEvents } from 'react-leaflet'
 import { createCustomIcon, createCategoryIcon, HOTEL_COORDS, calculateDistance, formatDistance } from '../lib/leaflet'
 import { Location } from '../hooks/useLocations'
@@ -84,11 +84,24 @@ function MapClickHandler({ onClick, enabled }: { onClick: (e: any) => void, enab
   return null
 }
 
-function UserLocationMarker({ isTracking, userEmoji }: { isTracking: boolean; userEmoji: string | null }) {
-  console.log('UserLocationMarker rendering, isTracking:', isTracking, 'userEmoji:', userEmoji)
+function GPSPositionController({ target }: { target: { lat: number; lng: number; token: number } | null }) {
+  const map = useMap()
+  const prevToken = useRef<number | null>(null)
+
+  useEffect(() => {
+    if (!target) return
+    if (prevToken.current === target.token) return
+    prevToken.current = target.token
+    map.flyTo([target.lat, target.lng], 16)
+  }, [target, map])
+
+  return null
+}
+
+function UserLocationMarker({ isTracking, userEmoji, onPositionFound }: { isTracking: boolean; userEmoji: string | null; onPositionFound: (pos: { lat: number; lng: number; token: number }) => void }) {
   const [position, setPosition] = useState<[number, number] | null>(null)
   const [accuracy, setAccuracy] = useState<number | null>(null)
-  const map = useMap()
+  const positionRef = useRef<[number, number] | null>(null)
 
   const icon = L.divIcon({
     className: 'user-marker',
@@ -103,80 +116,63 @@ function UserLocationMarker({ isTracking, userEmoji }: { isTracking: boolean; us
   })
 
   useEffect(() => {
-    console.log('UserLocationMarker mounted, starting geolocation...')
-
     if (!navigator.geolocation) {
-      console.log('Geolocation nicht unterstützt')
       alert('Dein Browser unterstützt GPS nicht')
       return
     }
 
     let watchId: number | null = null
 
-    const getCurrentPosition = () => {
-      console.log('Requesting geolocation...')
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const { latitude, longitude, accuracy: acc } = pos.coords
+        const newPos: [number, number] = [latitude, longitude]
+        positionRef.current = newPos
+        setPosition(newPos)
+        setAccuracy(acc)
+        onPositionFound({ lat: latitude, lng: longitude, token: Date.now() })
+      },
+      (error) => {
+        alert('GPS nicht verfügbar: ' + error.message + '\nCode: ' + error.code)
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    )
 
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          const { latitude, longitude, accuracy: acc } = pos.coords
-          console.log('Position gefunden:', { latitude, longitude, accuracy: acc })
-          const newPos: [number, number] = [latitude, longitude]
-          setPosition(newPos)
-          setAccuracy(acc)
-          map.setView(newPos, 16)
-        },
-        (error) => {
-          console.log('Geolocation Fehler:', error.message, error.code)
-          alert('GPS nicht verfügbar: ' + error.message + '\nCode: ' + error.code)
-          map.setView(HOTEL_COORDS, 15)
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0
-        }
-      )
-    }
-
-    const startWatching = () => {
-      console.log('Starting live tracking...')
+    if (isTracking) {
       watchId = navigator.geolocation.watchPosition(
         (pos) => {
           const { latitude, longitude, accuracy: acc } = pos.coords
           const newPos: [number, number] = [latitude, longitude]
+          const prev = positionRef.current
+          positionRef.current = newPos
           setPosition(newPos)
           setAccuracy(acc)
-          if (position) {
-            const distance = calculateDistance(position[0], position[1], latitude, longitude)
+          if (prev) {
+            const distance = calculateDistance(prev[0], prev[1], latitude, longitude)
             if (distance > 50) {
-              map.setView(newPos, 16)
+              onPositionFound({ lat: latitude, lng: longitude, token: Date.now() })
             }
           }
         },
-        (error) => {
-          console.log('Live tracking Fehler:', error.message)
-        },
+        () => {},
         {
           enableHighAccuracy: true,
           timeout: 10000,
           maximumAge: 0
         }
       )
-    }
-
-    getCurrentPosition()
-
-    if (isTracking) {
-      startWatching()
     }
 
     return () => {
       if (watchId !== null) {
         navigator.geolocation.clearWatch(watchId)
-        console.log('Stopped watching position')
       }
     }
-  }, [map, isTracking])
+  }, [isTracking, onPositionFound])
 
   if (!position || !accuracy) return null
 
@@ -248,15 +244,14 @@ function OtherUserMarker({ user, currentSessionId }: { user: UserLocation; curre
 }
 
 export default function MapComponent({ locations, onLocationSelect, showDistanceRings, showUserLocation, isTracking, onMapClick, editMode, hotelFlyTrigger = 0, flyToTarget, onRefetchLocations, userLocations = [], currentSessionId, showOwnMarker = false, onMapReady }: MapProps) {
-  console.log('MapComponent render, showUserLocation:', showUserLocation, 'isTracking:', isTracking)
-  console.log('userLocations:', userLocations)
-  console.log('currentSessionId:', currentSessionId)
+  const [flyToGPS, setFlyToGPS] = useState<{ lat: number; lng: number; token: number } | null>(null)
+
+  const handleGpsPositionFound = useCallback((pos: { lat: number; lng: number; token: number }) => {
+    setFlyToGPS(pos)
+  }, [])
 
   const currentUser = userLocations.find(user => user.session_id === currentSessionId)
   const currentUserEmoji = currentUser?.emoji || null
-
-  console.log('currentUser:', currentUser)
-  console.log('currentUserEmoji:', currentUserEmoji)
 
   useEffect(() => {
     const handleEmojiChange = () => {
@@ -284,8 +279,9 @@ export default function MapComponent({ locations, onLocationSelect, showDistance
       <MapController center={HOTEL_COORDS} zoom={15} onMapReady={onMapReady} />
       <HotelFlyController trigger={hotelFlyTrigger} />
       <FlyToLocationController target={flyToTarget} />
+      <GPSPositionController target={flyToGPS} />
 
-      {showUserLocation && <UserLocationMarker isTracking={!!isTracking} userEmoji={currentUserEmoji} />}
+      {showUserLocation && <UserLocationMarker isTracking={!!isTracking} userEmoji={currentUserEmoji} onPositionFound={handleGpsPositionFound} />}
 
       {userLocations
         .filter(user => showOwnMarker || user.session_id !== currentSessionId)
